@@ -1,0 +1,116 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["flink/jobmanager"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-27T09:11:37Z"
+    name: jobmanager
+    namespace: flink
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: jobmanager
+      uid: 6d9e937c-9784-4422-beac-bc8cb43c7ec1
+    resourceVersion: "3178288"
+    uid: fcc0f169-7f45-4ecb-bae9-d23f509878db
+  spec:
+    clusterIP: 10.43.96.156
+    clusterIPs:
+    - 10.43.96.156
+    ports:
+    - name: webui
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    - name: rpc
+      port: 6123
+      protocol: TCP
+      targetPort: 6123
+    - name: blob-server
+      port: 6124
+      protocol: TCP
+      targetPort: 6124
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30881,"protocol":"TCP","serviceName":"flink:jobmanager-nodeport","allNodes":true}]'
+      field.cattle.io/targetWorkloadIds: '["flink/jobmanager"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-27T09:11:37Z"
+    name: jobmanager-nodeport
+    namespace: flink
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: jobmanager
+      uid: 6d9e937c-9784-4422-beac-bc8cb43c7ec1
+    resourceVersion: "3178287"
+    uid: ca003496-7e03-42e7-bf26-60240b8afbe8
+  spec:
+    clusterIP: 10.43.58.242
+    clusterIPs:
+    - 10.43.58.242
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: webui
+      nodePort: 30881
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["flink/taskmanager"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-27T09:18:55Z"
+    name: taskmanager
+    namespace: flink
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: taskmanager
+      uid: 069d9264-5abb-4019-b434-7075a6061fe2
+    resourceVersion: "3178549"
+    uid: 897bdbee-45a3-4caf-9b93-82998d80394a
+  spec:
+    clusterIP: 10.43.235.85
+    clusterIPs:
+    - 10.43.235.85
+    ports:
+    - name: rpc
+      port: 6122
+      protocol: TCP
+      targetPort: 6122
+    - name: query-state
+      port: 6125
+      protocol: TCP
+      targetPort: 6125
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

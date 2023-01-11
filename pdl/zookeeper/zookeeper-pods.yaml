@@ -1,0 +1,106 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/podIP: 10.42.0.27/32
+      cni.projectcalico.org/podIPs: 10.42.0.27/32
+    creationTimestamp: "2023-01-06T07:31:54Z"
+    generateName: zookeeper-6bc7fb4b9f-
+    labels:
+      pod-template-hash: 6bc7fb4b9f
+      workload.user.cattle.io/workloadselector: apps.deployment-zookeeper-zookeeper
+    name: zookeeper-6bc7fb4b9f-cv7nn
+    namespace: zookeeper
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: zookeeper-6bc7fb4b9f
+      uid: faa46105-3b0f-40b7-a176-41eba6cfb850
+    resourceVersion: "3174448"
+    uid: 52ee4a3c-fd7c-4cb3-93c1-c64441bb6eaa
+  spec:
+    affinity: {}
+    containers:
+    - image: zookeeper:3.4.10
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 2181
+        name: zookeeper
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-jwbvm
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-jwbvm
+      secret:
+        defaultMode: 420
+        secretName: default-token-jwbvm
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:32:08Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:32:08Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://4735245a0b9f50a8be6a087a83aad745832d3176bba670df3d28fa5ce035461e
+      image: zookeeper:3.4.10
+      imageID: docker-pullable://zookeeper@sha256:0e0dba8ed2eb0769bf1592809940702194a8db9c4d184b7c6b7040c923211648
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:32:03Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.27
+    podIPs:
+    - ip: 10.42.0.27
+    qosClass: BestEffort
+    startTime: "2023-01-06T07:31:54Z"
+kind: List
+metadata:
+  resourceVersion: ""

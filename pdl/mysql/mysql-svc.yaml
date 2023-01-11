@@ -1,0 +1,71 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["mysql/mysql"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-27T05:11:32Z"
+    name: mysql
+    namespace: mysql
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: mysql
+      uid: e8fd31c5-d809-409a-a059-eacb5524c997
+    resourceVersion: "2906376"
+    uid: dbd48383-3221-4f6a-8898-842ca9c3de95
+  spec:
+    clusterIP: 10.43.219.27
+    clusterIPs:
+    - 10.43.219.27
+    externalIPs:
+    - 192.168.3.204
+    ports:
+    - name: mysql
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["mysql/mysql8"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-28T06:58:26Z"
+    name: mysql8
+    namespace: mysql
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: mysql8
+      uid: 7b90a388-2efc-422c-87a0-484052177e40
+    resourceVersion: "2695719"
+    uid: 5db11041-d934-4e90-939d-d50d18eccaee
+  spec:
+    clusterIP: 10.43.87.192
+    clusterIPs:
+    - 10.43.87.192
+    ports:
+    - name: mysql8
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

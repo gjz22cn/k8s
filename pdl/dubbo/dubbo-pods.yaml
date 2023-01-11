@@ -1,0 +1,114 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-21T02:13:33Z"
+      cni.projectcalico.org/podIP: 10.42.0.13/32
+      cni.projectcalico.org/podIPs: 10.42.0.13/32
+    creationTimestamp: "2023-01-06T07:31:44Z"
+    generateName: dubbo-664694b4dd-
+    labels:
+      pod-template-hash: 664694b4dd
+      workload.user.cattle.io/workloadselector: apps.deployment-dubbo-dubbo
+    name: dubbo-664694b4dd-x2jxd
+    namespace: dubbo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: dubbo-664694b4dd
+      uid: 3b195385-227c-4d67-b13c-dff19514f470
+    resourceVersion: "3173906"
+    uid: d6437b70-72e4-43ab-aef5-e4b3eeb518f9
+  spec:
+    affinity: {}
+    containers:
+    - env:
+      - name: admin.registry.address
+        value: zookeeper://zookeeper.zookeeper:2181
+      - name: admin.config-center
+        value: zookeeper://zookeeper.zookeeper:2181
+      - name: admin.metadata-report.address
+        value: zookeeper://zookeeper.zookeeper:2181
+      image: apache/dubbo-admin:latest
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8080
+        name: dubbo
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-m6q7d
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-m6q7d
+      secret:
+        defaultMode: 420
+        secretName: default-token-m6q7d
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:53Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:53Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://bae536530a45bbc2a0043b3e264d6dafc543273dd3949a4f31628404e93a9542
+      image: apache/dubbo-admin:latest
+      imageID: docker-pullable://apache/dubbo-admin@sha256:ad6b590b388595f3163156b3f6beecccb4acc6f568933aff2e93327096cd9959
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:31:49Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.13
+    podIPs:
+    - ip: 10.42.0.13
+    qosClass: BestEffort
+    startTime: "2023-01-06T07:31:44Z"
+kind: List
+metadata:
+  resourceVersion: ""

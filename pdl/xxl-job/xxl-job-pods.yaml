@@ -1,0 +1,234 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-27T06:28:42Z"
+      cni.projectcalico.org/podIP: 10.42.0.3/32
+      cni.projectcalico.org/podIPs: 10.42.0.3/32
+    creationTimestamp: "2022-12-27T06:28:07Z"
+    generateName: xxl-job-admin-74766f6c57-
+    labels:
+      pod-template-hash: 74766f6c57
+      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-admin
+    name: xxl-job-admin-74766f6c57-7bcph
+    namespace: xxl-job
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: xxl-job-admin-74766f6c57
+      uid: cfecc689-cc3b-4ef0-9171-e0c065d20f3c
+    resourceVersion: "3172390"
+    uid: 403e5c34-e7b8-4ddd-b861-43ffd03d4791
+  spec:
+    affinity: {}
+    containers:
+    - env:
+      - name: EXEC_MODE
+        value: admin
+      image: 192.168.10.101:5000/xxl-job:1.0.0
+      imagePullPolicy: Always
+      name: container-0
+      ports:
+      - containerPort: 30405
+        hostIP: 192.168.3.204
+        hostPort: 30405
+        name: xxl-admin
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application.properties
+        name: vol-pkxto
+        subPath: application.properties
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-xd48x
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: admin-conf
+      name: vol-pkxto
+    - name: default-token-xd48x
+      secret:
+        defaultMode: 420
+        secretName: default-token-xd48x
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-12-27T06:28:07Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:25:58Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:25:58Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-12-27T06:28:07Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://ae5b162c93e342c05a005ae6b146eb1cc15d2ceb94468215fbc7bd7d822459ae
+      image: 192.168.10.101:5000/xxl-job:1.0.0
+      imageID: docker-pullable://192.168.10.101:5000/xxl-job@sha256:522da25f051da0f48a14fe6d8119e0e4c9ec7dca775cb8ab0f97f35d85a10ec8
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:25:56Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.3
+    podIPs:
+    - ip: 10.42.0.3
+    qosClass: BestEffort
+    startTime: "2022-12-27T06:28:07Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-27T06:47:50Z"
+      cni.projectcalico.org/podIP: 10.42.0.30/32
+      cni.projectcalico.org/podIPs: 10.42.0.30/32
+    creationTimestamp: "2023-01-06T07:31:54Z"
+    generateName: xxl-job-exec-6c555f7845-
+    labels:
+      pod-template-hash: 6c555f7845
+      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-exec
+    name: xxl-job-exec-6c555f7845-vsl6n
+    namespace: xxl-job
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: xxl-job-exec-6c555f7845
+      uid: cc3debe9-6b52-46b1-a8da-77ed391af9cb
+    resourceVersion: "3174425"
+    uid: d5b7709d-f230-42bf-acf1-63b5d011e8cd
+  spec:
+    affinity: {}
+    containers:
+    - env:
+      - name: EXEC_MODE
+        value: executor
+      image: 192.168.10.101:5000/xxl-job:1.0.0
+      imagePullPolicy: Always
+      name: container-0
+      ports:
+      - containerPort: 9999
+        name: xxl-exec
+        protocol: TCP
+      - containerPort: 9081
+        name: web
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application.properties
+        name: vol-md2em
+        subPath: application.properties
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-xd48x
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: executor-conf
+      name: vol-md2em
+    - name: default-token-xd48x
+      secret:
+        defaultMode: 420
+        secretName: default-token-xd48x
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:32:08Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:32:08Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://f680cb36e541248d74636e07b061584db530338f91d00a3d5b984aa329225d5b
+      image: 192.168.10.101:5000/xxl-job:1.0.0
+      imageID: docker-pullable://192.168.10.101:5000/xxl-job@sha256:522da25f051da0f48a14fe6d8119e0e4c9ec7dca775cb8ab0f97f35d85a10ec8
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:32:04Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.30
+    podIPs:
+    - ip: 10.42.0.30
+    qosClass: BestEffort
+    startTime: "2023-01-06T07:31:54Z"
+kind: List
+metadata:
+  resourceVersion: ""

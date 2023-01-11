@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while true; do
+    DATE=`date '+%Y%m%d%H%M%S'`
+    docker ps -q | xargs  docker stats --no-stream > /root/docker_stats/docker_sts_$DATE
+    sleep 1h
+done

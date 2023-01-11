@@ -1,0 +1,95 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    flink-conf.yaml: "jobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\n\njobmanager.memory.process.size:
+      2500m\njobmanager.memory.jvm-metaspace.size: 1024m\ntaskmanager.memory.process.size:
+      5000m\ntaskmanager.memory.jvm-metaspace.size: 2048m\ntaskmanager.numberOfTaskSlots:
+      50\nparallelism.default: 6\njobmanager.execution.failover-strategy: region\nblob.server.port:
+      6124\nquery.server.port: 6125\nenv.java.opts.taskmanager: \"-Duser.timezone=Asia/Shanghai\"\nakka.ask.timeout:
+      60 s  \nweb.timeout:1000000\nrest.bind-address: 0.0.0.0\nheartbeat.timeout:
+      180000\nclassloader.resolve-order: parent-first\nclassloader.check-leaked-classloader:
+      false"
+    log4j-console.properties: |-
+      # This affects logging for both user code and Flink
+      rootLogger.level = INFO
+      rootLogger.appenderRef.console.ref = ConsoleAppender
+      rootLogger.appenderRef.rolling.ref = RollingFileAppender
+
+      # Uncomment this if you want to _only_ change Flink's logging
+      #logger.flink.name = org.apache.flink
+      #logger.flink.level = INFO
+
+      # The following lines keep the log level of common libraries/connectors on
+      # log level INFO. The root logger does not override this. You have to manually
+      # change the log levels here.
+      logger.akka.name = akka
+      logger.akka.level = INFO
+      logger.kafka.name= org.apache.kafka
+      logger.kafka.level = INFO
+      logger.hadoop.name = org.apache.hadoop
+      logger.hadoop.level = INFO
+      logger.zookeeper.name = org.apache.zookeeper
+      logger.zookeeper.level = INFO
+
+      # Log all infos to the console
+      appender.console.name = ConsoleAppender
+      appender.console.type = CONSOLE
+      appender.console.layout.type = PatternLayout
+      appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
+
+      # Log all infos in the given rolling file
+      appender.rolling.name = RollingFileAppender
+      appender.rolling.type = RollingFile
+      appender.rolling.append = false
+      appender.rolling.fileName = ${sys:log.file}
+      appender.rolling.filePattern = ${sys:log.file}.%i
+      appender.rolling.layout.type = PatternLayout
+      appender.rolling.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
+      appender.rolling.policies.type = Policies
+      appender.rolling.policies.size.type = SizeBasedTriggeringPolicy
+      appender.rolling.policies.size.size=100MB
+      appender.rolling.strategy.type = DefaultRolloverStrategy
+      appender.rolling.strategy.max = 10
+
+      # Suppress the irrelevant (wrong) warnings from the Netty channel handler
+      logger.netty.name = org.apache.flink.shaded.akka.org.jboss.netty.channel.DefaultChannelPipeline
+      logger.netty.level = OFF
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-27T08:26:10Z"
+    name: flink-conf
+    namespace: flink
+    resourceVersion: "3178960"
+    uid: 4e6fb301-05c0-45ed-b99e-43b48b64f031
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC4TCCAcmgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
+      LWNhMB4XDTIyMTIxNjAxMTc1OFoXDTMyMTIxMzAxMTc1OFowEjEQMA4GA1UEAxMH
+      a3ViZS1jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALnKg8ituiWe
+      95bePLO6cRVh3aOjbM4tVTGKpFR4g8Zc3QfF/opCoDsZrnx08Q9kf80lD0mSCvo1
+      U6tUVeBn4UIzvlxGcv5yRdVJ6c8n82Hwo0pU6sYKLQadT+Db5e/eTqPehls5sNma
+      cuqueG/OSTVfr6ogZO4YEBwYnDNfCSPgLjALo6NLJwyDdwP+wyK3OD5FD7Bmv38U
+      yWZ7UPM7qyTqipbgKvbUfDB1VuRYZyOk7TmFH6w9XdneFiY/vss6q+3scXX1HS4c
+      eI0lE7Y4O1h00cz7St+F9Pp3CTJ5bLTagGC8N5ejXafb3cL9Pjx8bsRABcm+n2mX
+      7Ztdykg4g4sCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMB
+      Af8wHQYDVR0OBBYEFMRVKnrflDLoT9F+8oDCdh9EV8eKMA0GCSqGSIb3DQEBCwUA
+      A4IBAQBBpyROOmN1CXR18JkncbblhozUSsl8ghwYkI+4QXbnTGbzv97RkuYntjsq
+      2gjxbaElrTxWVWGQzQrZ+X4qzyn6BGltwbvCdYHRSLN/6G4eebF2oglAFSZEo5hb
+      hYwC9VEomBkHo1EVHzsAmeqoHUhO1hFEs04asx5XiFSbglg4Vjv/1u+QqTx8dlvX
+      EpgbP7W0TccI1tikQRoIa+BxJOQXZuXOZxdM2a3Lq+DlAOW9ld+j2P5L+DlHaBdx
+      gwwFJ59oh/Ce7qr5RFukrSd1/6r6BnvcEHWkpdfzgYMUVyoBXoI9giJhy3umi9Fk
+      wadXCKkA/h9z3O9UdYkhFnnt7alu
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-23T09:18:14Z"
+    name: kube-root-ca.crt
+    namespace: flink
+    resourceVersion: "1603327"
+    uid: 2ae13e14-5347-489b-a5be-37affddbe426
+kind: List
+metadata:
+  resourceVersion: ""

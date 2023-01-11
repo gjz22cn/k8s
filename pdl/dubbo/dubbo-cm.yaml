@@ -1,0 +1,33 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC4TCCAcmgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
+      LWNhMB4XDTIyMTIxNjAxMTc1OFoXDTMyMTIxMzAxMTc1OFowEjEQMA4GA1UEAxMH
+      a3ViZS1jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALnKg8ituiWe
+      95bePLO6cRVh3aOjbM4tVTGKpFR4g8Zc3QfF/opCoDsZrnx08Q9kf80lD0mSCvo1
+      U6tUVeBn4UIzvlxGcv5yRdVJ6c8n82Hwo0pU6sYKLQadT+Db5e/eTqPehls5sNma
+      cuqueG/OSTVfr6ogZO4YEBwYnDNfCSPgLjALo6NLJwyDdwP+wyK3OD5FD7Bmv38U
+      yWZ7UPM7qyTqipbgKvbUfDB1VuRYZyOk7TmFH6w9XdneFiY/vss6q+3scXX1HS4c
+      eI0lE7Y4O1h00cz7St+F9Pp3CTJ5bLTagGC8N5ejXafb3cL9Pjx8bsRABcm+n2mX
+      7Ztdykg4g4sCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMB
+      Af8wHQYDVR0OBBYEFMRVKnrflDLoT9F+8oDCdh9EV8eKMA0GCSqGSIb3DQEBCwUA
+      A4IBAQBBpyROOmN1CXR18JkncbblhozUSsl8ghwYkI+4QXbnTGbzv97RkuYntjsq
+      2gjxbaElrTxWVWGQzQrZ+X4qzyn6BGltwbvCdYHRSLN/6G4eebF2oglAFSZEo5hb
+      hYwC9VEomBkHo1EVHzsAmeqoHUhO1hFEs04asx5XiFSbglg4Vjv/1u+QqTx8dlvX
+      EpgbP7W0TccI1tikQRoIa+BxJOQXZuXOZxdM2a3Lq+DlAOW9ld+j2P5L+DlHaBdx
+      gwwFJ59oh/Ce7qr5RFukrSd1/6r6BnvcEHWkpdfzgYMUVyoBXoI9giJhy3umi9Fk
+      wadXCKkA/h9z3O9UdYkhFnnt7alu
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-19T09:47:10Z"
+    name: kube-root-ca.crt
+    namespace: dubbo
+    resourceVersion: "737834"
+    uid: 3024be13-2ef6-4560-b653-bb0fd8864756
+kind: List
+metadata:
+  resourceVersion: ""

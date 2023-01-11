@@ -1,0 +1,129 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-28T09:40:42Z"
+      cni.projectcalico.org/podIP: 10.42.0.18/32
+      cni.projectcalico.org/podIPs: 10.42.0.18/32
+    creationTimestamp: "2023-01-06T07:31:44Z"
+    generateName: redis-9bdfb548-
+    labels:
+      pod-template-hash: 9bdfb548
+      workload.user.cattle.io/workloadselector: apps.deployment-redis-redis
+    name: redis-9bdfb548-q2fw2
+    namespace: redis
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: redis-9bdfb548
+      uid: 70aea731-5505-44ff-a968-7152412f1bda
+    resourceVersion: "3174344"
+    uid: e3651114-d670-4cd9-bd92-f98554145681
+  spec:
+    affinity: {}
+    containers:
+    - args:
+      - redis-server
+      - /etc/redis/redis.conf
+      image: redis:6.2.4
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 6379
+        name: redis
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 1m
+          memory: 1Gi
+        requests:
+          cpu: 1m
+          memory: 1Gi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: vol-redis-data
+      - mountPath: /etc/redis/redis.conf
+        name: vol-indgl
+        subPath: redis.conf
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rs7hr
+        readOnly: true
+      workingDir: /data
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: vol-redis-data
+      persistentVolumeClaim:
+        claimName: pvc-redis
+    - configMap:
+        defaultMode: 420
+        name: redis-conf
+      name: vol-indgl
+    - name: default-token-rs7hr
+      secret:
+        defaultMode: 420
+        secretName: default-token-rs7hr
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:54Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://56f70e61c06959909da3a6b78a354f6bc74324f0fdcd441f06230314083657b7
+      image: redis:6.2.4
+      imageID: docker-pullable://redis@sha256:6bc98f513258e0c17bd150a7a26f38a8ce3e7d584f0c451cf31df70d461a200a
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:31:52Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.18
+    podIPs:
+    - ip: 10.42.0.18
+    qosClass: Guaranteed
+    startTime: "2023-01-06T07:31:44Z"
+kind: List
+metadata:
+  resourceVersion: ""

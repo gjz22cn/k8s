@@ -1,0 +1,91 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIC4TCCAcmgAwIBAgIBADANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDEwdrdWJl
+      LWNhMB4XDTIyMTIxNjAxMTc1OFoXDTMyMTIxMzAxMTc1OFowEjEQMA4GA1UEAxMH
+      a3ViZS1jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALnKg8ituiWe
+      95bePLO6cRVh3aOjbM4tVTGKpFR4g8Zc3QfF/opCoDsZrnx08Q9kf80lD0mSCvo1
+      U6tUVeBn4UIzvlxGcv5yRdVJ6c8n82Hwo0pU6sYKLQadT+Db5e/eTqPehls5sNma
+      cuqueG/OSTVfr6ogZO4YEBwYnDNfCSPgLjALo6NLJwyDdwP+wyK3OD5FD7Bmv38U
+      yWZ7UPM7qyTqipbgKvbUfDB1VuRYZyOk7TmFH6w9XdneFiY/vss6q+3scXX1HS4c
+      eI0lE7Y4O1h00cz7St+F9Pp3CTJ5bLTagGC8N5ejXafb3cL9Pjx8bsRABcm+n2mX
+      7Ztdykg4g4sCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMB
+      Af8wHQYDVR0OBBYEFMRVKnrflDLoT9F+8oDCdh9EV8eKMA0GCSqGSIb3DQEBCwUA
+      A4IBAQBBpyROOmN1CXR18JkncbblhozUSsl8ghwYkI+4QXbnTGbzv97RkuYntjsq
+      2gjxbaElrTxWVWGQzQrZ+X4qzyn6BGltwbvCdYHRSLN/6G4eebF2oglAFSZEo5hb
+      hYwC9VEomBkHo1EVHzsAmeqoHUhO1hFEs04asx5XiFSbglg4Vjv/1u+QqTx8dlvX
+      EpgbP7W0TccI1tikQRoIa+BxJOQXZuXOZxdM2a3Lq+DlAOW9ld+j2P5L+DlHaBdx
+      gwwFJ59oh/Ce7qr5RFukrSd1/6r6BnvcEHWkpdfzgYMUVyoBXoI9giJhy3umi9Fk
+      wadXCKkA/h9z3O9UdYkhFnnt7alu
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-26T06:29:38Z"
+    name: kube-root-ca.crt
+    namespace: presto
+    resourceVersion: "2235289"
+    uid: 1be4e27a-8a6f-46f4-bb6a-7f047f29e305
+- apiVersion: v1
+  data:
+    hive.properties: |-
+      connector.name=hive-hadoop2
+      hive.metastore.uri=thrift://metastore.hive:9083
+    iceberg.properties: |-
+      connector.name=iceberg
+      hive.metastore.uri=thrift://metastore.hive:9083
+    mysql.properties: |-
+      connector.name=mysql
+      connection-url=jdbc:mysql://mysql.mysql:3306/?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&allowMultiQueries=true
+      connection-user=root
+      connection-password=123456
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-26T07:28:10Z"
+    name: presto-catalog-conf
+    namespace: presto
+    resourceVersion: "2471624"
+    uid: 82bf965e-e31a-463f-9b40-0f907508999a
+- apiVersion: v1
+  data:
+    config.properties: |-
+      #single node install config
+      coordinator=true
+      node-scheduler.include-coordinator=true
+      http-server.http.port=8091
+      discovery-server.enabled=true
+      discovery.uri=http://localhost:8091
+      query.max-memory=8GB
+      query.max-memory-per-node=1GB
+    jvm.config: |-
+      -server
+      -Xmx8G
+      -XX:-UseBiasedLocking
+      -XX:+UseG1GC
+      -XX:G1HeapRegionSize=32M
+      -XX:+ExplicitGCInvokesConcurrent
+      -XX:+HeapDumpOnOutOfMemoryError
+      -XX:+UseGCOverheadLimit
+      -XX:+ExitOnOutOfMemoryError
+      -XX:ReservedCodeCacheSize=256M
+      -XX:PerMethodRecompilationCutoff=10000
+      -XX:PerBytecodeRecompilationCutoff=10000
+      -Djdk.attach.allowAttachSelf=true
+      -Djdk.nio.maxCachedBufferSize=2000000
+    log.properties: com.facebook.presto=INFO
+    node.properties: |-
+      node.environment=docker
+      node.data-dir=/data/presto
+      plugin.dir=/usr/lib/presto/plugin
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-12-26T07:04:08Z"
+    name: presto-conf
+    namespace: presto
+    resourceVersion: "2477468"
+    uid: 93c699ed-536b-48b6-b0f0-d26fa1d2fdbe
+kind: List
+metadata:
+  resourceVersion: ""

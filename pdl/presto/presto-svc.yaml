@@ -1,0 +1,37 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["presto/presto"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-27T07:58:48Z"
+    name: presto
+    namespace: presto
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: presto
+      uid: b13ef396-0dba-4b3b-a35b-31fbe52d48f7
+    resourceVersion: "3116060"
+    uid: 87faa724-d7a3-4b8c-92e2-aa3e678a7db6
+  spec:
+    clusterIP: 10.43.204.186
+    clusterIPs:
+    - 10.43.204.186
+    ports:
+    - name: presto
+      port: 8091
+      protocol: TCP
+      targetPort: 8091
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

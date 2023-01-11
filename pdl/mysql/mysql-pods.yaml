@@ -1,0 +1,251 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-30T05:37:59Z"
+      cni.projectcalico.org/podIP: 10.42.0.19/32
+      cni.projectcalico.org/podIPs: 10.42.0.19/32
+      kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for
+        container container-0; cpu, memory limit for container container-0'
+    creationTimestamp: "2023-01-06T07:31:44Z"
+    generateName: mysql-64cfc6cc78-
+    labels:
+      pod-template-hash: 64cfc6cc78
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql
+    name: mysql-64cfc6cc78-b2bh9
+    namespace: mysql
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: mysql-64cfc6cc78
+      uid: 47c9240d-2248-4f75-a0d3-ecff88f0ed67
+    resourceVersion: "3174351"
+    uid: 25bd01fe-47e8-4ba1-b3ed-4164d2f6c7ee
+  spec:
+    affinity: {}
+    containers:
+    - env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: "123456"
+      image: mysql:5.7.40
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 3306
+        name: mysql
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 1m
+          memory: 1Gi
+        requests:
+          cpu: 1m
+          memory: 1Gi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/mysql/my.cnf
+        name: vol-tqqvl
+        subPath: my.cnf
+      - mountPath: /var/lib/mysql
+        name: vol-4stms
+        subPath: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-gc8bl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: mysql
+      name: vol-tqqvl
+    - name: vol-4stms
+      persistentVolumeClaim:
+        claimName: pvc-mysql
+    - name: default-token-gc8bl
+      secret:
+        defaultMode: 420
+        secretName: default-token-gc8bl
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:56Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:56Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://14f56471c70fce13e2f018e17be2694e167c0e42ee77a6a6d00805b82abe0b62
+      image: mysql:5.7.40
+      imageID: docker-pullable://mysql@sha256:6306f106a056e24b3a2582a59a4c84cd199907f826eff27df36406f227cd9a7d
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:31:54Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.19
+    podIPs:
+    - ip: 10.42.0.19
+    qosClass: Guaranteed
+    startTime: "2023-01-06T07:31:44Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/podIP: 10.42.0.40/32
+      cni.projectcalico.org/podIPs: 10.42.0.40/32
+      kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for
+        container container-0; cpu, memory limit for container container-0'
+    creationTimestamp: "2023-01-06T07:39:24Z"
+    generateName: mysql8-85f4d89bdf-
+    labels:
+      pod-template-hash: 85f4d89bdf
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+    name: mysql8-85f4d89bdf-bhzcw
+    namespace: mysql
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: mysql8-85f4d89bdf
+      uid: 0fe4ed9c-db8e-42d0-ac38-4274602c38be
+    resourceVersion: "3176136"
+    uid: ae6c1977-ca47-4423-bb14-b9cef3a60f92
+  spec:
+    affinity: {}
+    containers:
+    - env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: "123456"
+      image: mysql:8.0.22
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 3306
+        hostIP: 192.168.3.204
+        hostPort: 30308
+        name: mysql8
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 1m
+          memory: 1Gi
+        requests:
+          cpu: 1m
+          memory: 1Gi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/lib/mysql
+        name: vol-bkktz
+        subPath: data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-gc8bl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: vol-bkktz
+      persistentVolumeClaim:
+        claimName: pvc-mysql8
+    - name: default-token-gc8bl
+      secret:
+        defaultMode: 420
+        secretName: default-token-gc8bl
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:39:24Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:39:32Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:39:32Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:39:24Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://73bedf7658009ec57a750008e4b69eb96c6d66ba245f47f5e77730b7c9597094
+      image: mysql:8.0.22
+      imageID: docker-pullable://mysql@sha256:0fd2898dc1c946b34dceaccc3b80d38b1049285c1dab70df7480de62265d6213
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:39:31Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.40
+    podIPs:
+    - ip: 10.42.0.40
+    qosClass: Guaranteed
+    startTime: "2023-01-06T07:39:24Z"
+kind: List
+metadata:
+  resourceVersion: ""

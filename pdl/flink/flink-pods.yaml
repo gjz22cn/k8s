@@ -1,0 +1,286 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T07:00:06Z"
+      cni.projectcalico.org/podIP: 10.42.2.37/32
+      cni.projectcalico.org/podIPs: 10.42.2.37/32
+    creationTimestamp: "2023-01-09T07:00:06Z"
+    generateName: jobmanager-9f7cf85bc-
+    labels:
+      pod-template-hash: 9f7cf85bc
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    name: jobmanager-9f7cf85bc-qgp7f
+    namespace: flink
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: jobmanager-9f7cf85bc
+      uid: 5ee5705e-82be-4af4-925a-d3e5f199f3a6
+    resourceVersion: "3829453"
+    uid: d0cc817b-31a9-4df3-ac8d-98db08e8fa53
+  spec:
+    affinity: {}
+    containers:
+    - args:
+      - jobmanager
+      env:
+      - name: JOB_MANAGER_RPC_ADDRESS
+        value: jobmanager
+      - name: FLINK_PROPERTIES
+        value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+      image: flink:1.13.5-scala_2.12-java8
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8081
+        name: webui
+        protocol: TCP
+      - containerPort: 6123
+        name: rpc
+        protocol: TCP
+      - containerPort: 6124
+        name: blob-server
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /opt/flink/lib
+        name: vol-ighsr
+        subPath: jar
+      - mountPath: /opt/flink/conf/flink-conf.yaml
+        name: vol-swpyw
+        subPath: flink-conf.yaml
+      - mountPath: /opt/flink/conf/log4j-console.properties
+        name: vol-swpyw
+        subPath: log4j-console.properties
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-7p648
+        readOnly: true
+    dnsConfig: {}
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    hostAliases:
+    - hostnames:
+      - master
+      ip: 192.168.10.101
+    - hostnames:
+      - slave1
+      ip: 192.168.10.102
+    - hostnames:
+      - slave2
+      ip: 192.168.10.103
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: flink-conf
+      name: vol-swpyw
+    - name: vol-ighsr
+      persistentVolumeClaim:
+        claimName: pvc-flink
+    - name: default-token-7p648
+      secret:
+        defaultMode: 420
+        secretName: default-token-7p648
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:06Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:08Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:08Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:06Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://5117b31605e265fadc7ed0c4d28b661420ca84ad158c5147c0d2f1d3411a117e
+      image: flink:1.13.5-scala_2.12-java8
+      imageID: docker-pullable://flink@sha256:228fbb252d3f33bacef09af6144e4ff6a49c4c871c75df014c66536d596fdc0c
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T07:00:07Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.37
+    podIPs:
+    - ip: 10.42.2.37
+    qosClass: BestEffort
+    startTime: "2023-01-09T07:00:06Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T07:00:08Z"
+      cni.projectcalico.org/podIP: 10.42.2.38/32
+      cni.projectcalico.org/podIPs: 10.42.2.38/32
+    creationTimestamp: "2023-01-09T07:00:08Z"
+    generateName: taskmanager-c8dc96fb6-
+    labels:
+      pod-template-hash: c8dc96fb6
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    name: taskmanager-c8dc96fb6-pdgj8
+    namespace: flink
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: taskmanager-c8dc96fb6
+      uid: 9df91bc5-d563-4aba-a8b2-2d196f45c8d5
+    resourceVersion: "3829496"
+    uid: a833d3b8-ef19-4a78-aeb9-ce1c6cad4cc8
+  spec:
+    affinity: {}
+    containers:
+    - args:
+      - taskmanager
+      env:
+      - name: JOB_MANAGER_RPC_ADDRESS
+        value: jobmanager
+      - name: FLINK_PROPERTIES
+        value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+      image: flink:1.13.5-scala_2.12-java8
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 6122
+        name: rpc
+        protocol: TCP
+      - containerPort: 6125
+        name: query-state
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /opt/flink/lib
+        name: vol-0rxui
+        subPath: jar
+      - mountPath: /opt/flink/conf/flink-conf.yaml
+        name: vol-grczo
+        subPath: flink-conf.yaml
+      - mountPath: /opt/flink/conf/log4j-console.properties
+        name: vol-grczo
+        subPath: log4j-console.properties
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-7p648
+        readOnly: true
+    dnsConfig: {}
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    hostAliases:
+    - hostnames:
+      - master
+      ip: 192.168.10.101
+    - hostnames:
+      - slave1
+      ip: 192.168.10.102
+    - hostnames:
+      - slave2
+      ip: 192.168.10.103
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: flink-conf
+      name: vol-grczo
+    - name: vol-0rxui
+      persistentVolumeClaim:
+        claimName: pvc-flink
+    - name: default-token-7p648
+      secret:
+        defaultMode: 420
+        secretName: default-token-7p648
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:08Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:10Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:10Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T07:00:08Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://e58d266e0bcfdf644abb5ae2967a0b092b42e801f9f3de2fd8703869479394ae
+      image: flink:1.13.5-scala_2.12-java8
+      imageID: docker-pullable://flink@sha256:228fbb252d3f33bacef09af6144e4ff6a49c4c871c75df014c66536d596fdc0c
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T07:00:09Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.38
+    podIPs:
+    - ip: 10.42.2.38
+    qosClass: BestEffort
+    startTime: "2023-01-09T07:00:08Z"
+kind: List
+metadata:
+  resourceVersion: ""

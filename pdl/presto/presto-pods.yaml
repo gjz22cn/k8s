@@ -1,0 +1,129 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-30T04:40:28Z"
+      cni.projectcalico.org/podIP: 10.42.0.11/32
+      cni.projectcalico.org/podIPs: 10.42.0.11/32
+    creationTimestamp: "2023-01-06T07:31:44Z"
+    generateName: presto-ffd995c4f-
+    labels:
+      pod-template-hash: ffd995c4f
+      workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
+    name: presto-ffd995c4f-482fh
+    namespace: presto
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: presto-ffd995c4f
+      uid: 0185b39c-dc25-4cbf-b78f-31928781bea8
+    resourceVersion: "3173851"
+    uid: ad679d85-8423-4a0e-9f9d-06503f93c37d
+  spec:
+    affinity: {}
+    containers:
+    - image: 192.168.10.101:5000/presto:1.0.0
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8091
+        name: presto
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /usr/lib/presto/etc/catalog
+        name: vol-5fmjl
+      - mountPath: /usr/lib/presto/etc/config.properties
+        name: vol-6jctm
+        subPath: config.properties
+      - mountPath: /usr/lib/presto/etc/jvm.config
+        name: vol-6jctm
+        subPath: jvm.config
+      - mountPath: /usr/lib/presto/etc/log.properties
+        name: vol-6jctm
+        subPath: log.properties
+      - mountPath: /usr/lib/presto/etc/node.properties
+        name: vol-6jctm
+        subPath: node.properties
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-ntcj2
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: presto-conf
+      name: vol-6jctm
+    - configMap:
+        defaultMode: 420
+        name: presto-catalog-conf
+      name: vol-5fmjl
+    - name: default-token-ntcj2
+      secret:
+        defaultMode: 420
+        secretName: default-token-ntcj2
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:47Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:47Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-06T07:31:44Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://c41e240fce489626e2153c4b4391155b81f06b881d3c7ea9ea9e6d28f520bb9a
+      image: 192.168.10.101:5000/presto:1.0.0
+      imageID: docker-pullable://192.168.10.101:5000/presto@sha256:f389e96f26cca5a83eb9c811df30629a3ff8cbe561f2d955769af15ede13e335
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-06T07:31:47Z"
+    hostIP: 192.168.10.101
+    phase: Running
+    podIP: 10.42.0.11
+    podIPs:
+    - ip: 10.42.0.11
+    qosClass: BestEffort
+    startTime: "2023-01-06T07:31:44Z"
+kind: List
+metadata:
+  resourceVersion: ""

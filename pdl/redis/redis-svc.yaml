@@ -1,0 +1,37 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["redis/redis"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-16T06:11:03Z"
+    name: redis
+    namespace: redis
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: redis
+      uid: 2fa7427e-e68c-473c-b476-fa49374de547
+    resourceVersion: "47107"
+    uid: 6cef825e-bff3-4aa9-9dc9-5cf4aaeb8527
+  spec:
+    clusterIP: 10.43.22.146
+    clusterIPs:
+    - 10.43.22.146
+    ports:
+    - name: redis
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-redis-redis
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

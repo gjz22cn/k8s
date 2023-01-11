@@ -1,0 +1,72 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["dubbo/dubbo"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-19T09:53:08Z"
+    name: dubbo
+    namespace: dubbo
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: dubbo
+      uid: bf14733a-1fe5-4ac3-b7f2-b53d5c9e6379
+    resourceVersion: "3156145"
+    uid: a06baade-563c-495e-aa58-70a515ebbf5a
+  spec:
+    clusterIP: 10.43.224.246
+    clusterIPs:
+    - 10.43.224.246
+    ports:
+    - name: dubbo
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-dubbo-dubbo
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30888,"protocol":"TCP","serviceName":"dubbo:dubbo-nodeport","allNodes":true}]'
+      field.cattle.io/targetWorkloadIds: '["dubbo/dubbo"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-30T08:53:49Z"
+    name: dubbo-nodeport
+    namespace: dubbo
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: dubbo
+      uid: bf14733a-1fe5-4ac3-b7f2-b53d5c9e6379
+    resourceVersion: "3156162"
+    uid: 583a25f9-22eb-4597-ad14-03c848c53c0a
+  spec:
+    clusterIP: 10.43.111.70
+    clusterIPs:
+    - 10.43.111.70
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: dubbo
+      nodePort: 30888
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-dubbo-dubbo
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

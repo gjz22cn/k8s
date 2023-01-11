@@ -1,0 +1,233 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-12-29T03:16:59Z"
+    labels:
+      app: hadoop-datanode
+      workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-datanode
+    name: datanode
+    namespace: hadoop
+    resourceVersion: "3838701"
+    uid: 3f94543d-af26-4d37-a646-57bc3f0c86ba
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    ports:
+    - name: ipc
+      port: 9867
+      protocol: TCP
+      targetPort: 9867
+    - name: data-transfer
+      port: 9866
+      protocol: TCP
+      targetPort: 9866
+    - name: https
+      port: 9865
+      protocol: TCP
+      targetPort: 9865
+    - name: http
+      port: 9864
+      protocol: TCP
+      targetPort: 9864
+    selector:
+      workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-datanode
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["hadoop/hdfs-master"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-19T06:27:28Z"
+    name: hdfs-master
+    namespace: hadoop
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: hdfs-master
+      uid: ef1be25a-d48b-448d-9102-db28290ba106
+    resourceVersion: "3821636"
+    uid: 1101a1cf-9651-46d8-a720-4da9fb0bed86
+  spec:
+    clusterIP: 10.43.151.145
+    clusterIPs:
+    - 10.43.151.145
+    ports:
+    - name: default-fs
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+    - name: http
+      port: 9870
+      protocol: TCP
+      targetPort: 9870
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-hadoop-hdfs-master
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30900,"protocol":"TCP","serviceName":"hadoop:hdfs-master-nodeport","allNodes":true},{"addresses":["192.168.3.204"],"port":30987,"protocol":"TCP","serviceName":"hadoop:hdfs-master-nodeport","allNodes":true}]'
+      field.cattle.io/targetWorkloadIds: '["hadoop/hdfs-master"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-19T06:27:28Z"
+    name: hdfs-master-nodeport
+    namespace: hadoop
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: hdfs-master
+      uid: ef1be25a-d48b-448d-9102-db28290ba106
+    resourceVersion: "3822034"
+    uid: 081446d7-7760-43f9-9036-a7a008a663e3
+  spec:
+    clusterIP: 10.43.52.91
+    clusterIPs:
+    - 10.43.52.91
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: default-fs
+      nodePort: 30900
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+    - name: http
+      nodePort: 30987
+      port: 9870
+      protocol: TCP
+      targetPort: 9870
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-hadoop-hdfs-master
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/targetWorkloadIds: '["hadoop/yarn-master"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-19T06:17:25Z"
+    name: yarn-master
+    namespace: hadoop
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: yarn-master
+      uid: 8ea28ba8-91b5-4277-a2d9-d27e6edbdf58
+    resourceVersion: "3824285"
+    uid: a6f6616e-7067-436a-a3dd-503f72271300
+  spec:
+    clusterIP: 10.43.255.212
+    clusterIPs:
+    - 10.43.255.212
+    ports:
+    - name: ipc1
+      port: 8031
+      protocol: TCP
+      targetPort: 8031
+    - name: ipc2
+      port: 8033
+      protocol: TCP
+      targetPort: 8033
+    - name: http
+      port: 8088
+      protocol: TCP
+      targetPort: 8088
+    - name: rm-asm
+      port: 8032
+      protocol: TCP
+      targetPort: 8032
+    - name: ipc-scheduler
+      port: 8030
+      protocol: TCP
+      targetPort: 8030
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-hadoop-yarn-master
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":32088,"protocol":"TCP","serviceName":"hadoop:yarn-master-nodeport","allNodes":true}]'
+      field.cattle.io/targetWorkloadIds: '["hadoop/yarn-master"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2022-12-19T06:17:25Z"
+    name: yarn-master-nodeport
+    namespace: hadoop
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: yarn-master
+      uid: 8ea28ba8-91b5-4277-a2d9-d27e6edbdf58
+    resourceVersion: "3824289"
+    uid: e07d8988-52a9-403c-b0e9-54cb46f9c8fc
+  spec:
+    clusterIP: 10.43.215.70
+    clusterIPs:
+    - 10.43.215.70
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: http
+      nodePort: 32088
+      port: 8088
+      protocol: TCP
+      targetPort: 8088
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-hadoop-yarn-master
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-12-29T03:27:25Z"
+    name: yarnnode
+    namespace: hadoop
+    resourceVersion: "3838877"
+    uid: 8f1d593f-0c8f-4d8c-acec-020b1098e311
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    ports:
+    - name: localizer
+      port: 8040
+      protocol: TCP
+      targetPort: 8040
+    - name: webapp
+      port: 8041
+      protocol: TCP
+      targetPort: 8041
+    - name: nm-cm
+      port: 8042
+      protocol: TCP
+      targetPort: 8042
+    selector:
+      workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-yarn-node
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

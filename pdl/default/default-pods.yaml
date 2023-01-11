@@ -1,0 +1,1108 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-06T08:16:14Z"
+      cni.projectcalico.org/podIP: 10.42.2.23/32
+      cni.projectcalico.org/podIPs: 10.42.2.23/32
+    creationTimestamp: "2023-01-09T03:07:03Z"
+    generateName: data-server-84c89d4b5-
+    labels:
+      pod-template-hash: 84c89d4b5
+      workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
+    name: data-server-84c89d4b5-6b5ft
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: data-server-84c89d4b5
+      uid: 7e3cfe0b-c42b-4341-ad9d-4c130296488c
+    resourceVersion: "3792693"
+    uid: 8204308b-a0d2-4922-b2b1-a454f1874ff8
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/data-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8080
+        name: tcp-8080
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-mexrl
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-virfe
+        subPath: application.yml
+      - mountPath: /etc/localtime
+        name: vol-uommj
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-mexrl
+    - configMap:
+        defaultMode: 420
+        name: data-server-application
+      name: vol-virfe
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-uommj
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:07:03Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:07:34Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:07:34Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:07:03Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://a4c9f7bbaba43ae61698fd956324fcea77f65d55cc4cd87fae81bfd693a03a5c
+      image: 10.168.2.90/sjzt/data-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/data-server@sha256:5b4760053bf385e363d7ca8a97862c8a385d3c48892c868f31012b50538feb62
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T03:07:33Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.23
+    podIPs:
+    - ip: 10.42.2.23
+    qosClass: BestEffort
+    startTime: "2023-01-09T03:07:03Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-06T08:16:18Z"
+      cni.projectcalico.org/podIP: 10.42.2.27/32
+      cni.projectcalico.org/podIPs: 10.42.2.27/32
+    creationTimestamp: "2023-01-09T03:38:23Z"
+    generateName: frontweb-767d8b457b-
+    labels:
+      pod-template-hash: 767d8b457b
+      workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+    name: frontweb-767d8b457b-n8fc7
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: frontweb-767d8b457b
+      uid: c4755f8f-b727-4e92-98de-3a8122cd9c65
+    resourceVersion: "3797956"
+    uid: 00c117ac-84b4-47e6-a52d-7fc349fc83ea
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/frontweb:20230109104143
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 80
+        name: web
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /usr/share/nginx/html/static/config.js
+        name: vol-oubku
+        subPath: config.js
+      - mountPath: /etc/localtime
+        name: vol-ciani
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: web-conf
+      name: vol-oubku
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-ciani
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:38:23Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:38:27Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:38:27Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:38:23Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://46c4aaaa18e267915f3e906998181f6b86698180c211ff163978dc9adcf247b6
+      image: 10.168.2.90/sjzt/frontweb:20230109104143
+      imageID: docker-pullable://10.168.2.90/sjzt/frontweb@sha256:80e3d25b64bde3726e786bd122361e28ccd6e72f7f79131c1d16015f99048bd6
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T03:38:27Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.27
+    podIPs:
+    - ip: 10.42.2.27
+    qosClass: BestEffort
+    startTime: "2023-01-09T03:38:23Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T03:47:01Z"
+      cni.projectcalico.org/podIP: 10.42.1.25/32
+      cni.projectcalico.org/podIPs: 10.42.1.25/32
+    creationTimestamp: "2023-01-09T03:47:02Z"
+    generateName: integration-server-cdcc6d6fc-
+    labels:
+      pod-template-hash: cdcc6d6fc
+      workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
+    name: integration-server-cdcc6d6fc-xxfmb
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: integration-server-cdcc6d6fc
+      uid: 51f9eef6-e7d4-44ef-9bf7-378be58e46b8
+    resourceVersion: "3799357"
+    uid: 55282198-c83f-42dc-b9d6-4fdc5f23c092
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/integration-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8020
+        name: tcp-8020
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/localtime
+        name: vol-1rlrt
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-zjjtn
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-dugbi
+        subPath: application.yml
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-3
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-1rlrt
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-zjjtn
+    - configMap:
+        defaultMode: 420
+        name: integration-server-application
+      name: vol-dugbi
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:47:02Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:47:04Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:47:04Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:47:02Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://8b1200f0fca1cfb68fafd05b09cc334f1e69f8f7c6cc0818f2417ef7b9baa80f
+      image: 10.168.2.90/sjzt/integration-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/integration-server@sha256:9474138c11f403bd16078583839df3ea4f5edb903484ebe395488e0087bcfbad
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T03:47:03Z"
+    hostIP: 192.168.10.103
+    phase: Running
+    podIP: 10.42.1.25
+    podIPs:
+    - ip: 10.42.1.25
+    qosClass: BestEffort
+    startTime: "2023-01-09T03:47:02Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T06:45:01Z"
+      cni.projectcalico.org/podIP: 10.42.1.32/32
+      cni.projectcalico.org/podIPs: 10.42.1.32/32
+    creationTimestamp: "2023-01-09T06:45:01Z"
+    generateName: lake-server-67fcdc6b44-
+    labels:
+      pod-template-hash: 67fcdc6b44
+      workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
+    name: lake-server-67fcdc6b44-8nkvp
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: lake-server-67fcdc6b44
+      uid: 534db6d3-775b-4e5c-8fa6-a78447beae0c
+    resourceVersion: "3826986"
+    uid: cffffe2c-6c0e-452a-bbb8-317d4a10968d
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/lake-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8050
+        name: tcp-8050
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-mqjvc
+        subPath: application-base.yml
+      - mountPath: /etc/localtime
+        name: vol-ht6t7
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-8wxdm
+        subPath: application.yml
+      - mountPath: /mnt/upload
+        name: vol-rh9o3
+        subPath: upload
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-3
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-mqjvc
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-ht6t7
+    - configMap:
+        defaultMode: 420
+        name: lake-server-application
+      name: vol-8wxdm
+    - name: vol-rh9o3
+      persistentVolumeClaim:
+        claimName: pvc-app
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:01Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:02Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:02Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:01Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://a12740bb2d4045c483dc32b935376df538cc271e240a8c99695fbbee96c466bf
+      image: 10.168.2.90/sjzt/lake-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/lake-server@sha256:e55290f00d7065231ef9ebc02262d27bc24e8675ac2c2304c5a24406f78fe8ca
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T06:45:01Z"
+    hostIP: 192.168.10.103
+    phase: Running
+    podIP: 10.42.1.32
+    podIPs:
+    - ip: 10.42.1.32
+    qosClass: BestEffort
+    startTime: "2023-01-09T06:45:01Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T06:46:01Z"
+      cni.projectcalico.org/podIP: 10.42.2.36/32
+      cni.projectcalico.org/podIPs: 10.42.2.36/32
+    creationTimestamp: "2023-01-09T06:46:01Z"
+    generateName: metadata-server-6dbf68fc54-
+    labels:
+      pod-template-hash: 6dbf68fc54
+      workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
+    name: metadata-server-6dbf68fc54-77ckk
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: metadata-server-6dbf68fc54
+      uid: 3e7a9137-1971-4439-b633-10beb57cd27f
+    resourceVersion: "3827261"
+    uid: 29b0d1c0-9771-4993-a0ba-b8fdd4ad92cd
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/metadata-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8070
+        name: tcp-8070
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/localtime
+        name: vol-gsrah
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-gnp7h
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-puxfh
+        subPath: application.yml
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-gsrah
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-gnp7h
+    - configMap:
+        defaultMode: 420
+        name: metadata-server-application
+      name: vol-puxfh
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:46:01Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:46:02Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:46:02Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:46:01Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://8270cd587e103eb4b74f9442a80d3653c8ac26b29e86d87f255bcc2b30283998
+      image: 10.168.2.90/sjzt/metadata-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/metadata-server@sha256:22126fca0353962f68bc116a5a66b4205f2e6087bf86af523a8ce6801340607e
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T06:46:02Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.36
+    podIPs:
+    - ip: 10.42.2.36
+    qosClass: BestEffort
+    startTime: "2023-01-09T06:46:01Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T06:45:56Z"
+      cni.projectcalico.org/podIP: 10.42.2.35/32
+      cni.projectcalico.org/podIPs: 10.42.2.35/32
+    creationTimestamp: "2023-01-09T06:45:56Z"
+    generateName: modeling-server-76f4b95c59-
+    labels:
+      pod-template-hash: 76f4b95c59
+      workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
+    name: modeling-server-76f4b95c59-5mgdr
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: modeling-server-76f4b95c59
+      uid: 77754742-c73e-4ff2-b6f3-87203e5a24dc
+    resourceVersion: "3827208"
+    uid: d7e49ec6-3ce4-4afd-9ede-d1fccc561121
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/modeling-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8040
+        name: tcp-8040
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/localtime
+        name: vol-blsqf
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-26g5d
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-r2lnk
+        subPath: application.yml
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-blsqf
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-26g5d
+    - configMap:
+        defaultMode: 420
+        name: modeling-server-application
+      name: vol-r2lnk
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:56Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:57Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:57Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:56Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://ede55715cb9f89bc3f226644c327759093cf503105b988dee045b235e7406f98
+      image: 10.168.2.90/sjzt/modeling-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/modeling-server@sha256:0e249929ca3ce3e6004b85d1d29ffd43db77d97593e8e21df55ba74f076fd70b
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T06:45:57Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.35
+    podIPs:
+    - ip: 10.42.2.35
+    qosClass: BestEffort
+    startTime: "2023-01-09T06:45:56Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-09T06:45:47Z"
+      cni.projectcalico.org/podIP: 10.42.1.33/32
+      cni.projectcalico.org/podIPs: 10.42.1.33/32
+    creationTimestamp: "2023-01-09T06:45:47Z"
+    generateName: rest-server-c48d7f9f5-
+    labels:
+      pod-template-hash: c48d7f9f5
+      workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
+    name: rest-server-c48d7f9f5-6g2hc
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: rest-server-c48d7f9f5
+      uid: 0e4fbed6-05c4-4eb7-be52-f30e3e9bf9f5
+    resourceVersion: "3827146"
+    uid: 875ddf49-0772-4726-b100-4303348dd2fe
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/rest-server:20230106173913
+      imagePullPolicy: Always
+      name: container-0
+      ports:
+      - containerPort: 8000
+        name: tcp-8000
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-gdxcm
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-8jazq
+        subPath: application.yml
+      - mountPath: /mnt/upload
+        name: vol-qgzaj
+        subPath: upload
+      - mountPath: /etc/localtime
+        name: vol-edrfr
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-3
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-gdxcm
+    - configMap:
+        defaultMode: 420
+        name: rest-server-application
+      name: vol-8jazq
+    - name: vol-qgzaj
+      persistentVolumeClaim:
+        claimName: pvc-app
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-edrfr
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:47Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:48Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:48Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T06:45:47Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://b31424fba3edf9573152c577a91fceff32cea34fd7be438f987775c58d8dd7af
+      image: 10.168.2.90/sjzt/rest-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/rest-server@sha256:9f0bf4092b5787930ca9c380cdc5651aa8a3c2cfb35cbfdefaca3c69a0f05b8e
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T06:45:48Z"
+    hostIP: 192.168.10.103
+    phase: Running
+    podIP: 10.42.1.33
+    podIPs:
+    - ip: 10.42.1.33
+    qosClass: BestEffort
+    startTime: "2023-01-09T06:45:47Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-06T08:16:36Z"
+      cni.projectcalico.org/podIP: 10.42.2.26/32
+      cni.projectcalico.org/podIPs: 10.42.2.26/32
+    creationTimestamp: "2023-01-09T03:08:07Z"
+    generateName: source-server-6f7565d774-
+    labels:
+      pod-template-hash: 6f7565d774
+      workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
+    name: source-server-6f7565d774-bwprd
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: source-server-6f7565d774
+      uid: 02969906-d442-4227-bf29-059df0e47ce6
+    resourceVersion: "3793338"
+    uid: 288c5f8b-79cd-43e3-8088-012afe6a31b3
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/source-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8030
+        name: tcp-8030
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-dfi7f
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-p8wen
+        subPath: application.yml
+      - mountPath: /etc/localtime
+        name: vol-wb6vc
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-2
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-dfi7f
+    - configMap:
+        defaultMode: 420
+        name: source-server-application
+      name: vol-p8wen
+    - hostPath:
+        path: /etc/localtime
+        type: ""
+      name: vol-wb6vc
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:08:07Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:09:25Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:09:25Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:08:07Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://072a6ac19b441848235d307494e5219c3d3897e528b2543517f87e2fceece5bc
+      image: 10.168.2.90/sjzt/source-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/source-server@sha256:ad460b8ceb47271525dbe6246f8e444ae0561ffcf24fdb6c906f0e2928066d77
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T03:09:24Z"
+    hostIP: 192.168.10.102
+    phase: Running
+    podIP: 10.42.2.26
+    podIPs:
+    - ip: 10.42.2.26
+    qosClass: BestEffort
+    startTime: "2023-01-09T03:08:07Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2023-01-06T08:16:38Z"
+      cni.projectcalico.org/podIP: 10.42.1.23/32
+      cni.projectcalico.org/podIPs: 10.42.1.23/32
+    creationTimestamp: "2023-01-09T03:08:16Z"
+    generateName: user-server-5f7464bb46-
+    labels:
+      pod-template-hash: 5f7464bb46
+      workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
+    name: user-server-5f7464bb46-cpt4d
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: user-server-5f7464bb46
+      uid: f2bb7475-1ff5-4741-b9ab-799af1af4aab
+    resourceVersion: "3793224"
+    uid: 72ec13ee-732f-40b1-8df3-92f031503db2
+  spec:
+    affinity: {}
+    containers:
+    - image: 10.168.2.90/sjzt/user-server:20230106173913
+      imagePullPolicy: IfNotPresent
+      name: container-0
+      ports:
+      - containerPort: 8010
+        name: tcp-8010
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: "/etc/localtime\t"
+        name: vol-4vvkt
+      - mountPath: /data/java/config/application-baseTest.yml
+        name: vol-kwfxu
+        subPath: application-base.yml
+      - mountPath: /data/java/config/application-test.yml
+        name: vol-8rdt5
+        subPath: application.yml
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-t98n7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: pdl2-3
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - hostPath:
+        path: "/etc/localtime\t"
+        type: ""
+      name: vol-4vvkt
+    - configMap:
+        defaultMode: 420
+        name: application-base
+      name: vol-kwfxu
+    - configMap:
+        defaultMode: 420
+        name: user-server-application
+      name: vol-8rdt5
+    - name: default-token-t98n7
+      secret:
+        defaultMode: 420
+        secretName: default-token-t98n7
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:08:16Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:09:07Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:09:07Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-09T03:08:16Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://de6e3b8d59780af4d50d70effe2f5d96a63a870994d63d3048b93e2bfc70a127
+      image: 10.168.2.90/sjzt/user-server:20230106173913
+      imageID: docker-pullable://10.168.2.90/sjzt/user-server@sha256:eb4de71251069e5c5fea0e536fd27ef22edb93c748b863f2c9cb4c31a3f3c3c2
+      lastState: {}
+      name: container-0
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-09T03:09:06Z"
+    hostIP: 192.168.10.103
+    phase: Running
+    podIP: 10.42.1.23
+    podIPs:
+    - ip: 10.42.1.23
+    qosClass: BestEffort
+    startTime: "2023-01-09T03:08:16Z"
+kind: List
+metadata:
+  resourceVersion: ""
