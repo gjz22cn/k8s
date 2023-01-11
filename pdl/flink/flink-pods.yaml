@@ -4,27 +4,39 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T07:00:06Z"
-      cni.projectcalico.org/podIP: 10.42.2.37/32
-      cni.projectcalico.org/podIPs: 10.42.2.37/32
-    creationTimestamp: "2023-01-09T07:00:06Z"
-    generateName: jobmanager-9f7cf85bc-
+      cattle.io/timestamp: "2023-01-09T10:18:53Z"
+      cni.projectcalico.org/podIP: 10.42.2.53/32
+      cni.projectcalico.org/podIPs: 10.42.2.53/32
+    creationTimestamp: "2023-01-09T10:26:01Z"
+    generateName: jobmanager-76f58bbdc-
     labels:
-      pod-template-hash: 9f7cf85bc
+      pod-template-hash: 76f58bbdc
       workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
-    name: jobmanager-9f7cf85bc-qgp7f
+    name: jobmanager-76f58bbdc-9zxdt
     namespace: flink
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: jobmanager-9f7cf85bc
-      uid: 5ee5705e-82be-4af4-925a-d3e5f199f3a6
-    resourceVersion: "3829453"
-    uid: d0cc817b-31a9-4df3-ac8d-98db08e8fa53
+      name: jobmanager-76f58bbdc
+      uid: 2cd42d79-4284-4cff-8a0e-d7fb0048d79f
+    resourceVersion: "3862498"
+    uid: b9bf3969-446c-4c0a-8d4a-492fde14278d
   spec:
-    affinity: {}
+    affinity:
+      podAffinity: {}
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: component
+                operator: In
+                values:
+                - jobmanager
+            topologyKey: kubernetes.io/hostname
+          weight: 100
     containers:
     - args:
       - jobmanager
@@ -33,8 +45,21 @@ items:
         value: jobmanager
       - name: FLINK_PROPERTIES
         value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+      - name: POD_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
       image: flink:1.13.5-scala_2.12-java8
       imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 60
+        successThreshold: 1
+        tcpSocket:
+          port: 6123
+        timeoutSeconds: 30
       name: container-0
       ports:
       - containerPort: 8081
@@ -108,23 +133,23 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:06Z"
+      lastTransitionTime: "2023-01-09T10:26:01Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:08Z"
+      lastTransitionTime: "2023-01-09T10:26:02Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:08Z"
+      lastTransitionTime: "2023-01-09T10:26:02Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:06Z"
+      lastTransitionTime: "2023-01-09T10:26:01Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://5117b31605e265fadc7ed0c4d28b661420ca84ad158c5147c0d2f1d3411a117e
+    - containerID: docker://ac431d0f374e8ecd8a51416eeec57cf7348100c9d96a4e93f04cc156334f026d
       image: flink:1.13.5-scala_2.12-java8
       imageID: docker-pullable://flink@sha256:228fbb252d3f33bacef09af6144e4ff6a49c4c871c75df014c66536d596fdc0c
       lastState: {}
@@ -134,39 +159,51 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T07:00:07Z"
+          startedAt: "2023-01-09T10:26:01Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.37
+    podIP: 10.42.2.53
     podIPs:
-    - ip: 10.42.2.37
+    - ip: 10.42.2.53
     qosClass: BestEffort
-    startTime: "2023-01-09T07:00:06Z"
+    startTime: "2023-01-09T10:26:01Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T07:00:08Z"
-      cni.projectcalico.org/podIP: 10.42.2.38/32
-      cni.projectcalico.org/podIPs: 10.42.2.38/32
-    creationTimestamp: "2023-01-09T07:00:08Z"
-    generateName: taskmanager-c8dc96fb6-
+      cattle.io/timestamp: "2023-01-10T01:43:09Z"
+      cni.projectcalico.org/podIP: 10.42.2.54/32
+      cni.projectcalico.org/podIPs: 10.42.2.54/32
+    creationTimestamp: "2023-01-10T01:43:09Z"
+    generateName: taskmanager-5678cc5c59-
     labels:
-      pod-template-hash: c8dc96fb6
+      pod-template-hash: 5678cc5c59
       workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
-    name: taskmanager-c8dc96fb6-pdgj8
+    name: taskmanager-5678cc5c59-b8cg9
     namespace: flink
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: taskmanager-c8dc96fb6
-      uid: 9df91bc5-d563-4aba-a8b2-2d196f45c8d5
-    resourceVersion: "3829496"
-    uid: a833d3b8-ef19-4a78-aeb9-ce1c6cad4cc8
+      name: taskmanager-5678cc5c59
+      uid: 1da59611-33da-428e-b0af-76f28b1b4a45
+    resourceVersion: "4002957"
+    uid: fdcb4624-e54f-4212-a4cc-b6d5556de217
   spec:
-    affinity: {}
+    affinity:
+      podAffinity: {}
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: component
+                operator: In
+                values:
+                - taskmanager
+            topologyKey: kubernetes.io/hostname
+          weight: 100
     containers:
     - args:
       - taskmanager
@@ -177,6 +214,14 @@ items:
         value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
       image: flink:1.13.5-scala_2.12-java8
       imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 60
+        successThreshold: 1
+        tcpSocket:
+          port: 6122
+        timeoutSeconds: 30
       name: container-0
       ports:
       - containerPort: 6122
@@ -247,23 +292,23 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:08Z"
+      lastTransitionTime: "2023-01-10T01:43:09Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:10Z"
+      lastTransitionTime: "2023-01-10T01:43:10Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:10Z"
+      lastTransitionTime: "2023-01-10T01:43:10Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:00:08Z"
+      lastTransitionTime: "2023-01-10T01:43:09Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://e58d266e0bcfdf644abb5ae2967a0b092b42e801f9f3de2fd8703869479394ae
+    - containerID: docker://970d7ef22239313bf78b1d23f4f7cbb5a56b080a9c4249e5ff84dc535bccf592
       image: flink:1.13.5-scala_2.12-java8
       imageID: docker-pullable://flink@sha256:228fbb252d3f33bacef09af6144e4ff6a49c4c871c75df014c66536d596fdc0c
       lastState: {}
@@ -273,14 +318,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T07:00:09Z"
+          startedAt: "2023-01-10T01:43:10Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.38
+    podIP: 10.42.2.54
     podIPs:
-    - ip: 10.42.2.38
+    - ip: 10.42.2.54
     qosClass: BestEffort
-    startTime: "2023-01-09T07:00:08Z"
+    startTime: "2023-01-10T01:43:09Z"
 kind: List
 metadata:
   resourceVersion: ""

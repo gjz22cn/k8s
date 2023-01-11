@@ -5,24 +5,24 @@ items:
   metadata:
     annotations:
       cattle.io/timestamp: "2022-12-21T02:13:33Z"
-      cni.projectcalico.org/podIP: 10.42.0.13/32
-      cni.projectcalico.org/podIPs: 10.42.0.13/32
-    creationTimestamp: "2023-01-06T07:31:44Z"
-    generateName: dubbo-664694b4dd-
+      cni.projectcalico.org/podIP: 10.42.2.55/32
+      cni.projectcalico.org/podIPs: 10.42.2.55/32
+    creationTimestamp: "2023-01-10T08:09:43Z"
+    generateName: dubbo-8d87d88c8-
     labels:
-      pod-template-hash: 664694b4dd
+      pod-template-hash: 8d87d88c8
       workload.user.cattle.io/workloadselector: apps.deployment-dubbo-dubbo
-    name: dubbo-664694b4dd-x2jxd
+    name: dubbo-8d87d88c8-l8tpg
     namespace: dubbo
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: dubbo-664694b4dd
-      uid: 3b195385-227c-4d67-b13c-dff19514f470
-    resourceVersion: "3173906"
-    uid: d6437b70-72e4-43ab-aef5-e4b3eeb518f9
+      name: dubbo-8d87d88c8
+      uid: 6a6c639e-8cba-4742-b7b7-434beb1a4fb6
+    resourceVersion: "4061993"
+    uid: 21a36901-a387-4f84-9518-5eb4d4b1322f
   spec:
     affinity: {}
     containers:
@@ -33,7 +33,7 @@ items:
         value: zookeeper://zookeeper.zookeeper:2181
       - name: admin.metadata-report.address
         value: zookeeper://zookeeper.zookeeper:2181
-      image: apache/dubbo-admin:latest
+      image: apache/dubbo-admin:0.5.0
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -49,7 +49,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-1
+    nodeName: pdl2-2
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -75,25 +75,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:44Z"
+      lastTransitionTime: "2023-01-10T08:09:43Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:53Z"
+      lastTransitionTime: "2023-01-10T08:10:22Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:53Z"
+      lastTransitionTime: "2023-01-10T08:10:22Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:44Z"
+      lastTransitionTime: "2023-01-10T08:09:43Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://bae536530a45bbc2a0043b3e264d6dafc543273dd3949a4f31628404e93a9542
-      image: apache/dubbo-admin:latest
-      imageID: docker-pullable://apache/dubbo-admin@sha256:ad6b590b388595f3163156b3f6beecccb4acc6f568933aff2e93327096cd9959
+    - containerID: docker://cc49d759085e15fddcf6ef7f15f2149110677ad1d630c7998644a3093538edb5
+      image: apache/dubbo-admin:0.5.0
+      imageID: docker-pullable://apache/dubbo-admin@sha256:adb05de9c0f91d52f7355a6b5c39a6698df3103eb3c1cf148f41ba542b9cdaeb
       lastState: {}
       name: container-0
       ready: true
@@ -101,14 +101,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-06T07:31:49Z"
-    hostIP: 192.168.10.101
+          startedAt: "2023-01-10T08:10:21Z"
+    hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.0.13
+    podIP: 10.42.2.55
     podIPs:
-    - ip: 10.42.0.13
+    - ip: 10.42.2.55
     qosClass: BestEffort
-    startTime: "2023-01-06T07:31:44Z"
+    startTime: "2023-01-10T08:09:43Z"
 kind: List
 metadata:
   resourceVersion: ""

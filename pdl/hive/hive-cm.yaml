@@ -2,6 +2,7 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
+    hive-env.sh: export HADOOP_HEAPSIZE=1024
     hive-site.xml: |-
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -36,7 +37,7 @@ items:
     creationTimestamp: "2022-12-23T05:41:53Z"
     name: hive-conf
     namespace: hive
-    resourceVersion: "2946495"
+    resourceVersion: "4058955"
     uid: f2a98542-fdf2-4504-b261-4117b621c1b6
 - apiVersion: v1
   data:

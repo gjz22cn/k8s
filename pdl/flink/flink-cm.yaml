@@ -2,10 +2,12 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
-    flink-conf.yaml: "jobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\n\njobmanager.memory.process.size:
-      2500m\njobmanager.memory.jvm-metaspace.size: 1024m\ntaskmanager.memory.process.size:
-      5000m\ntaskmanager.memory.jvm-metaspace.size: 2048m\ntaskmanager.numberOfTaskSlots:
-      50\nparallelism.default: 6\njobmanager.execution.failover-strategy: region\nblob.server.port:
+    flink-conf.yaml: "#kubernetes.cluster-id: 100\n#high-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory\n#high-availability.storageDir:
+      hdfs://hdfs-master.hadoop:9000/flink/recovery\n#restart-strategy: fixed-delay\n#restart-strategy.fixed-delay.attempts:
+      10\n\njobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\njobmanager.memory.process.size:
+      2500m\njobmanager.memory.jvm-metaspace.size: 1024m\njobmanager.execution.failover-strategy:
+      region\n\ntaskmanager.rpc.port: 6122\ntaskmanager.memory.process.size: 5000m\ntaskmanager.memory.jvm-metaspace.size:
+      2048m\ntaskmanager.numberOfTaskSlots: 50\n\nparallelism.default: 6\nblob.server.port:
       6124\nquery.server.port: 6125\nenv.java.opts.taskmanager: \"-Duser.timezone=Asia/Shanghai\"\nakka.ask.timeout:
       60 s  \nweb.timeout:1000000\nrest.bind-address: 0.0.0.0\nheartbeat.timeout:
       180000\nclassloader.resolve-order: parent-first\nclassloader.check-leaked-classloader:
@@ -60,7 +62,7 @@ items:
     creationTimestamp: "2022-12-27T08:26:10Z"
     name: flink-conf
     namespace: flink
-    resourceVersion: "3178960"
+    resourceVersion: "4002911"
     uid: 4e6fb301-05c0-45ed-b99e-43b48b64f031
 - apiVersion: v1
   data:

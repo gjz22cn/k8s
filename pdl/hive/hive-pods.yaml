@@ -4,25 +4,25 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2022-12-29T10:11:05Z"
-      cni.projectcalico.org/podIP: 10.42.0.22/32
-      cni.projectcalico.org/podIPs: 10.42.0.22/32
-    creationTimestamp: "2023-01-06T07:31:54Z"
-    generateName: hiveserver2-668548b946-
+      cattle.io/timestamp: "2023-01-10T07:52:21Z"
+      cni.projectcalico.org/podIP: 10.42.1.46/32
+      cni.projectcalico.org/podIPs: 10.42.1.46/32
+    creationTimestamp: "2023-01-10T07:52:21Z"
+    generateName: hiveserver2-8474f7cbcc-
     labels:
-      pod-template-hash: 668548b946
+      pod-template-hash: 8474f7cbcc
       workload.user.cattle.io/workloadselector: apps.deployment-hive-hiveserver2
-    name: hiveserver2-668548b946-54ldd
+    name: hiveserver2-8474f7cbcc-d5bfr
     namespace: hive
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: hiveserver2-668548b946
-      uid: 60e62e52-e2c8-4bd4-96c1-b90ab13a5015
-    resourceVersion: "3174476"
-    uid: b480af65-948a-4684-a327-5f496d296205
+      name: hiveserver2-8474f7cbcc
+      uid: 7c2ca020-e3ed-49da-85f1-5c561aefeed0
+    resourceVersion: "4059141"
+    uid: 32610e11-c158-42c4-ab5e-4adefe0eb857
   spec:
     affinity: {}
     containers:
@@ -43,12 +43,15 @@ items:
       - mountPath: /opt/apache-hive-3.1.3/conf/hive-site.xml
         name: vol-na7il
         subPath: hive-site.xml
+      - mountPath: /opt/apache-hive-3.1.3/conf/hive-env.sh
+        name: vol-na7il
+        subPath: hive-env.sh
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: default-token-hmhbv
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-1
+    nodeName: pdl2-3
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -78,25 +81,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:54Z"
+      lastTransitionTime: "2023-01-10T07:52:21Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:32:08Z"
+      lastTransitionTime: "2023-01-10T07:52:22Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:32:08Z"
+      lastTransitionTime: "2023-01-10T07:52:22Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:54Z"
+      lastTransitionTime: "2023-01-10T07:52:21Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://5350d8bec7d505849008fc59cfa6ddcf282867a71e3fb4219d28ad9e0da577e7
+    - containerID: docker://2cade94f59bd2e2e7312bec8bc6cf90a5036b786af8c395a5fa98c9306bd890c
       image: 192.168.10.101:5000/hive-3.3.4:3.1.3
-      imageID: docker-pullable://192.168.10.101:5000/hive-3.3.4@sha256:98a9bb4d5d9a02beaaf39bbc89e3045c475d20306915abbe296977fb87667efc
+      imageID: docker-pullable://192.168.10.101:5000/hive-3.3.4@sha256:e6482c78acfbf68e32869eaf17286400091b67404df39d2fa735a9472ef0bc5b
       lastState: {}
       name: container-0
       ready: true
@@ -104,14 +107,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-06T07:32:02Z"
-    hostIP: 192.168.10.101
+          startedAt: "2023-01-10T07:52:22Z"
+    hostIP: 192.168.10.103
     phase: Running
-    podIP: 10.42.0.22
+    podIP: 10.42.1.46
     podIPs:
-    - ip: 10.42.0.22
+    - ip: 10.42.1.46
     qosClass: BestEffort
-    startTime: "2023-01-06T07:31:54Z"
+    startTime: "2023-01-10T07:52:21Z"
 - apiVersion: v1
   kind: Pod
   metadata:

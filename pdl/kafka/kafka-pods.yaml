@@ -4,24 +4,25 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cni.projectcalico.org/podIP: 10.42.0.54/32
-      cni.projectcalico.org/podIPs: 10.42.0.54/32
-    creationTimestamp: "2023-01-09T05:04:18Z"
-    generateName: kafka-64bb87c8f8-
+      cattle.io/timestamp: "2023-01-10T08:08:48Z"
+      cni.projectcalico.org/podIP: 10.42.0.62/32
+      cni.projectcalico.org/podIPs: 10.42.0.62/32
+    creationTimestamp: "2023-01-10T08:08:48Z"
+    generateName: kafka-86b4db9578-
     labels:
-      pod-template-hash: 64bb87c8f8
+      pod-template-hash: 86b4db9578
       workload.user.cattle.io/workloadselector: apps.deployment-kafka-kafka
-    name: kafka-64bb87c8f8-2qswz
+    name: kafka-86b4db9578-2bk6g
     namespace: kafka
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: kafka-64bb87c8f8
-      uid: dbad62ec-a439-428e-b118-b13ba7afdb89
-    resourceVersion: "3811145"
-    uid: 5473a77a-e6a1-40a8-8c82-ff319bfeeb2e
+      name: kafka-86b4db9578
+      uid: 3a3b7ae5-8b97-4440-b951-6a80fca6fd2b
+    resourceVersion: "4061716"
+    uid: 71daa30f-6e42-40c8-99e4-55484df9203e
   spec:
     affinity: {}
     containers:
@@ -36,7 +37,7 @@ items:
         value: zookeeper.zookeeper:2181
       - name: ALLOW_PLAINTEXT_LISTENER
         value: "yes"
-      image: bitnami/kafka:latest
+      image: bitnami/kafka:3.3.1
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -78,23 +79,23 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T05:04:18Z"
+      lastTransitionTime: "2023-01-10T08:08:48Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T05:04:20Z"
+      lastTransitionTime: "2023-01-10T08:08:49Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T05:04:20Z"
+      lastTransitionTime: "2023-01-10T08:08:49Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T05:04:18Z"
+      lastTransitionTime: "2023-01-10T08:08:48Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://67bf4540f1465fd9e86f2a4576e186278e152faae8fb2acf7d3958ff9d92bc9a
+    - containerID: docker://3aca731e888495e3231e90d9f1ca3e2b0cf7f4039742c51697868c2cbf8c4e33
       image: bitnami/kafka:3.3.1
       imageID: docker-pullable://bitnami/kafka@sha256:0e24101cdb799649979c393e9748c39b614e81b827eac4ba3897ed13304af603
       lastState: {}
@@ -104,14 +105,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T05:04:19Z"
+          startedAt: "2023-01-10T08:08:49Z"
     hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.0.54
+    podIP: 10.42.0.62
     podIPs:
-    - ip: 10.42.0.54
+    - ip: 10.42.0.62
     qosClass: BestEffort
-    startTime: "2023-01-09T05:04:18Z"
+    startTime: "2023-01-10T08:08:48Z"
 kind: List
 metadata:
   resourceVersion: ""

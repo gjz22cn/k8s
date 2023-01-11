@@ -118,25 +118,25 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2022-12-27T06:47:50Z"
-      cni.projectcalico.org/podIP: 10.42.0.30/32
-      cni.projectcalico.org/podIPs: 10.42.0.30/32
-    creationTimestamp: "2023-01-06T07:31:54Z"
-    generateName: xxl-job-exec-6c555f7845-
+      cattle.io/timestamp: "2023-01-11T02:38:23Z"
+      cni.projectcalico.org/podIP: 10.42.0.63/32
+      cni.projectcalico.org/podIPs: 10.42.0.63/32
+    creationTimestamp: "2023-01-11T02:38:23Z"
+    generateName: xxl-job-exec-74797959f-
     labels:
-      pod-template-hash: 6c555f7845
+      pod-template-hash: 74797959f
       workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-exec
-    name: xxl-job-exec-6c555f7845-vsl6n
+    name: xxl-job-exec-74797959f-pn5lj
     namespace: xxl-job
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: xxl-job-exec-6c555f7845
-      uid: cc3debe9-6b52-46b1-a8da-77ed391af9cb
-    resourceVersion: "3174425"
-    uid: d5b7709d-f230-42bf-acf1-63b5d011e8cd
+      name: xxl-job-exec-74797959f
+      uid: 4521585c-b2c5-4c1d-bcfc-43613194eb30
+    resourceVersion: "4230332"
+    uid: 643f2114-db31-40a6-a489-8295af28c27b
   spec:
     affinity: {}
     containers:
@@ -195,25 +195,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:54Z"
+      lastTransitionTime: "2023-01-11T02:38:23Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:32:08Z"
+      lastTransitionTime: "2023-01-11T02:38:25Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:32:08Z"
+      lastTransitionTime: "2023-01-11T02:38:25Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:54Z"
+      lastTransitionTime: "2023-01-11T02:38:23Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://f680cb36e541248d74636e07b061584db530338f91d00a3d5b984aa329225d5b
+    - containerID: docker://a6188114f2c82e648261fd4f9559ddf2b5376a1eee90d21ea1485a0a53b467c6
       image: 192.168.10.101:5000/xxl-job:1.0.0
-      imageID: docker-pullable://192.168.10.101:5000/xxl-job@sha256:522da25f051da0f48a14fe6d8119e0e4c9ec7dca775cb8ab0f97f35d85a10ec8
+      imageID: docker-pullable://192.168.10.101:5000/xxl-job@sha256:27f03b7d46557dfd3459f01ce325040dbdbb36177f1c3917203c95256a7184ee
       lastState: {}
       name: container-0
       ready: true
@@ -221,14 +221,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-06T07:32:04Z"
+          startedAt: "2023-01-11T02:38:24Z"
     hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.0.30
+    podIP: 10.42.0.63
     podIPs:
-    - ip: 10.42.0.30
+    - ip: 10.42.0.63
     qosClass: BestEffort
-    startTime: "2023-01-06T07:31:54Z"
+    startTime: "2023-01-11T02:38:23Z"
 kind: List
 metadata:
   resourceVersion: ""
