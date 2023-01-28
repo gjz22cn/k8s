@@ -1,0 +1,12 @@
+FROM flink:1.13.5-scala_2.12-java8
+
+# hadoop
+ADD hadoop-3.3.4.tar.gz /opt
+RUN mv /opt/hadoop-3.3.4 /opt/hadoop
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$HADOOP_HOME/bin:$PATH
+
+COPY docker-entrypoint-flink.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

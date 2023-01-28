@@ -16,6 +16,8 @@ RUN set -ex; \
     rm $HADOOP_HOME/src.tgz; \
     chown -R root:root $HADOOP_HOME
 RUN mkdir -p $HADOOP_HOME/hdfs/name/ && mkdir -p $HADOOP_HOME/hdfs/data/
+COPY rack_topology.sh $HADOOP_HOME/etc/hadoop/
+RUN chmod +x $HADOOP_HOME/etc/hadoop/rack_topology.sh
 # clean trash file or dir
 RUN rm -rf $HADOOP_HOME/share/doc/;
 COPY docker-entrypoint.sh /
