@@ -15,12 +15,14 @@ items:
       kind: Deployment
       name: xxl-job-admin
       uid: 271e2442-b6f0-404a-a188-cc3c330b1c8d
-    resourceVersion: "2405244"
+    resourceVersion: "8552054"
     uid: 9f652156-59f0-41a8-a058-1071342cfcee
   spec:
     clusterIP: 10.43.215.123
     clusterIPs:
     - 10.43.215.123
+    externalIPs:
+    - 192.168.3.204
     ports:
     - name: xxl-admin
       port: 30405
@@ -30,82 +32,6 @@ items:
       workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-admin
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-      field.cattle.io/targetWorkloadIds: '["xxl-job/xxl-job-exec"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-26T09:59:53Z"
-    name: xxl-job-exec
-    namespace: xxl-job
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: xxl-job-exec
-      uid: 000032ff-5956-4cbd-b285-bc88a43d7461
-    resourceVersion: "2406018"
-    uid: b9f0c7f1-1f4c-40ac-a88a-63bdc7a44c03
-  spec:
-    clusterIP: 10.43.88.12
-    clusterIPs:
-    - 10.43.88.12
-    ports:
-    - name: xxl-exec
-      port: 9999
-      protocol: TCP
-      targetPort: 9999
-    - name: web
-      port: 9081
-      protocol: TCP
-      targetPort: 9081
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-exec
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30089,"protocol":"TCP","serviceName":"xxl-job:xxl-job-exec-nodeport","allNodes":true},{"addresses":["192.168.3.204"],"port":30081,"protocol":"TCP","serviceName":"xxl-job:xxl-job-exec-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["xxl-job/xxl-job-exec"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-26T09:59:53Z"
-    name: xxl-job-exec-nodeport
-    namespace: xxl-job
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: xxl-job-exec
-      uid: 000032ff-5956-4cbd-b285-bc88a43d7461
-    resourceVersion: "2407318"
-    uid: 3d9bff26-f972-4ee3-bf1e-a610d07efb34
-  spec:
-    clusterIP: 10.43.245.67
-    clusterIPs:
-    - 10.43.245.67
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: xxl-exec
-      nodePort: 30089
-      port: 9999
-      protocol: TCP
-      targetPort: 9999
-    - name: web
-      nodePort: 30081
-      port: 9081
-      protocol: TCP
-      targetPort: 9081
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-exec
-    sessionAffinity: None
-    type: NodePort
   status:
     loadBalancer: {}
 kind: List

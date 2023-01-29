@@ -4,29 +4,29 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2022-12-30T04:40:28Z"
-      cni.projectcalico.org/podIP: 10.42.0.11/32
-      cni.projectcalico.org/podIPs: 10.42.0.11/32
-    creationTimestamp: "2023-01-06T07:31:44Z"
-    generateName: presto-ffd995c4f-
+      cattle.io/timestamp: "2023-01-18T09:49:19Z"
+      cni.projectcalico.org/podIP: 10.42.0.74/32
+      cni.projectcalico.org/podIPs: 10.42.0.74/32
+    creationTimestamp: "2023-01-18T09:50:56Z"
+    generateName: presto-65c6cb6b58-
     labels:
-      pod-template-hash: ffd995c4f
+      pod-template-hash: 65c6cb6b58
       workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
-    name: presto-ffd995c4f-482fh
+    name: presto-65c6cb6b58-fc9sd
     namespace: presto
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: presto-ffd995c4f
-      uid: 0185b39c-dc25-4cbf-b78f-31928781bea8
-    resourceVersion: "3173851"
-    uid: ad679d85-8423-4a0e-9f9d-06503f93c37d
+      name: presto-65c6cb6b58
+      uid: de086159-7dff-4aff-b706-29c4dd005aa7
+    resourceVersion: "5850673"
+    uid: f8981daf-14f0-4a4d-a8d2-a141a07a3d1a
   spec:
     affinity: {}
     containers:
-    - image: 192.168.10.101:5000/presto:1.0.0
+    - image: ahanaio/prestodb-sandbox:0.278.1
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -37,20 +37,21 @@ items:
       terminationMessagePath: /dev/termination-log
       terminationMessagePolicy: File
       volumeMounts:
-      - mountPath: /usr/lib/presto/etc/catalog
+      - mountPath: /opt/presto-server/etc/catalog/hive.properties
         name: vol-5fmjl
-      - mountPath: /usr/lib/presto/etc/config.properties
-        name: vol-6jctm
+        subPath: hive.properties
+      - mountPath: /opt/presto-server/etc/catalog/iceberg.properties
+        name: vol-5fmjl
+        subPath: iceberg.properties
+      - mountPath: /opt/presto-server/etc/catalog/mysql.properties
+        name: vol-5fmjl
+        subPath: mysql.properties
+      - mountPath: /opt/presto-server/etc/config.properties
+        name: vol-yunlc
         subPath: config.properties
-      - mountPath: /usr/lib/presto/etc/jvm.config
-        name: vol-6jctm
+      - mountPath: /opt/presto-server/etc/jvm.config
+        name: vol-yunlc
         subPath: jvm.config
-      - mountPath: /usr/lib/presto/etc/log.properties
-        name: vol-6jctm
-        subPath: log.properties
-      - mountPath: /usr/lib/presto/etc/node.properties
-        name: vol-6jctm
-        subPath: node.properties
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: default-token-ntcj2
         readOnly: true
@@ -77,12 +78,12 @@ items:
     volumes:
     - configMap:
         defaultMode: 420
-        name: presto-conf
-      name: vol-6jctm
-    - configMap:
-        defaultMode: 420
         name: presto-catalog-conf
       name: vol-5fmjl
+    - configMap:
+        defaultMode: 420
+        name: presto-conf
+      name: vol-yunlc
     - name: default-token-ntcj2
       secret:
         defaultMode: 420
@@ -90,25 +91,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:44Z"
+      lastTransitionTime: "2023-01-18T09:50:56Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:47Z"
+      lastTransitionTime: "2023-01-18T09:50:56Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:47Z"
+      lastTransitionTime: "2023-01-18T09:50:56Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:31:44Z"
+      lastTransitionTime: "2023-01-18T09:50:56Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://c41e240fce489626e2153c4b4391155b81f06b881d3c7ea9ea9e6d28f520bb9a
-      image: 192.168.10.101:5000/presto:1.0.0
-      imageID: docker-pullable://192.168.10.101:5000/presto@sha256:f389e96f26cca5a83eb9c811df30629a3ff8cbe561f2d955769af15ede13e335
+    - containerID: docker://c4040f6bbe646a6db3002302760a929fec1f4d89bc25330787f2155a3c35bcb6
+      image: ahanaio/prestodb-sandbox:0.278.1
+      imageID: docker-pullable://ahanaio/prestodb-sandbox@sha256:62166cf500a83a83d6e1311ff93889b2e9d7ad5a858002ed7e996b03dda6e83f
       lastState: {}
       name: container-0
       ready: true
@@ -116,14 +117,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-06T07:31:47Z"
+          startedAt: "2023-01-18T09:50:56Z"
     hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.0.11
+    podIP: 10.42.0.74
     podIPs:
-    - ip: 10.42.0.11
+    - ip: 10.42.0.74
     qosClass: BestEffort
-    startTime: "2023-01-06T07:31:44Z"
+    startTime: "2023-01-18T09:50:56Z"
 kind: List
 metadata:
   resourceVersion: ""

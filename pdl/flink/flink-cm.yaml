@@ -2,16 +2,18 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
-    flink-conf.yaml: "#kubernetes.cluster-id: 100\n#high-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory\n#high-availability.storageDir:
-      hdfs://hdfs-master.hadoop:9000/flink/recovery\n#restart-strategy: fixed-delay\n#restart-strategy.fixed-delay.attempts:
-      10\n\njobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\njobmanager.memory.process.size:
+    flink-conf.yaml: "jobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\njobmanager.memory.process.size:
       2500m\njobmanager.memory.jvm-metaspace.size: 1024m\njobmanager.execution.failover-strategy:
-      region\n\ntaskmanager.rpc.port: 6122\ntaskmanager.memory.process.size: 5000m\ntaskmanager.memory.jvm-metaspace.size:
-      2048m\ntaskmanager.numberOfTaskSlots: 50\n\nparallelism.default: 6\nblob.server.port:
+      region\n\ntaskmanager.rpc.port: 6122\ntaskmanager.memory.process.size: 20480m\ntaskmanager.memory.jvm-metaspace.size:
+      2048m\ntaskmanager.numberOfTaskSlots: 8\n\nparallelism.default: 1\nblob.server.port:
       6124\nquery.server.port: 6125\nenv.java.opts.taskmanager: \"-Duser.timezone=Asia/Shanghai\"\nakka.ask.timeout:
-      60 s  \nweb.timeout:1000000\nrest.bind-address: 0.0.0.0\nheartbeat.timeout:
-      180000\nclassloader.resolve-order: parent-first\nclassloader.check-leaked-classloader:
-      false"
+      60s\nweb.timeout: 1000000\nrest.bind-address: 0.0.0.0\nheartbeat.timeout: 180000\nclassloader.resolve-order:
+      parent-first\nclassloader.check-leaked-classloader: false\n\n# HA\nkubernetes.cluster-id:
+      pdl2\nhigh-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory
+      \n\n# hdfs\nhigh-availability.storageDir: hdfs://hdfs-master.hadoop:9000/flink/recovery\nrestart-strategy:
+      fixed-delay\nrestart-strategy.fixed-delay.attempts: 10\n\n# # chekpoin\n# state.backend:
+      filesystem\n# # hdfs checkpoint\n# state.checkpoints.dir: hdfs://sd-cluster-03:8020/data/flink/checkpoints\n\nweb.tmpdir:
+      /opt/flink/joblib"
     log4j-console.properties: |-
       # This affects logging for both user code and Flink
       rootLogger.level = INFO
@@ -62,7 +64,7 @@ items:
     creationTimestamp: "2022-12-27T08:26:10Z"
     name: flink-conf
     namespace: flink
-    resourceVersion: "4002911"
+    resourceVersion: "8812722"
     uid: 4e6fb301-05c0-45ed-b99e-43b48b64f031
 - apiVersion: v1
   data:

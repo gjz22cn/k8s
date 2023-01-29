@@ -73,7 +73,7 @@ items:
     creationTimestamp: "2022-12-26T09:09:52Z"
     name: admin-conf
     namespace: xxl-job
-    resourceVersion: "2458991"
+    resourceVersion: "8539047"
     uid: 59a7ab32-d719-4a8f-93a8-f910422efb43
 - apiVersion: v1
   data:
@@ -89,7 +89,6 @@ items:
 
       ### xxl-job admin address list, such as "http://address" or "http://address01,http://address02"
       xxl.job.admin.addresses=http://xxl-job-admin.xxl-job:30405/xxl-job-admin
-      #xxl.job.admin.addresses=http://192.168.3.164:30405/xxl-job-admin
 
       ### xxl-job, access token
       xxl.job.accessToken=
@@ -115,7 +114,7 @@ items:
       influxdb.delay.time=600
 
       # kafka configuration
-      spring.kafka.bootstrap-servers=10.42.2.54:9092
+      spring.kafka.bootstrap-servers=kafka.kafka:9092
       kafka.bootstrap.servers=kafka.kafka:9092
       kafka.memory=33554432
       kafka.batch.size=16484
@@ -135,12 +134,26 @@ items:
       spring.kafka.consumer.auto-commit-interval=1000
       spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
       spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+      flink.server-url=http://jobmanager.flink:8081
+      flink.sql-jar-name: flink-actuator.jar
+
+      imysql.ip=mysql.mysql
+      imysql.port=3306
+      imysql.username=root
+      imysql.password=123456
+      imysql.database=integration_center
+
+      task.poll.time=6
+
+      warehouseUri=hdfs-master.hadoop:9000
+      hiveUri=jdbc:hive2://hiveserver2.hive:10000/
   kind: ConfigMap
   metadata:
     creationTimestamp: "2022-12-26T09:10:53Z"
     name: executor-conf
     namespace: xxl-job
-    resourceVersion: "2466066"
+    resourceVersion: "6340295"
     uid: 0178cb44-d408-44b0-9e74-86b407df5aa8
 - apiVersion: v1
   data:

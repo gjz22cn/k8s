@@ -5,28 +5,28 @@ items:
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-06T08:16:14Z"
-      cni.projectcalico.org/podIP: 10.42.2.23/32
-      cni.projectcalico.org/podIPs: 10.42.2.23/32
-    creationTimestamp: "2023-01-09T03:07:03Z"
-    generateName: data-server-84c89d4b5-
+      cni.projectcalico.org/podIP: 10.42.2.117/32
+      cni.projectcalico.org/podIPs: 10.42.2.117/32
+    creationTimestamp: "2023-01-28T02:16:37Z"
+    generateName: data-server-66697b7768-
     labels:
-      pod-template-hash: 84c89d4b5
+      pod-template-hash: 66697b7768
       workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
-    name: data-server-84c89d4b5-6b5ft
+    name: data-server-66697b7768-x7w8t
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: data-server-84c89d4b5
-      uid: 7e3cfe0b-c42b-4341-ad9d-4c130296488c
-    resourceVersion: "3792693"
-    uid: 8204308b-a0d2-4922-b2b1-a454f1874ff8
+      name: data-server-66697b7768
+      uid: 0ffde2ff-87df-4a07-a9fa-1930cfcf86be
+    resourceVersion: "8471928"
+    uid: 47489326-f3cd-45de-932d-184ee09edb91
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/data-server:20230106173913
+    - image: 10.168.2.90/sjzt/data-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -88,25 +88,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:07:03Z"
+      lastTransitionTime: "2023-01-28T02:16:37Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:07:34Z"
+      lastTransitionTime: "2023-01-28T02:17:06Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:07:34Z"
+      lastTransitionTime: "2023-01-28T02:17:06Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:07:03Z"
+      lastTransitionTime: "2023-01-28T02:16:37Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://a4c9f7bbaba43ae61698fd956324fcea77f65d55cc4cd87fae81bfd693a03a5c
-      image: 10.168.2.90/sjzt/data-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/data-server@sha256:5b4760053bf385e363d7ca8a97862c8a385d3c48892c868f31012b50538feb62
+    - containerID: docker://d48c2982ebab74f72c8f31a066bfcdd6ef9d53c9256576db3f42fa8bcf5fecf2
+      image: 10.168.2.90/sjzt/data-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/data-server@sha256:126e18227f954988ab294dfc507f4ef4c4d3732208a670643c3587d416abfb2a
       lastState: {}
       name: container-0
       ready: true
@@ -114,41 +114,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T03:07:33Z"
+          startedAt: "2023-01-28T02:17:05Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.23
+    podIP: 10.42.2.117
     podIPs:
-    - ip: 10.42.2.23
+    - ip: 10.42.2.117
     qosClass: BestEffort
-    startTime: "2023-01-09T03:07:03Z"
+    startTime: "2023-01-28T02:16:37Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-06T08:16:18Z"
-      cni.projectcalico.org/podIP: 10.42.2.27/32
-      cni.projectcalico.org/podIPs: 10.42.2.27/32
-    creationTimestamp: "2023-01-09T03:38:23Z"
-    generateName: frontweb-767d8b457b-
+      cni.projectcalico.org/podIP: 10.42.2.121/32
+      cni.projectcalico.org/podIPs: 10.42.2.121/32
+    creationTimestamp: "2023-01-28T02:19:14Z"
+    generateName: frontweb-7f6695c95-
     labels:
-      pod-template-hash: 767d8b457b
+      pod-template-hash: 7f6695c95
       workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
-    name: frontweb-767d8b457b-n8fc7
+    name: frontweb-7f6695c95-4pfgw
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: frontweb-767d8b457b
-      uid: c4755f8f-b727-4e92-98de-3a8122cd9c65
-    resourceVersion: "3797956"
-    uid: 00c117ac-84b4-47e6-a52d-7fc349fc83ea
+      name: frontweb-7f6695c95
+      uid: 9373e0c6-f36d-4fb2-a04d-5e4b444a3884
+    resourceVersion: "8472681"
+    uid: 30e60e4e-984c-499d-ada7-11b56e5219ef
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/frontweb:20230109104143
+    - image: 10.168.2.90/sjzt/frontweb:20230118135137
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -203,25 +203,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:38:23Z"
+      lastTransitionTime: "2023-01-28T02:19:14Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:38:27Z"
+      lastTransitionTime: "2023-01-28T02:19:24Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:38:27Z"
+      lastTransitionTime: "2023-01-28T02:19:24Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:38:23Z"
+      lastTransitionTime: "2023-01-28T02:19:14Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://46c4aaaa18e267915f3e906998181f6b86698180c211ff163978dc9adcf247b6
-      image: 10.168.2.90/sjzt/frontweb:20230109104143
-      imageID: docker-pullable://10.168.2.90/sjzt/frontweb@sha256:80e3d25b64bde3726e786bd122361e28ccd6e72f7f79131c1d16015f99048bd6
+    - containerID: docker://68659da85714ee4d43ed1267a763a768520d9d9a6862fb5416b322bc570ead47
+      image: 10.168.2.90/sjzt/frontweb:20230118135137
+      imageID: docker-pullable://10.168.2.90/sjzt/frontweb@sha256:b31d7cc6de4778f68eda1168ae193f0e89bef69afd4f7a5de9f8b35f67703d26
       lastState: {}
       name: container-0
       ready: true
@@ -229,41 +229,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T03:38:27Z"
+          startedAt: "2023-01-28T02:19:23Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.27
+    podIP: 10.42.2.121
     podIPs:
-    - ip: 10.42.2.27
+    - ip: 10.42.2.121
     qosClass: BestEffort
-    startTime: "2023-01-09T03:38:23Z"
+    startTime: "2023-01-28T02:19:14Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T03:47:01Z"
-      cni.projectcalico.org/podIP: 10.42.1.25/32
-      cni.projectcalico.org/podIPs: 10.42.1.25/32
-    creationTimestamp: "2023-01-09T03:47:02Z"
-    generateName: integration-server-cdcc6d6fc-
+      cattle.io/timestamp: "2023-01-28T09:01:49Z"
+      cni.projectcalico.org/podIP: 10.42.2.131/32
+      cni.projectcalico.org/podIPs: 10.42.2.131/32
+    creationTimestamp: "2023-01-28T09:01:49Z"
+    generateName: integration-server-74f4584689-
     labels:
-      pod-template-hash: cdcc6d6fc
+      pod-template-hash: 74f4584689
       workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
-    name: integration-server-cdcc6d6fc-xxfmb
+    name: integration-server-74f4584689-bc7dv
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: integration-server-cdcc6d6fc
-      uid: 51f9eef6-e7d4-44ef-9bf7-378be58e46b8
-    resourceVersion: "3799357"
-    uid: 55282198-c83f-42dc-b9d6-4fdc5f23c092
+      name: integration-server-74f4584689
+      uid: 3b44ab60-723b-45a0-831d-e48deccb1826
+    resourceVersion: "8550642"
+    uid: 5d1b6140-b1ce-453d-a1a8-93aa78d823e1
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/integration-server:20230106173913
+    - image: 10.168.2.90/sjzt/integration-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -287,7 +287,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-3
+    nodeName: pdl2-2
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -325,25 +325,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:47:02Z"
+      lastTransitionTime: "2023-01-28T09:01:49Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:47:04Z"
+      lastTransitionTime: "2023-01-28T09:01:50Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:47:04Z"
+      lastTransitionTime: "2023-01-28T09:01:50Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:47:02Z"
+      lastTransitionTime: "2023-01-28T09:01:49Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://8b1200f0fca1cfb68fafd05b09cc334f1e69f8f7c6cc0818f2417ef7b9baa80f
-      image: 10.168.2.90/sjzt/integration-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/integration-server@sha256:9474138c11f403bd16078583839df3ea4f5edb903484ebe395488e0087bcfbad
+    - containerID: docker://a5c97b3fe9581bde14069c1564059aa85761749d2af4babe76aefd3c2dfdf574
+      image: 10.168.2.90/sjzt/integration-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/integration-server@sha256:32ab2cd1734c8a30e2cf83ec31995766e48e35ce31b9106244655f7c178b6ee8
       lastState: {}
       name: container-0
       ready: true
@@ -351,41 +351,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T03:47:03Z"
-    hostIP: 192.168.10.103
+          startedAt: "2023-01-28T09:01:50Z"
+    hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.1.25
+    podIP: 10.42.2.131
     podIPs:
-    - ip: 10.42.1.25
+    - ip: 10.42.2.131
     qosClass: BestEffort
-    startTime: "2023-01-09T03:47:02Z"
+    startTime: "2023-01-28T09:01:49Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T06:45:01Z"
-      cni.projectcalico.org/podIP: 10.42.1.32/32
-      cni.projectcalico.org/podIPs: 10.42.1.32/32
-    creationTimestamp: "2023-01-09T06:45:01Z"
-    generateName: lake-server-67fcdc6b44-
+      cattle.io/timestamp: "2023-01-28T08:14:21Z"
+      cni.projectcalico.org/podIP: 10.42.0.84/32
+      cni.projectcalico.org/podIPs: 10.42.0.84/32
+    creationTimestamp: "2023-01-28T08:14:20Z"
+    generateName: lake-server-fd4d96bb-
     labels:
-      pod-template-hash: 67fcdc6b44
+      pod-template-hash: fd4d96bb
       workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
-    name: lake-server-67fcdc6b44-8nkvp
+    name: lake-server-fd4d96bb-rh6jc
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: lake-server-67fcdc6b44
-      uid: 534db6d3-775b-4e5c-8fa6-a78447beae0c
-    resourceVersion: "3826986"
-    uid: cffffe2c-6c0e-452a-bbb8-317d4a10968d
+      name: lake-server-fd4d96bb
+      uid: 48e0f35d-de66-4d8b-ac6d-b8977d9d60c5
+    resourceVersion: "8541416"
+    uid: 75d3e0eb-f4f1-48d2-9969-2fb4f4e16bd4
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/lake-server:20230106173913
+    - image: 10.168.2.90/sjzt/lake-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -412,7 +412,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-3
+    nodeName: pdl2-1
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -453,25 +453,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:01Z"
+      lastTransitionTime: "2023-01-28T08:14:21Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:02Z"
+      lastTransitionTime: "2023-01-28T08:14:21Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:02Z"
+      lastTransitionTime: "2023-01-28T08:14:21Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:01Z"
+      lastTransitionTime: "2023-01-28T08:14:20Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://a12740bb2d4045c483dc32b935376df538cc271e240a8c99695fbbee96c466bf
-      image: 10.168.2.90/sjzt/lake-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/lake-server@sha256:e55290f00d7065231ef9ebc02262d27bc24e8675ac2c2304c5a24406f78fe8ca
+    - containerID: docker://45cffda9961209a3d260d2d60c6c3081b46175905307d6f4fb476a27c29cd713
+      image: 10.168.2.90/sjzt/lake-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/lake-server@sha256:6714a27c502c043925749df2aaca24c31e8c663de6531e4a0d3fa949a46da79a
       lastState: {}
       name: container-0
       ready: true
@@ -479,41 +479,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T06:45:01Z"
-    hostIP: 192.168.10.103
+          startedAt: "2023-01-28T08:14:21Z"
+    hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.1.32
+    podIP: 10.42.0.84
     podIPs:
-    - ip: 10.42.1.32
+    - ip: 10.42.0.84
     qosClass: BestEffort
-    startTime: "2023-01-09T06:45:01Z"
+    startTime: "2023-01-28T08:14:21Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-09T06:46:01Z"
-      cni.projectcalico.org/podIP: 10.42.2.36/32
-      cni.projectcalico.org/podIPs: 10.42.2.36/32
-    creationTimestamp: "2023-01-09T06:46:01Z"
-    generateName: metadata-server-6dbf68fc54-
+      cni.projectcalico.org/podIP: 10.42.1.79/32
+      cni.projectcalico.org/podIPs: 10.42.1.79/32
+    creationTimestamp: "2023-01-28T02:18:01Z"
+    generateName: metadata-server-67ffb9d7f5-
     labels:
-      pod-template-hash: 6dbf68fc54
+      pod-template-hash: 67ffb9d7f5
       workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
-    name: metadata-server-6dbf68fc54-77ckk
+    name: metadata-server-67ffb9d7f5-nnl4w
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: metadata-server-6dbf68fc54
-      uid: 3e7a9137-1971-4439-b633-10beb57cd27f
-    resourceVersion: "3827261"
-    uid: 29b0d1c0-9771-4993-a0ba-b8fdd4ad92cd
+      name: metadata-server-67ffb9d7f5
+      uid: 3bb78298-867a-4e86-9e52-0e99e80ea20b
+    resourceVersion: "8472568"
+    uid: e62590c4-678a-4675-813a-21ea753cf42f
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/metadata-server:20230106173913
+    - image: 10.168.2.90/sjzt/metadata-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -537,7 +537,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-2
+    nodeName: pdl2-3
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -575,25 +575,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:46:01Z"
+      lastTransitionTime: "2023-01-28T02:18:01Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:46:02Z"
+      lastTransitionTime: "2023-01-28T02:19:08Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:46:02Z"
+      lastTransitionTime: "2023-01-28T02:19:08Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:46:01Z"
+      lastTransitionTime: "2023-01-28T02:18:01Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://8270cd587e103eb4b74f9442a80d3653c8ac26b29e86d87f255bcc2b30283998
-      image: 10.168.2.90/sjzt/metadata-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/metadata-server@sha256:22126fca0353962f68bc116a5a66b4205f2e6087bf86af523a8ce6801340607e
+    - containerID: docker://37d05aef42dbe6130b662dd21e5ccf866a40993ebeb1e37f8251094817c0c5d2
+      image: 10.168.2.90/sjzt/metadata-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/metadata-server@sha256:a39907c0eed993cd97c0a014aba443bc13ea5c4c136bbe4c6302448384ec6a5e
       lastState: {}
       name: container-0
       ready: true
@@ -601,41 +601,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T06:46:02Z"
-    hostIP: 192.168.10.102
+          startedAt: "2023-01-28T02:19:08Z"
+    hostIP: 192.168.10.103
     phase: Running
-    podIP: 10.42.2.36
+    podIP: 10.42.1.79
     podIPs:
-    - ip: 10.42.2.36
+    - ip: 10.42.1.79
     qosClass: BestEffort
-    startTime: "2023-01-09T06:46:01Z"
+    startTime: "2023-01-28T02:18:01Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-09T06:45:56Z"
-      cni.projectcalico.org/podIP: 10.42.2.35/32
-      cni.projectcalico.org/podIPs: 10.42.2.35/32
-    creationTimestamp: "2023-01-09T06:45:56Z"
-    generateName: modeling-server-76f4b95c59-
+      cni.projectcalico.org/podIP: 10.42.2.119/32
+      cni.projectcalico.org/podIPs: 10.42.2.119/32
+    creationTimestamp: "2023-01-28T02:17:49Z"
+    generateName: modeling-server-68b7dc4bc4-
     labels:
-      pod-template-hash: 76f4b95c59
+      pod-template-hash: 68b7dc4bc4
       workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
-    name: modeling-server-76f4b95c59-5mgdr
+    name: modeling-server-68b7dc4bc4-rkx9b
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: modeling-server-76f4b95c59
-      uid: 77754742-c73e-4ff2-b6f3-87203e5a24dc
-    resourceVersion: "3827208"
-    uid: d7e49ec6-3ce4-4afd-9ede-d1fccc561121
+      name: modeling-server-68b7dc4bc4
+      uid: 8d497e33-e235-47ce-b940-1d6feb5070e1
+    resourceVersion: "8472337"
+    uid: 2539d9fb-aa04-498b-b467-632fb46a4fac
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/modeling-server:20230106173913
+    - image: 10.168.2.90/sjzt/modeling-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -697,25 +697,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:56Z"
+      lastTransitionTime: "2023-01-28T02:17:49Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:57Z"
+      lastTransitionTime: "2023-01-28T02:18:18Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:57Z"
+      lastTransitionTime: "2023-01-28T02:18:18Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:56Z"
+      lastTransitionTime: "2023-01-28T02:17:49Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://ede55715cb9f89bc3f226644c327759093cf503105b988dee045b235e7406f98
-      image: 10.168.2.90/sjzt/modeling-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/modeling-server@sha256:0e249929ca3ce3e6004b85d1d29ffd43db77d97593e8e21df55ba74f076fd70b
+    - containerID: docker://87d93c8ecf10d0e9f402d9c8f539783c34c52dc82f5e8182f7f66e056525181f
+      image: 10.168.2.90/sjzt/modeling-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/modeling-server@sha256:39c9f0b5ec0022c3671039440aaff564200870a1f9aa0bb266c4bea28dea3b37
       lastState: {}
       name: container-0
       ready: true
@@ -723,42 +723,42 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T06:45:57Z"
+          startedAt: "2023-01-28T02:18:17Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.35
+    podIP: 10.42.2.119
     podIPs:
-    - ip: 10.42.2.35
+    - ip: 10.42.2.119
     qosClass: BestEffort
-    startTime: "2023-01-09T06:45:56Z"
+    startTime: "2023-01-28T02:17:49Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-09T06:45:47Z"
-      cni.projectcalico.org/podIP: 10.42.1.33/32
-      cni.projectcalico.org/podIPs: 10.42.1.33/32
-    creationTimestamp: "2023-01-09T06:45:47Z"
-    generateName: rest-server-c48d7f9f5-
+      cni.projectcalico.org/podIP: 10.42.1.78/32
+      cni.projectcalico.org/podIPs: 10.42.1.78/32
+    creationTimestamp: "2023-01-28T02:17:34Z"
+    generateName: rest-server-8c7c5b9bb-
     labels:
-      pod-template-hash: c48d7f9f5
+      pod-template-hash: 8c7c5b9bb
       workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
-    name: rest-server-c48d7f9f5-6g2hc
+    name: rest-server-8c7c5b9bb-8ft25
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: rest-server-c48d7f9f5
-      uid: 0e4fbed6-05c4-4eb7-be52-f30e3e9bf9f5
-    resourceVersion: "3827146"
-    uid: 875ddf49-0772-4726-b100-4303348dd2fe
+      name: rest-server-8c7c5b9bb
+      uid: d8393366-e420-4f71-b048-3db9c0b63e4f
+    resourceVersion: "8472167"
+    uid: 92745b5a-0b70-4d93-9e80-082f9951abc4
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/rest-server:20230106173913
-      imagePullPolicy: Always
+    - image: 10.168.2.90/sjzt/rest-server:20230120142316
+      imagePullPolicy: IfNotPresent
       name: container-0
       ports:
       - containerPort: 8000
@@ -825,25 +825,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:47Z"
+      lastTransitionTime: "2023-01-28T02:17:34Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:48Z"
+      lastTransitionTime: "2023-01-28T02:17:48Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:48Z"
+      lastTransitionTime: "2023-01-28T02:17:48Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:45:47Z"
+      lastTransitionTime: "2023-01-28T02:17:34Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://b31424fba3edf9573152c577a91fceff32cea34fd7be438f987775c58d8dd7af
-      image: 10.168.2.90/sjzt/rest-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/rest-server@sha256:9f0bf4092b5787930ca9c380cdc5651aa8a3c2cfb35cbfdefaca3c69a0f05b8e
+    - containerID: docker://550cb7940be26a74dee56911105c74d2c966e4200d8f920c5811afb49f79f815
+      image: 10.168.2.90/sjzt/rest-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/rest-server@sha256:72e9bcf8384492841003600df5fd9357f06a73fa1979488a1ab20ae71b11d7ac
       lastState: {}
       name: container-0
       ready: true
@@ -851,41 +851,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T06:45:48Z"
+          startedAt: "2023-01-28T02:17:47Z"
     hostIP: 192.168.10.103
     phase: Running
-    podIP: 10.42.1.33
+    podIP: 10.42.1.78
     podIPs:
-    - ip: 10.42.1.33
+    - ip: 10.42.1.78
     qosClass: BestEffort
-    startTime: "2023-01-09T06:45:47Z"
+    startTime: "2023-01-28T02:17:34Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-06T08:16:36Z"
-      cni.projectcalico.org/podIP: 10.42.2.26/32
-      cni.projectcalico.org/podIPs: 10.42.2.26/32
-    creationTimestamp: "2023-01-09T03:08:07Z"
-    generateName: source-server-6f7565d774-
+      cni.projectcalico.org/podIP: 10.42.2.118/32
+      cni.projectcalico.org/podIPs: 10.42.2.118/32
+    creationTimestamp: "2023-01-28T02:17:20Z"
+    generateName: source-server-846fcff96c-
     labels:
-      pod-template-hash: 6f7565d774
+      pod-template-hash: 846fcff96c
       workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
-    name: source-server-6f7565d774-bwprd
+    name: source-server-846fcff96c-wpbj4
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: source-server-6f7565d774
-      uid: 02969906-d442-4227-bf29-059df0e47ce6
-    resourceVersion: "3793338"
-    uid: 288c5f8b-79cd-43e3-8088-012afe6a31b3
+      name: source-server-846fcff96c
+      uid: 35c3ef05-f019-4997-9f37-82c823989576
+    resourceVersion: "8472072"
+    uid: af8f2656-785b-40e7-8e9d-b83773b58435
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/source-server:20230106173913
+    - image: 10.168.2.90/sjzt/source-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -947,25 +947,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:08:07Z"
+      lastTransitionTime: "2023-01-28T02:17:20Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:09:25Z"
+      lastTransitionTime: "2023-01-28T02:17:30Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:09:25Z"
+      lastTransitionTime: "2023-01-28T02:17:30Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:08:07Z"
+      lastTransitionTime: "2023-01-28T02:17:20Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://072a6ac19b441848235d307494e5219c3d3897e528b2543517f87e2fceece5bc
-      image: 10.168.2.90/sjzt/source-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/source-server@sha256:ad460b8ceb47271525dbe6246f8e444ae0561ffcf24fdb6c906f0e2928066d77
+    - containerID: docker://2dd6639244f5eeb9266e9d7008c1a63c6fc1d63b8609cbf856457214ef2ff598
+      image: 10.168.2.90/sjzt/source-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/source-server@sha256:add5034cfe62ff26ab989366e7eee71e72eba39d1f5bca7ad0ac2bfbabd9bbec
       lastState: {}
       name: container-0
       ready: true
@@ -973,41 +973,41 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T03:09:24Z"
+          startedAt: "2023-01-28T02:17:30Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.26
+    podIP: 10.42.2.118
     podIPs:
-    - ip: 10.42.2.26
+    - ip: 10.42.2.118
     qosClass: BestEffort
-    startTime: "2023-01-09T03:08:07Z"
+    startTime: "2023-01-28T02:17:20Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       cattle.io/timestamp: "2023-01-06T08:16:38Z"
-      cni.projectcalico.org/podIP: 10.42.1.23/32
-      cni.projectcalico.org/podIPs: 10.42.1.23/32
-    creationTimestamp: "2023-01-09T03:08:16Z"
-    generateName: user-server-5f7464bb46-
+      cni.projectcalico.org/podIP: 10.42.0.78/32
+      cni.projectcalico.org/podIPs: 10.42.0.78/32
+    creationTimestamp: "2023-01-28T02:16:50Z"
+    generateName: user-server-74697f57b5-
     labels:
-      pod-template-hash: 5f7464bb46
+      pod-template-hash: 74697f57b5
       workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
-    name: user-server-5f7464bb46-cpt4d
+    name: user-server-74697f57b5-7qxtr
     namespace: default
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: user-server-5f7464bb46
-      uid: f2bb7475-1ff5-4741-b9ab-799af1af4aab
-    resourceVersion: "3793224"
-    uid: 72ec13ee-732f-40b1-8df3-92f031503db2
+      name: user-server-74697f57b5
+      uid: a8ccb44b-da40-4b51-857d-690da0552e17
+    resourceVersion: "8471957"
+    uid: dd56e4ca-52fd-474b-84b7-06d7d8eede07
   spec:
     affinity: {}
     containers:
-    - image: 10.168.2.90/sjzt/user-server:20230106173913
+    - image: 10.168.2.90/sjzt/user-server:20230120142316
       imagePullPolicy: IfNotPresent
       name: container-0
       ports:
@@ -1031,7 +1031,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
-    nodeName: pdl2-3
+    nodeName: pdl2-1
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -1069,25 +1069,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:08:16Z"
+      lastTransitionTime: "2023-01-28T02:16:50Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:09:07Z"
+      lastTransitionTime: "2023-01-28T02:17:09Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:09:07Z"
+      lastTransitionTime: "2023-01-28T02:17:09Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T03:08:16Z"
+      lastTransitionTime: "2023-01-28T02:16:50Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://de6e3b8d59780af4d50d70effe2f5d96a63a870994d63d3048b93e2bfc70a127
-      image: 10.168.2.90/sjzt/user-server:20230106173913
-      imageID: docker-pullable://10.168.2.90/sjzt/user-server@sha256:eb4de71251069e5c5fea0e536fd27ef22edb93c748b863f2c9cb4c31a3f3c3c2
+    - containerID: docker://b8cdcebec8183cb0c6d3385581e5aab6f9b2bba8844f248bda491f9e5249c625
+      image: 10.168.2.90/sjzt/user-server:20230120142316
+      imageID: docker-pullable://10.168.2.90/sjzt/user-server@sha256:6b4cf91d8220b1f93823ff1e04d0e77b3e14d673e65725ee2cb9c264837985e7
       lastState: {}
       name: container-0
       ready: true
@@ -1095,14 +1095,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T03:09:06Z"
-    hostIP: 192.168.10.103
+          startedAt: "2023-01-28T02:17:08Z"
+    hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.1.23
+    podIP: 10.42.0.78
     podIPs:
-    - ip: 10.42.1.23
+    - ip: 10.42.0.78
     qosClass: BestEffort
-    startTime: "2023-01-09T03:08:16Z"
+    startTime: "2023-01-28T02:16:50Z"
 kind: List
 metadata:
   resourceVersion: ""

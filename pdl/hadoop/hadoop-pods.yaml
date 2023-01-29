@@ -4,13 +4,13 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T07:52:22Z"
-      cni.projectcalico.org/podIP: 10.42.2.41/32
-      cni.projectcalico.org/podIPs: 10.42.2.41/32
-    creationTimestamp: "2023-01-09T07:54:17Z"
+      cattle.io/timestamp: "2023-01-28T06:26:22Z"
+      cni.projectcalico.org/podIP: 10.42.2.126/32
+      cni.projectcalico.org/podIPs: 10.42.2.126/32
+    creationTimestamp: "2023-01-28T06:28:17Z"
     generateName: datanode-
     labels:
-      controller-revision-hash: datanode-6ddcff4496
+      controller-revision-hash: datanode-6bf7696dcc
       statefulset.kubernetes.io/pod-name: datanode-0
       workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-datanode
     name: datanode-0
@@ -22,8 +22,8 @@ items:
       kind: StatefulSet
       name: datanode
       uid: d926be23-6eb7-463d-9d1b-42aa945af00b
-    resourceVersion: "3837936"
-    uid: c1c09673-fcc5-42e9-8069-85daaf7b7456
+    resourceVersion: "8525215"
+    uid: 4c51e989-2536-477e-ad30-ab6a96a31bfd
   spec:
     affinity:
       podAffinity: {}
@@ -123,51 +123,57 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:54:17Z"
+      lastTransitionTime: "2023-01-28T06:28:17Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:54:19Z"
+      lastTransitionTime: "2023-01-28T06:50:02Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:54:19Z"
+      lastTransitionTime: "2023-01-28T06:50:02Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:54:17Z"
+      lastTransitionTime: "2023-01-28T06:28:17Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://86513f3d0c03682d8acbf36a0f8f229a669557263f0e21df6f9c3a6d1611aafa
+    - containerID: docker://c022331079156b12083a3243b4bc3b7bd8d5e5fea8594b7bfaf66ae322e738dc
       image: 192.168.10.101:5000/hadoop:3.3.4
-      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b174bcdd75d1c330f1d091fb0fcbcd64f1cefc0a054120068a3368acd328e1cf
-      lastState: {}
+      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:ba7c79a74760376b656f7f5569be27b79351975e6fa42fe34b31e1c8c5b824e9
+      lastState:
+        terminated:
+          containerID: docker://6026b383f8fc8e37bd821636a821c6fb81dd6ee83f39df75d67b0bc03562fdd8
+          exitCode: 0
+          finishedAt: "2023-01-28T06:50:00Z"
+          reason: Completed
+          startedAt: "2023-01-28T06:38:38Z"
       name: container-0
       ready: true
-      restartCount: 0
+      restartCount: 2
       started: true
       state:
         running:
-          startedAt: "2023-01-09T07:54:18Z"
+          startedAt: "2023-01-28T06:50:01Z"
     hostIP: 192.168.10.102
     phase: Running
-    podIP: 10.42.2.41
+    podIP: 10.42.2.126
     podIPs:
-    - ip: 10.42.2.41
+    - ip: 10.42.2.126
     qosClass: BestEffort
-    startTime: "2023-01-09T07:54:17Z"
+    startTime: "2023-01-28T06:28:17Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T07:52:22Z"
-      cni.projectcalico.org/podIP: 10.42.1.35/32
-      cni.projectcalico.org/podIPs: 10.42.1.35/32
-    creationTimestamp: "2023-01-09T07:53:37Z"
+      cattle.io/timestamp: "2023-01-28T06:26:22Z"
+      cni.projectcalico.org/podIP: 10.42.1.83/32
+      cni.projectcalico.org/podIPs: 10.42.1.83/32
+    creationTimestamp: "2023-01-28T06:27:35Z"
     generateName: datanode-
     labels:
-      controller-revision-hash: datanode-6ddcff4496
+      controller-revision-hash: datanode-6bf7696dcc
       statefulset.kubernetes.io/pod-name: datanode-1
       workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-datanode
     name: datanode-1
@@ -179,8 +185,8 @@ items:
       kind: StatefulSet
       name: datanode
       uid: d926be23-6eb7-463d-9d1b-42aa945af00b
-    resourceVersion: "3837814"
-    uid: dceb61e2-f826-496c-87e8-457eec262e16
+    resourceVersion: "8525209"
+    uid: d169e7a3-4d6f-4fe5-b5dd-7a63df841c5a
   spec:
     affinity:
       podAffinity: {}
@@ -280,51 +286,57 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:37Z"
+      lastTransitionTime: "2023-01-28T06:27:35Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:38Z"
+      lastTransitionTime: "2023-01-28T06:50:02Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:38Z"
+      lastTransitionTime: "2023-01-28T06:50:02Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:37Z"
+      lastTransitionTime: "2023-01-28T06:27:35Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://7fd9cb42ec7c9d38599a061d1f3ad4c344d06d84b136989f82e98bff40183437
+    - containerID: docker://986bbf43781bbfffaca136ce257f1eedef3524762b72ea4d1c5544d442bb245f
       image: 192.168.10.101:5000/hadoop:3.3.4
-      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b174bcdd75d1c330f1d091fb0fcbcd64f1cefc0a054120068a3368acd328e1cf
-      lastState: {}
+      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b47be1ceccaaa5ab449d61a08439ffcfcfe254678ab20a39057b82c8efbad96e
+      lastState:
+        terminated:
+          containerID: docker://c9854875cf945f95f5e98d1cd3ca9cf1fdabb4043586b7537c3a6e785d4bb186
+          exitCode: 0
+          finishedAt: "2023-01-28T06:50:00Z"
+          reason: Completed
+          startedAt: "2023-01-28T06:38:37Z"
       name: container-0
       ready: true
-      restartCount: 0
+      restartCount: 2
       started: true
       state:
         running:
-          startedAt: "2023-01-09T07:53:38Z"
+          startedAt: "2023-01-28T06:50:01Z"
     hostIP: 192.168.10.103
     phase: Running
-    podIP: 10.42.1.35
+    podIP: 10.42.1.83
     podIPs:
-    - ip: 10.42.1.35
+    - ip: 10.42.1.83
     qosClass: BestEffort
-    startTime: "2023-01-09T07:53:37Z"
+    startTime: "2023-01-28T06:27:35Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T07:52:22Z"
-      cni.projectcalico.org/podIP: 10.42.0.60/32
-      cni.projectcalico.org/podIPs: 10.42.0.60/32
-    creationTimestamp: "2023-01-09T07:53:04Z"
+      cattle.io/timestamp: "2023-01-28T06:26:22Z"
+      cni.projectcalico.org/podIP: 10.42.0.83/32
+      cni.projectcalico.org/podIPs: 10.42.0.83/32
+    creationTimestamp: "2023-01-28T06:26:54Z"
     generateName: datanode-
     labels:
-      controller-revision-hash: datanode-6ddcff4496
+      controller-revision-hash: datanode-6bf7696dcc
       statefulset.kubernetes.io/pod-name: datanode-2
       workload.user.cattle.io/workloadselector: apps.statefulset-hadoop-datanode
     name: datanode-2
@@ -336,8 +348,8 @@ items:
       kind: StatefulSet
       name: datanode
       uid: d926be23-6eb7-463d-9d1b-42aa945af00b
-    resourceVersion: "3837708"
-    uid: 658c3f77-5bff-4d17-80c8-9e8a9fe883e8
+    resourceVersion: "8525182"
+    uid: b7dcd26e-94bb-4415-affc-481a5995d9b5
   spec:
     affinity:
       podAffinity: {}
@@ -437,63 +449,69 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:04Z"
+      lastTransitionTime: "2023-01-28T06:26:54Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:05Z"
+      lastTransitionTime: "2023-01-28T06:50:00Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:05Z"
+      lastTransitionTime: "2023-01-28T06:50:00Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T07:53:04Z"
+      lastTransitionTime: "2023-01-28T06:26:54Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://a0a7a0d4c7740cd177e7111387d943ee394881e359726eb2dacc7210a0be4470
+    - containerID: docker://a2cbc7872781d40aa54b02c8c108a6129f1e41b6e89ec6c7dbf54472f88d32db
       image: 192.168.10.101:5000/hadoop:3.3.4
-      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b174bcdd75d1c330f1d091fb0fcbcd64f1cefc0a054120068a3368acd328e1cf
-      lastState: {}
+      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:eae89b7ed208914051a137b617e62411fe1f198b955629c4aebfb6140418a829
+      lastState:
+        terminated:
+          containerID: docker://0a7cffe857bc8bd44ac89d2f6132ea6137dbe7244e1b13b44cf006781b255331
+          exitCode: 0
+          finishedAt: "2023-01-28T06:49:58Z"
+          reason: Completed
+          startedAt: "2023-01-28T06:38:39Z"
       name: container-0
       ready: true
-      restartCount: 0
+      restartCount: 2
       started: true
       state:
         running:
-          startedAt: "2023-01-09T07:53:04Z"
+          startedAt: "2023-01-28T06:49:59Z"
     hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.0.60
+    podIP: 10.42.0.83
     podIPs:
-    - ip: 10.42.0.60
+    - ip: 10.42.0.83
     qosClass: BestEffort
-    startTime: "2023-01-09T07:53:04Z"
+    startTime: "2023-01-28T06:26:54Z"
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
-      cattle.io/timestamp: "2023-01-09T06:33:59Z"
-      cni.projectcalico.org/podIP: 10.42.1.28/32
-      cni.projectcalico.org/podIPs: 10.42.1.28/32
-    creationTimestamp: "2023-01-09T06:33:59Z"
-    generateName: hdfs-master-64b9b94dfb-
+      cattle.io/timestamp: "2023-01-28T06:49:21Z"
+      cni.projectcalico.org/podIP: 10.42.1.85/32
+      cni.projectcalico.org/podIPs: 10.42.1.85/32
+    creationTimestamp: "2023-01-28T06:49:21Z"
+    generateName: hdfs-master-6d99ccb67b-
     labels:
-      pod-template-hash: 64b9b94dfb
+      pod-template-hash: 6d99ccb67b
       workload.user.cattle.io/workloadselector: apps.deployment-hadoop-hdfs-master
-    name: hdfs-master-64b9b94dfb-p2gj2
+    name: hdfs-master-6d99ccb67b-8mgjt
     namespace: hadoop
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: hdfs-master-64b9b94dfb
-      uid: c5eb8037-a3ca-4f59-aef1-9497a6763160
-    resourceVersion: "3825088"
-    uid: 0b507fc4-dcbf-47d2-930e-3d79a6a4604b
+      name: hdfs-master-6d99ccb67b
+      uid: 461268bf-3db4-4958-bf67-5a48705af319
+    resourceVersion: "8525030"
+    uid: 33ee7135-0178-4891-984f-75b9054c1f3f
   spec:
     affinity: {}
     containers:
@@ -513,7 +531,7 @@ items:
             name: hadoop-conf
             optional: false
       image: 192.168.10.101:5000/hadoop:3.3.4
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       name: container-0
       ports:
       - containerPort: 9000
@@ -538,6 +556,9 @@ items:
       - mountPath: /opt/hadoop/etc/hadoop/yarn-site.xml
         name: vol-cxwnc
         subPath: yarn-site.xml
+      - mountPath: /opt/hadoop/etc/hadoop/rack_topology.data
+        name: vol-cxwnc
+        subPath: rack_topology.data
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: default-token-4drln
         readOnly: true
@@ -573,25 +594,25 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:33:59Z"
+      lastTransitionTime: "2023-01-28T06:49:21Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:34:00Z"
+      lastTransitionTime: "2023-01-28T06:49:22Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:34:00Z"
+      lastTransitionTime: "2023-01-28T06:49:22Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-09T06:33:59Z"
+      lastTransitionTime: "2023-01-28T06:49:21Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://32126aa4ac5bdbb1d55e0b3b2a1a7a56f37ee3f9b2d3c58dd1320bce612abc7a
+    - containerID: docker://dea0485866b8806b2c247e77022707c464ab155530202036b48d2b8a0e568e02
       image: 192.168.10.101:5000/hadoop:3.3.4
-      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b174bcdd75d1c330f1d091fb0fcbcd64f1cefc0a054120068a3368acd328e1cf
+      imageID: docker-pullable://192.168.10.101:5000/hadoop@sha256:b47be1ceccaaa5ab449d61a08439ffcfcfe254678ab20a39057b82c8efbad96e
       lastState: {}
       name: container-0
       ready: true
@@ -599,14 +620,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-09T06:33:59Z"
+          startedAt: "2023-01-28T06:49:22Z"
     hostIP: 192.168.10.103
     phase: Running
-    podIP: 10.42.1.28
+    podIP: 10.42.1.85
     podIPs:
-    - ip: 10.42.1.28
+    - ip: 10.42.1.85
     qosClass: BestEffort
-    startTime: "2023-01-09T06:33:59Z"
+    startTime: "2023-01-28T06:49:21Z"
 - apiVersion: v1
   kind: Pod
   metadata:

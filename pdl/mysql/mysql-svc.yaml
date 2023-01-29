@@ -66,6 +66,41 @@ items:
     type: ClusterIP
   status:
     loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30336,"protocol":"TCP","serviceName":"mysql:mysql8-nodeport","allNodes":true}]'
+      field.cattle.io/targetWorkloadIds: '["mysql/mysql8"]'
+      management.cattle.io/ui-managed: "true"
+    creationTimestamp: "2023-01-29T04:54:17Z"
+    name: mysql8-nodeport
+    namespace: mysql
+    ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: mysql8
+      uid: 7b90a388-2efc-422c-87a0-484052177e40
+    resourceVersion: "8779688"
+    uid: 672782f3-55cc-45de-be57-1de887e44f47
+  spec:
+    clusterIP: 10.43.138.228
+    clusterIPs:
+    - 10.43.138.228
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: mysql8
+      nodePort: 30336
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
 kind: List
 metadata:
   resourceVersion: ""

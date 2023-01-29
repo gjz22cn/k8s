@@ -36,6 +36,7 @@ items:
     iceberg.properties: |-
       connector.name=iceberg
       hive.metastore.uri=thrift://metastore.hive:9083
+      iceberg.catalog.type=hive
     mysql.properties: |-
       connector.name=mysql
       connection-url=jdbc:mysql://mysql.mysql:3306/?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&allowMultiQueries=true
@@ -46,7 +47,7 @@ items:
     creationTimestamp: "2022-12-26T07:28:10Z"
     name: presto-catalog-conf
     namespace: presto
-    resourceVersion: "2471624"
+    resourceVersion: "5832192"
     uid: 82bf965e-e31a-463f-9b40-0f907508999a
 - apiVersion: v1
   data:

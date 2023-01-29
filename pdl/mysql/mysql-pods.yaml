@@ -130,26 +130,26 @@ items:
   kind: Pod
   metadata:
     annotations:
-      cni.projectcalico.org/podIP: 10.42.0.40/32
-      cni.projectcalico.org/podIPs: 10.42.0.40/32
+      cni.projectcalico.org/podIP: 10.42.0.87/32
+      cni.projectcalico.org/podIPs: 10.42.0.87/32
       kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for
         container container-0; cpu, memory limit for container container-0'
-    creationTimestamp: "2023-01-06T07:39:24Z"
-    generateName: mysql8-85f4d89bdf-
+    creationTimestamp: "2023-01-29T04:55:17Z"
+    generateName: mysql8-6d998b8675-
     labels:
-      pod-template-hash: 85f4d89bdf
+      pod-template-hash: 6d998b8675
       workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
-    name: mysql8-85f4d89bdf-bhzcw
+    name: mysql8-6d998b8675-n4l6v
     namespace: mysql
     ownerReferences:
     - apiVersion: apps/v1
       blockOwnerDeletion: true
       controller: true
       kind: ReplicaSet
-      name: mysql8-85f4d89bdf
-      uid: 0fe4ed9c-db8e-42d0-ac38-4274602c38be
-    resourceVersion: "3176136"
-    uid: ae6c1977-ca47-4423-bb14-b9cef3a60f92
+      name: mysql8-6d998b8675
+      uid: 143c7348-cda1-4170-9061-8153dbbd5f4f
+    resourceVersion: "8779728"
+    uid: f913bd96-06b8-4c45-935d-a2693b3c8735
   spec:
     affinity: {}
     containers:
@@ -161,8 +161,6 @@ items:
       name: container-0
       ports:
       - containerPort: 3306
-        hostIP: 192.168.3.204
-        hostPort: 30308
         name: mysql8
         protocol: TCP
       resources:
@@ -212,23 +210,23 @@ items:
   status:
     conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:39:24Z"
+      lastTransitionTime: "2023-01-29T04:55:17Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:39:32Z"
+      lastTransitionTime: "2023-01-29T04:55:25Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:39:32Z"
+      lastTransitionTime: "2023-01-29T04:55:25Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2023-01-06T07:39:24Z"
+      lastTransitionTime: "2023-01-29T04:55:17Z"
       status: "True"
       type: PodScheduled
     containerStatuses:
-    - containerID: docker://73bedf7658009ec57a750008e4b69eb96c6d66ba245f47f5e77730b7c9597094
+    - containerID: docker://2a7e4cddfa500f43bfda1d33297b73517882c36e66b78837f219ff32e89a1fc5
       image: mysql:8.0.22
       imageID: docker-pullable://mysql@sha256:0fd2898dc1c946b34dceaccc3b80d38b1049285c1dab70df7480de62265d6213
       lastState: {}
@@ -238,14 +236,14 @@ items:
       started: true
       state:
         running:
-          startedAt: "2023-01-06T07:39:31Z"
+          startedAt: "2023-01-29T04:55:24Z"
     hostIP: 192.168.10.101
     phase: Running
-    podIP: 10.42.0.40
+    podIP: 10.42.0.87
     podIPs:
-    - ip: 10.42.0.40
+    - ip: 10.42.0.87
     qosClass: Guaranteed
-    startTime: "2023-01-06T07:39:24Z"
+    startTime: "2023-01-29T04:55:17Z"
 kind: List
 metadata:
   resourceVersion: ""
