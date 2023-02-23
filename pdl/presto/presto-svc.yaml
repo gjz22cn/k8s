@@ -15,12 +15,14 @@ items:
       kind: Deployment
       name: presto
       uid: b13ef396-0dba-4b3b-a35b-31fbe52d48f7
-    resourceVersion: "3116060"
+    resourceVersion: "9168325"
     uid: 87faa724-d7a3-4b8c-92e2-aa3e678a7db6
   spec:
     clusterIP: 10.43.204.186
     clusterIPs:
     - 10.43.204.186
+    externalIPs:
+    - 192.168.3.204
     ports:
     - name: presto
       port: 8091

@@ -1,0 +1,189 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "58"
+      field.cattle.io/publicEndpoints: '[{"nodeName":":pdl2-3","addresses":["192.168.3.204"],"port":10000,"protocol":"TCP","podName":"hive:hiveserver2-7c565fcf4b-pvqvq","allNodes":false}]'
+    creationTimestamp: "2022-12-28T06:27:53Z"
+    generation: 74
+    labels:
+      app: hiveserver2
+      workload.user.cattle.io/workloadselector: apps.deployment-hive-hiveserver2
+    name: hiveserver2
+    namespace: hive
+    resourceVersion: "15402193"
+    uid: 00e06b12-6363-48d7-a1c8-2636e1bca15b
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-hive-hiveserver2
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cattle.io/timestamp: "2023-02-13T09:07:19Z"
+        creationTimestamp: null
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-hive-hiveserver2
+      spec:
+        affinity: {}
+        containers:
+        - env:
+          - name: NODE_TYPE
+            value: hiveserver2
+          image: 192.168.10.101:5000/hive-3.3.4:3.1.2
+          imagePullPolicy: Always
+          name: container-0
+          ports:
+          - containerPort: 10000
+            hostIP: 192.168.3.204
+            hostPort: 10000
+            name: hiveserver2
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/hive/conf/hive-site.xml
+            name: vol-na7il
+            subPath: hive-site.xml
+          - mountPath: /opt/hive/conf/hive-env.sh
+            name: vol-na7il
+            subPath: hive-env.sh
+          - mountPath: /opt/hadoop/etc/hadoop/core-site.xml
+            name: vol-pnm4m
+            subPath: core-site.xml
+          - mountPath: /opt/hadoop/etc/hadoop/hdfs-site.xml
+            name: vol-pnm4m
+            subPath: hdfs-site.xml
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: hive-conf
+          name: vol-na7il
+        - configMap:
+            defaultMode: 420
+            name: hadoop-conf
+          name: vol-pnm4m
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2022-12-28T06:27:53Z"
+      lastUpdateTime: "2023-02-13T09:07:21Z"
+      message: ReplicaSet "hiveserver2-7c565fcf4b" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2023-02-23T04:57:28Z"
+      lastUpdateTime: "2023-02-23T04:57:28Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 74
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "63"
+    creationTimestamp: "2022-12-23T06:17:44Z"
+    generation: 74
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-hive-metastore
+    name: metastore
+    namespace: hive
+    resourceVersion: "15402227"
+    uid: 3bda8f45-7a5b-456b-b77d-d8991387e1f0
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-hive-metastore
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cattle.io/timestamp: "2023-02-03T05:01:25Z"
+        creationTimestamp: null
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-hive-metastore
+      spec:
+        affinity: {}
+        containers:
+        - env:
+          - name: NODE_TYPE
+            value: metastore
+          image: 192.168.10.101:5000/hive-3.3.4:3.1.2
+          imagePullPolicy: Always
+          name: container-0
+          ports:
+          - containerPort: 9083
+            name: metastore
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/hive/conf/hive-site.xml
+            name: vol-xtnrm
+            subPath: hive-site.xml
+        dnsPolicy: ClusterFirst
+        nodeName: pdl2-3
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: hive-conf
+          name: vol-xtnrm
+        - configMap:
+            defaultMode: 420
+            name: lockclean-conf
+          name: vol-7eadn
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2022-12-23T06:17:44Z"
+      lastUpdateTime: "2023-02-03T05:01:27Z"
+      message: ReplicaSet "metastore-5fd85dbf69" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2023-02-23T04:57:30Z"
+      lastUpdateTime: "2023-02-23T04:57:30Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 74
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

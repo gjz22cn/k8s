@@ -2,11 +2,69 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
+    core-site.xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n    <?xml-stylesheet
+      type=\"text/xsl\" href=\"configuration.xsl\" rel=\"external nofollow\"  rel=\"external
+      nofollow\" ?>\n    <configuration>\n        <property>\n            <name>fs.defaultFS</name>\n
+      \           <value>hdfs://hdfs-master.hadoop:9000</value>\n        </property>\n
+      \       <property>\n            <name>dfs.namenode.rpc-bind-host</name>\n            <value>0.0.0.0</value>\n
+      \       </property>\n        <property>\n\t  <name>hadoop.security.token.service.use_ip</name>\n\t
+      \ <value>false</value>\n\t</property>\n        <property>\n          <name>hadoop.http.staticuser.user</name>\n
+      \         <value>root</value>\n        </property>\n        <property>\n          <name>hadoop.proxyuser.root.groups</name>\n
+      \         <value>*</value>\n        </property>\n        <property>\n          <name>hadoop.proxyuser.root.hosts</name>\n
+      \         <value>*</value>\n        </property>\n        <property>\n          <name>net.topology.script.file.name</name>\n
+      \         <value>/opt/hadoop/etc/hadoop/rack_topology.sh</value>\n        </property>\n
+      \   </configuration>"
+    hdfs-site.xml: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+          <?xml-stylesheet type="text/xsl" href="configuration.xsl" rel="external nofollow"  rel="external nofollow" ?>
+          <configuration>
+              <property>
+                  <name>dfs.namenode.http-address</name>
+                  <value>0.0.0.0:9870</value>
+              </property>
+              <property>
+                  <name>dfs.namenode.name.dir</name>
+                  <value>file:///opt/hadoop/hdfs/name</value>
+              </property>
+              <property>
+                  <name>dfs.datanode.data.dir</name>
+                  <value>file:///opt/hadoop/hdfs/data</value>
+              </property>
+              <property>
+                  <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
+                  <value>false</value>
+              </property>
+              <property>
+                  <name>dfs.replication</name>
+                  <value>3</value>
+              </property>
+              <property>
+                <name>dfs.permissions</name>
+                <value>false</value>
+              </property>
+          </configuration>
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2023-02-01T02:46:03Z"
+    name: hadoop-conf
+    namespace: hive
+    resourceVersion: "9811033"
+    uid: 9b53b360-2a82-4989-bcf8-8058c1aff3c2
+- apiVersion: v1
+  data:
     hive-env.sh: export HADOOP_HEAPSIZE=1024
     hive-site.xml: |-
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
           <configuration>
+            <property>
+              <name>hive.execution.engine</name>
+              <value>mr</value>
+            </property>
+            <property>
+              <name>hive.metastore.uris</name>
+              <value>thrift://metastore:9083</value>
+            </property>
             <property>
               <name>javax.jdo.option.ConnectionUserName</name>
               <value>root</value>
@@ -17,7 +75,11 @@ items:
             </property>
             <property>
               <name>javax.jdo.option.ConnectionURL</name>
-              <value>jdbc:mysql://mysql8.mysql:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</value>
+              <value>jdbc:mysql://mysql8.mysql:3306/hive?useSSL=false&amp;useAffectedRows=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;serverTimezone=Asia/Shanghai&amp;allowMultiQueries=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true</value>
+            </property>
+            <property>
+             <name>hive.aux.jars.path</name>
+             <value>file:///opt/hive/lib/libfb303-0.9.3.jar,file:///opt/hive/lib/iceberg-hive-runtime-0.13.2.jar</value>
             </property>
             <property>
               <name>javax.jdo.option.ConnectionDriverName</name>
@@ -36,6 +98,10 @@ items:
               <value>false</value>
             </property>
             <property>
+               <name>hive.metastore.event.db.notification.api.auth</name>
+               <value>false</value>
+            </property>
+            <property>
                <name>iceberg.engine.hive.enabled</name>
                <value>true</value>
             </property>
@@ -45,7 +111,7 @@ items:
     creationTimestamp: "2022-12-23T05:41:53Z"
     name: hive-conf
     namespace: hive
-    resourceVersion: "5128535"
+    resourceVersion: "10748532"
     uid: f2a98542-fdf2-4504-b261-4117b621c1b6
 - apiVersion: v1
   data:
@@ -75,6 +141,28 @@ items:
     namespace: hive
     resourceVersion: "1568668"
     uid: c49681fc-2afe-4575-b228-770175d1e087
+- apiVersion: v1
+  data:
+    configuration.yaml: |-
+      linux:
+        host: 192.168.3.204
+        port: 22
+        username: root
+        password: '123456'
+
+      mysql:
+        host: mysql8.mysql
+        port: 3306
+        database: hive
+        username: root
+        password: '123456'
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2023-02-01T09:53:47Z"
+    name: lockclean-conf
+    namespace: hive
+    resourceVersion: "9894678"
+    uid: cc879dd0-ff67-4aee-8842-f4dce8cf2e1b
 kind: List
 metadata:
   resourceVersion: ""

@@ -11,6 +11,7 @@ do
         mkdir $ns
     fi
     kubectl get cm -n $ns -o yaml > $ns/$ns-cm.yaml
-    kubectl get pods -n $ns -o yaml > $ns/$ns-pods.yaml
+    #kubectl get pods -n $ns -o yaml > $ns/$ns-pods.yaml
+    kubectl get deploy -n $ns -o yaml > $ns/$ns-deploy.yaml
     kubectl get svc -n $ns -o yaml > $ns/$ns-svc.yaml
 done

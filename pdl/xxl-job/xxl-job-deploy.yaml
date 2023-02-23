@@ -1,0 +1,117 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "45"
+      field.cattle.io/publicEndpoints: '[{"nodeName":":pdl2-2","addresses":["192.168.3.204"],"port":30405,"protocol":"TCP","podName":"xxl-job:xxl-job-admin-54994747dc-dpv2l","allNodes":false}]'
+    creationTimestamp: "2022-12-26T09:18:12Z"
+    generation: 98
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-admin
+    name: xxl-job-admin
+    namespace: xxl-job
+    resourceVersion: "15321776"
+    uid: 271e2442-b6f0-404a-a188-cc3c330b1c8d
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-admin
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cattle.io/timestamp: "2023-01-30T09:39:36Z"
+        creationTimestamp: null
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job-admin
+      spec:
+        affinity: {}
+        containers:
+        - env:
+          - name: EXEC_MODE
+            value: admin
+          image: 10.168.2.90/sjzt/xxljob-executor-server:20230220163520
+          imagePullPolicy: Always
+          name: container-0
+          ports:
+          - containerPort: 30405
+            hostIP: 192.168.3.204
+            hostPort: 30405
+            name: xxl-admin
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-admin.properties
+            name: vol-pkxto
+            subPath: application.properties
+          - mountPath: /data/java/config/application-executor.properties
+            name: vol-24dbb
+            subPath: application.properties
+        - env:
+          - name: EXEC_MODE
+            value: executor
+          image: 10.168.2.90/sjzt/xxljob-executor-server:20230221114843
+          imagePullPolicy: Always
+          name: container-1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-executor.properties
+            name: vol-jyxgp
+            subPath: application.properties
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: admin-conf
+          name: vol-pkxto
+        - configMap:
+            defaultMode: 420
+            name: executor-conf
+          name: vol-24dbb
+        - configMap:
+            defaultMode: 420
+            name: executor-conf
+          name: vol-b78c4
+        - configMap:
+            defaultMode: 420
+            name: executor-conf
+          name: vol-jyxgp
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2022-12-26T09:48:39Z"
+      lastUpdateTime: "2023-02-21T03:59:04Z"
+      message: ReplicaSet "xxl-job-admin-54994747dc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2023-02-22T20:21:05Z"
+      lastUpdateTime: "2023-02-22T20:21:05Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 98
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

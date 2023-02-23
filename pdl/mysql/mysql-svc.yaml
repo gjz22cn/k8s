@@ -82,7 +82,7 @@ items:
       kind: Deployment
       name: mysql8
       uid: 7b90a388-2efc-422c-87a0-484052177e40
-    resourceVersion: "8779688"
+    resourceVersion: "9156177"
     uid: 672782f3-55cc-45de-be57-1de887e44f47
   spec:
     clusterIP: 10.43.138.228

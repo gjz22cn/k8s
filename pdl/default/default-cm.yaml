@@ -507,97 +507,42 @@ items:
     uid: 0f739b2e-e8ff-4c1d-8f64-3df43bcdde4a
 - apiVersion: v1
   data:
-    address: akka.tcp://flink@10.42.1.111:6123/user/rpc/jobmanager_2
-    checkpointID-0000000000000000599: rO0ABXNyADtvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuUmV0cmlldmFibGVTdHJlYW1TdGF0ZUhhbmRsZQABHhjxVZcrAgABTAAYd3JhcHBlZFN0cmVhbVN0YXRlSGFuZGxldAAyTG9yZy9hcGFjaGUvZmxpbmsvcnVudGltZS9zdGF0ZS9TdHJlYW1TdGF0ZUhhbmRsZTt4cHNyADlvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuZmlsZXN5c3RlbS5GaWxlU3RhdGVIYW5kbGUE3HXYYr0bswIAAkoACXN0YXRlU2l6ZUwACGZpbGVQYXRodAAfTG9yZy9hcGFjaGUvZmxpbmsvY29yZS9mcy9QYXRoO3hwAAAAAAAAHgRzcgAdb3JnLmFwYWNoZS5mbGluay5jb3JlLmZzLlBhdGgAAAAAAAAAAQIAAUwAA3VyaXQADkxqYXZhL25ldC9VUkk7eHBzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAVWhkZnM6Ly9oZGZzLW1hc3Rlci5oYWRvb3A6OTAwMC9mbGluay9yZWNvdmVyeS9kZWZhdWx0L2NvbXBsZXRlZENoZWNrcG9pbnQxMjgzYzJmMmNkODN4
-    counter: "600"
-    sessionId: cc241a5c-b97a-42b9-b0c2-aa4f32eb59cc
+    nginx.conf: |
+      worker_processes  1;
+      events {
+          worker_connections  1024;
+      }
+      http {
+          include       mime.types;
+          default_type  application/octet-stream;
+          sendfile        on;
+          keepalive_timeout  65;
+
+          server {
+              listen       80;
+              server_name  localhost;
+              autoindex on;
+
+              location / {
+                  root   html;
+                  index  index.html index.htm;
+              }
+              error_page   500 502 503 504  /50x.html;
+              location = /50x.html {
+                  root   html;
+              }
+          }
+      }
   kind: ConfigMap
   metadata:
     annotations:
-      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"51ca44e0-f3e0-46a5-9c5d-285d671128d1","leaseDuration":15.000000000,"acquireTime":"2023-01-29T07:13:07.352000Z","renewTime":"2023-01-29T07:27:27.382000Z","leaderTransitions":173}'
-    creationTimestamp: "2023-01-29T06:33:35Z"
-    labels:
-      app: pdl2
-      configmap-type: high-availability
-      type: flink-native-kubernetes
-    name: pdl2-367cd13302f03992485dd71c5d0f1d43-jobmanager-leader
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"nginx.conf":"worker_processes  1;\nevents {\n    worker_connections  1024;\n}\nhttp {\n    include       mime.types;\n    default_type  application/octet-stream;\n    sendfile        on;\n    keepalive_timeout  65;\n\n    server {\n        listen       80;\n        server_name  localhost;\n        autoindex on;\n\n        location / {\n            root   html;\n            index  index.html index.htm;\n        }\n        error_page   500 502 503 504  /50x.html;\n        location = /50x.html {\n            root   html;\n        }\n    }\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"nginx-conf","namespace":"default"}}
+    creationTimestamp: "2023-02-23T03:50:24Z"
+    name: nginx-conf
     namespace: default
-    resourceVersion: "8818561"
-    uid: 2a382c10-2f38-41e2-86a2-b7901a02c8f1
-- apiVersion: v1
-  data:
-    address: akka.tcp://flink@10.42.1.111:6123/user/rpc/jobmanager_3
-    checkpointID-0000000000000001627: rO0ABXNyADtvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuUmV0cmlldmFibGVTdHJlYW1TdGF0ZUhhbmRsZQABHhjxVZcrAgABTAAYd3JhcHBlZFN0cmVhbVN0YXRlSGFuZGxldAAyTG9yZy9hcGFjaGUvZmxpbmsvcnVudGltZS9zdGF0ZS9TdHJlYW1TdGF0ZUhhbmRsZTt4cHNyADlvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuZmlsZXN5c3RlbS5GaWxlU3RhdGVIYW5kbGUE3HXYYr0bswIAAkoACXN0YXRlU2l6ZUwACGZpbGVQYXRodAAfTG9yZy9hcGFjaGUvZmxpbmsvY29yZS9mcy9QYXRoO3hwAAAAAAAAHQxzcgAdb3JnLmFwYWNoZS5mbGluay5jb3JlLmZzLlBhdGgAAAAAAAAAAQIAAUwAA3VyaXQADkxqYXZhL25ldC9VUkk7eHBzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAVWhkZnM6Ly9oZGZzLW1hc3Rlci5oYWRvb3A6OTAwMC9mbGluay9yZWNvdmVyeS9kZWZhdWx0L2NvbXBsZXRlZENoZWNrcG9pbnQ2MmU1M2M2Yjg0ZjB4
-    counter: "1629"
-    sessionId: e6bb5915-a0f2-4d20-921d-153952ebbad9
-  kind: ConfigMap
-  metadata:
-    annotations:
-      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"51ca44e0-f3e0-46a5-9c5d-285d671128d1","leaseDuration":15.000000000,"acquireTime":"2023-01-29T07:13:09.561000Z","renewTime":"2023-01-29T07:27:29.629000Z","leaderTransitions":173}'
-    creationTimestamp: "2023-01-29T03:37:47Z"
-    labels:
-      app: pdl2
-      configmap-type: high-availability
-      type: flink-native-kubernetes
-    name: pdl2-d3ec65715334b5345fd9bb174a07929a-jobmanager-leader
-    namespace: default
-    resourceVersion: "8818568"
-    uid: 2227ef9b-2f71-4144-b227-1c5f254e8ae7
-- apiVersion: v1
-  data:
-    address: akka.tcp://flink@10.42.1.111:6123/user/rpc/dispatcher_1
-    jobGraph-367cd13302f03992485dd71c5d0f1d43: rO0ABXNyADtvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuUmV0cmlldmFibGVTdHJlYW1TdGF0ZUhhbmRsZQABHhjxVZcrAgABTAAYd3JhcHBlZFN0cmVhbVN0YXRlSGFuZGxldAAyTG9yZy9hcGFjaGUvZmxpbmsvcnVudGltZS9zdGF0ZS9TdHJlYW1TdGF0ZUhhbmRsZTt4cHNyADlvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuZmlsZXN5c3RlbS5GaWxlU3RhdGVIYW5kbGUE3HXYYr0bswIAAkoACXN0YXRlU2l6ZUwACGZpbGVQYXRodAAfTG9yZy9hcGFjaGUvZmxpbmsvY29yZS9mcy9QYXRoO3hwAAAAAAAERSpzcgAdb3JnLmFwYWNoZS5mbGluay5jb3JlLmZzLlBhdGgAAAAAAAAAAQIAAUwAA3VyaXQADkxqYXZhL25ldC9VUkk7eHBzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAU2hkZnM6Ly9oZGZzLW1hc3Rlci5oYWRvb3A6OTAwMC9mbGluay9yZWNvdmVyeS9kZWZhdWx0L3N1Ym1pdHRlZEpvYkdyYXBoNDJlOTU0M2EwNjE4eA==
-    jobGraph-d3ec65715334b5345fd9bb174a07929a: rO0ABXNyADtvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuUmV0cmlldmFibGVTdHJlYW1TdGF0ZUhhbmRsZQABHhjxVZcrAgABTAAYd3JhcHBlZFN0cmVhbVN0YXRlSGFuZGxldAAyTG9yZy9hcGFjaGUvZmxpbmsvcnVudGltZS9zdGF0ZS9TdHJlYW1TdGF0ZUhhbmRsZTt4cHNyADlvcmcuYXBhY2hlLmZsaW5rLnJ1bnRpbWUuc3RhdGUuZmlsZXN5c3RlbS5GaWxlU3RhdGVIYW5kbGUE3HXYYr0bswIAAkoACXN0YXRlU2l6ZUwACGZpbGVQYXRodAAfTG9yZy9hcGFjaGUvZmxpbmsvY29yZS9mcy9QYXRoO3hwAAAAAAALBp9zcgAdb3JnLmFwYWNoZS5mbGluay5jb3JlLmZzLlBhdGgAAAAAAAAAAQIAAUwAA3VyaXQADkxqYXZhL25ldC9VUkk7eHBzcgAMamF2YS5uZXQuVVJJrAF4LkOeSasDAAFMAAZzdHJpbmd0ABJMamF2YS9sYW5nL1N0cmluZzt4cHQAU2hkZnM6Ly9oZGZzLW1hc3Rlci5oYWRvb3A6OTAwMC9mbGluay9yZWNvdmVyeS9kZWZhdWx0L3N1Ym1pdHRlZEpvYkdyYXBoMTlmMmUzYzgwMTBieA==
-    runningJobsRegistry-367cd13302f03992485dd71c5d0f1d43: RUNNING
-    runningJobsRegistry-d3ec65715334b5345fd9bb174a07929a: RUNNING
-    sessionId: 029fc61b-dd74-4cd5-8339-21a1acaff7f9
-  kind: ConfigMap
-  metadata:
-    annotations:
-      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"51ca44e0-f3e0-46a5-9c5d-285d671128d1","leaseDuration":15.000000000,"acquireTime":"2023-01-29T07:13:05.710000Z","renewTime":"2023-01-29T07:27:30.734000Z","leaderTransitions":174}'
-    creationTimestamp: "2023-01-18T02:15:28Z"
-    labels:
-      app: pdl2
-      configmap-type: high-availability
-      type: flink-native-kubernetes
-    name: pdl2-dispatcher-leader
-    namespace: default
-    resourceVersion: "8818575"
-    uid: b44fcffb-0a2c-47d9-ba77-0d014bdeae14
-- apiVersion: v1
-  data:
-    address: akka.tcp://flink@10.42.1.111:6123/user/rpc/resourcemanager_0
-    sessionId: 2a91d79c-15e8-420c-9065-2c58c3be2c0a
-  kind: ConfigMap
-  metadata:
-    annotations:
-      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"51ca44e0-f3e0-46a5-9c5d-285d671128d1","leaseDuration":15.000000000,"acquireTime":"2023-01-29T07:13:05.264000Z","renewTime":"2023-01-29T07:27:30.313000Z","leaderTransitions":174}'
-    creationTimestamp: "2023-01-18T02:15:28Z"
-    labels:
-      app: pdl2
-      configmap-type: high-availability
-      type: flink-native-kubernetes
-    name: pdl2-resourcemanager-leader
-    namespace: default
-    resourceVersion: "8818570"
-    uid: 7a497347-346d-4269-8b51-191dc836f54f
-- apiVersion: v1
-  data:
-    address: http://10.42.2.151:8081
-    sessionId: 49ccb3ba-0e08-40ce-b334-f5c5ed33b328
-  kind: ConfigMap
-  metadata:
-    annotations:
-      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"386c2df7-ace2-45fe-a262-6e0345ed9b4c","leaseDuration":15.000000000,"acquireTime":"2023-01-29T07:13:04.977000Z","renewTime":"2023-01-29T07:27:30.041000Z","leaderTransitions":174}'
-    creationTimestamp: "2023-01-18T02:15:28Z"
-    labels:
-      app: pdl2
-      configmap-type: high-availability
-      type: flink-native-kubernetes
-    name: pdl2-restserver-leader
-    namespace: default
-    resourceVersion: "8818569"
-    uid: 3aa9c122-f198-4d9e-85f3-59cfa3a3553b
+    resourceVersion: "15391606"
+    uid: f8c00dbf-4a6b-43c0-9f1a-19b0dc9b6369
 - apiVersion: v1
   data:
     application.yml: |-
@@ -818,7 +763,7 @@ items:
     creationTimestamp: "2022-12-28T07:24:12Z"
     name: web-conf
     namespace: default
-    resourceVersion: "2700171"
+    resourceVersion: "12363629"
     uid: 72682984-c82c-481a-b46e-b85a91557b60
 kind: List
 metadata:

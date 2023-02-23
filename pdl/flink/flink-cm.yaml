@@ -2,18 +2,56 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
-    flink-conf.yaml: "jobmanager.rpc.address: jobmanager\njobmanager.rpc.port: 6123\njobmanager.memory.process.size:
-      2500m\njobmanager.memory.jvm-metaspace.size: 1024m\njobmanager.execution.failover-strategy:
-      region\n\ntaskmanager.rpc.port: 6122\ntaskmanager.memory.process.size: 20480m\ntaskmanager.memory.jvm-metaspace.size:
-      2048m\ntaskmanager.numberOfTaskSlots: 8\n\nparallelism.default: 1\nblob.server.port:
-      6124\nquery.server.port: 6125\nenv.java.opts.taskmanager: \"-Duser.timezone=Asia/Shanghai\"\nakka.ask.timeout:
-      60s\nweb.timeout: 1000000\nrest.bind-address: 0.0.0.0\nheartbeat.timeout: 180000\nclassloader.resolve-order:
-      parent-first\nclassloader.check-leaked-classloader: false\n\n# HA\nkubernetes.cluster-id:
-      pdl2\nhigh-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory
-      \n\n# hdfs\nhigh-availability.storageDir: hdfs://hdfs-master.hadoop:9000/flink/recovery\nrestart-strategy:
-      fixed-delay\nrestart-strategy.fixed-delay.attempts: 10\n\n# # chekpoin\n# state.backend:
-      filesystem\n# # hdfs checkpoint\n# state.checkpoints.dir: hdfs://sd-cluster-03:8020/data/flink/checkpoints\n\nweb.tmpdir:
-      /opt/flink/joblib"
+    flink-conf.yaml: |-
+      jobmanager.rpc.address: jobmanager
+      jobmanager.rpc.port: 6123
+      # jobmanager.memory.process.size: 3500m
+      jobmanager.memory.jvm-metaspace.size: 2048m
+      jobmanager.execution.failover-strategy: region
+      jobmanager.memory.heap.size: 2048m
+
+      taskmanager.rpc.port: 6122
+      taskmanager.memory.process.size: 16384m
+      #taskmanager.memory.jvm-metaspace.size: 2048m
+      taskmanager.numberOfTaskSlots: 40
+
+      parallelism.default: 1
+      blob.server.port: 6124
+      query.server.port: 6125
+      env.java.opts.taskmanager: "-Duser.timezone=Asia/Shanghai"
+      akka.ask.timeout: 60s
+      akka.framesize: "104857600b"
+      web.timeout: 1000000
+      rest.bind-address: 0.0.0.0
+      heartbeat.timeout: 180000
+      classloader.resolve-order: parent-first
+      classloader.check-leaked-classloader: false
+
+      # HA
+      high-availability: zookeeper
+      high-availability.zookeeper.quorum: 192.168.3.204:2181
+      high-availability.cluster-id: /pdl2
+      high-availability.zookeeper.path.root: /flink
+
+
+      # hdfs
+      high-availability.storageDir: hdfs://hdfs-master.hadoop:9000/flink/recovery
+      #high-availability.storageDir: /opt/flink/recovery
+      restart-strategy: fixed-delay
+      restart-strategy.fixed-delay.attempts: 10
+
+      # checkpoint
+      state.backend: filesystem
+      # state.backend.incremental: true
+      state.checkpoint-storage: filesystem
+      state.checkpoints.dir: hdfs://hdfs-master.hadoop:9000/flink/checkpoints
+      state.savepoints.dir: hdfs://hdfs-master.hadoop:9000/flink/savepoints
+
+
+      # state.backend.rocksdb.localdir: /opt/flink/checkpoints
+      # state.backend.rocksdb.timer-service.factory: HEAP
+
+      web.upload.dir: /opt/flink/joblib
     log4j-console.properties: |-
       # This affects logging for both user code and Flink
       rootLogger.level = INFO
@@ -64,7 +102,7 @@ items:
     creationTimestamp: "2022-12-27T08:26:10Z"
     name: flink-conf
     namespace: flink
-    resourceVersion: "8812722"
+    resourceVersion: "15386774"
     uid: 4e6fb301-05c0-45ed-b99e-43b48b64f031
 - apiVersion: v1
   data:
@@ -94,6 +132,57 @@ items:
     namespace: flink
     resourceVersion: "1603327"
     uid: 2ae13e14-5347-489b-a5be-37affddbe426
+- apiVersion: v1
+  data:
+    address: akka.tcp://flink@10.42.2.59:6123/user/rpc/dispatcher_1
+    sessionId: d3932356-db52-4292-b786-ffa680b11851
+  kind: ConfigMap
+  metadata:
+    annotations:
+      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"f9314352-95b7-43f1-bf20-385d379cbaf3","leaseDuration":15.000000000,"acquireTime":"2023-02-06T06:55:27.923000Z","renewTime":"2023-02-06T07:54:07.946000Z","leaderTransitions":705}'
+    creationTimestamp: "2023-02-06T06:09:44Z"
+    labels:
+      app: pdl2
+      configmap-type: high-availability
+      type: flink-native-kubernetes
+    name: pdl2-dispatcher-leader
+    namespace: flink
+    resourceVersion: "11664481"
+    uid: 5521e552-6c12-4739-91c1-75d3c5c8fdd1
+- apiVersion: v1
+  data:
+    address: akka.tcp://flink@10.42.2.59:6123/user/rpc/resourcemanager_0
+    sessionId: b61ae446-3901-4f2c-a117-e222be8d66e1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"f9314352-95b7-43f1-bf20-385d379cbaf3","leaseDuration":15.000000000,"acquireTime":"2023-02-06T06:55:27.592000Z","renewTime":"2023-02-06T07:54:07.634000Z","leaderTransitions":705}'
+    creationTimestamp: "2023-02-06T06:09:44Z"
+    labels:
+      app: pdl2
+      configmap-type: high-availability
+      type: flink-native-kubernetes
+    name: pdl2-resourcemanager-leader
+    namespace: flink
+    resourceVersion: "11664454"
+    uid: e9018958-8180-48ae-a0e8-21f768a57c20
+- apiVersion: v1
+  data:
+    address: http://10.42.2.59:8081
+    sessionId: a8d29f26-e3b1-4afe-b475-7b10912d8fa1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"f9314352-95b7-43f1-bf20-385d379cbaf3","leaseDuration":15.000000000,"acquireTime":"2023-02-06T06:55:39.031000Z","renewTime":"2023-02-06T07:54:09.059000Z","leaderTransitions":703}'
+    creationTimestamp: "2023-02-06T06:09:44Z"
+    labels:
+      app: pdl2
+      configmap-type: high-availability
+      type: flink-native-kubernetes
+    name: pdl2-restserver-leader
+    namespace: flink
+    resourceVersion: "11664494"
+    uid: c84e949f-74f5-488d-bb33-2c3129904ae3
 kind: List
 metadata:
   resourceVersion: ""

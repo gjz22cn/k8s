@@ -15,12 +15,14 @@ items:
       kind: Deployment
       name: hiveserver2
       uid: 00e06b12-6363-48d7-a1c8-2636e1bca15b
-    resourceVersion: "2690842"
+    resourceVersion: "9180129"
     uid: f615d2f1-be70-4e75-9b0b-e5faced08fb1
   spec:
     clusterIP: 10.43.95.21
     clusterIPs:
     - 10.43.95.21
+    externalIPs:
+    - 192.168.3.204
     ports:
     - name: hiveserver2
       port: 10000

@@ -36,41 +36,6 @@ items:
   kind: Service
   metadata:
     annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30880,"protocol":"TCP","serviceName":"default:data-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/data-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T02:53:14Z"
-    name: data-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: data-server
-      uid: 73d35368-c377-4b7b-b03d-4eed898e8533
-    resourceVersion: "2677462"
-    uid: 78dc44e5-4541-4e40-990b-d41436e9a64b
-  spec:
-    clusterIP: 10.43.48.139
-    clusterIPs:
-    - 10.43.48.139
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8080
-      nodePort: 30880
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
-    sessionAffinity: None
-    type: NodePort
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
       field.cattle.io/targetWorkloadIds: '["default/frontweb"]'
       management.cattle.io/ui-managed: "true"
     creationTimestamp: "2022-12-28T07:26:08Z"
@@ -169,41 +134,6 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
-    annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30820,"protocol":"TCP","serviceName":"default:integration-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/integration-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T05:02:39Z"
-    name: integration-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: integration-server
-      uid: b826fc72-956e-45b4-bb4f-e2f002c7dfab
-    resourceVersion: "2676652"
-    uid: fbdbc856-e305-4c12-a2c4-3bbe05cd27f4
-  spec:
-    clusterIP: 10.43.17.16
-    clusterIPs:
-    - 10.43.17.16
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8020
-      nodePort: 30820
-      port: 8020
-      protocol: TCP
-      targetPort: 8020
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
-    sessionAffinity: None
-    type: NodePort
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
     creationTimestamp: "2022-12-16T01:21:32Z"
     labels:
       component: apiserver
@@ -261,41 +191,6 @@ items:
   kind: Service
   metadata:
     annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30850,"protocol":"TCP","serviceName":"default:lake-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/lake-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T03:03:03Z"
-    name: lake-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: lake-server
-      uid: da714c55-ddf4-4db3-bfc6-c337dc6b6200
-    resourceVersion: "2676056"
-    uid: e2fffba0-ee2b-4ede-a3dd-abed66052b12
-  spec:
-    clusterIP: 10.43.42.143
-    clusterIPs:
-    - 10.43.42.143
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8050
-      nodePort: 30850
-      port: 8050
-      protocol: TCP
-      targetPort: 8050
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
-    sessionAffinity: None
-    type: NodePort
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
       field.cattle.io/targetWorkloadIds: '["default/metadata-server"]'
       management.cattle.io/ui-managed: "true"
     creationTimestamp: "2022-12-28T04:54:20Z"
@@ -328,41 +223,6 @@ items:
   kind: Service
   metadata:
     annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30870,"protocol":"TCP","serviceName":"default:metadata-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/metadata-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T04:54:20Z"
-    name: metadata-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: metadata-server
-      uid: e13f98dc-e7db-43c6-9e74-86f16851abb1
-    resourceVersion: "2675181"
-    uid: fa83fd47-07e9-462e-a3a5-0582b74b8536
-  spec:
-    clusterIP: 10.43.231.136
-    clusterIPs:
-    - 10.43.231.136
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8070
-      nodePort: 30870
-      port: 8070
-      protocol: TCP
-      targetPort: 8070
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
-    sessionAffinity: None
-    type: NodePort
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
       field.cattle.io/targetWorkloadIds: '["default/modeling-server"]'
       management.cattle.io/ui-managed: "true"
     creationTimestamp: "2022-12-28T04:49:44Z"
@@ -389,41 +249,6 @@ items:
       workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30840,"protocol":"TCP","serviceName":"default:modeling-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/modeling-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T04:49:44Z"
-    name: modeling-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: modeling-server
-      uid: 96243430-331d-44c9-968e-bafcae37e0db
-    resourceVersion: "2674239"
-    uid: 739f35cf-5208-4ba9-b4ec-c5b7c6a0c147
-  spec:
-    clusterIP: 10.43.230.173
-    clusterIPs:
-    - 10.43.230.173
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8040
-      nodePort: 30840
-      port: 8040
-      protocol: TCP
-      targetPort: 8040
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
-    sessionAffinity: None
-    type: NodePort
   status:
     loadBalancer: {}
 - apiVersion: v1
@@ -465,7 +290,7 @@ items:
       field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30800,"protocol":"TCP","serviceName":"default:rest-server-nodeport","allNodes":true}]'
       field.cattle.io/targetWorkloadIds: '["default/rest-server"]'
       management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T03:10:10Z"
+    creationTimestamp: "2023-02-09T10:07:45Z"
     name: rest-server-nodeport
     namespace: default
     ownerReferences:
@@ -474,12 +299,12 @@ items:
       kind: Deployment
       name: rest-server
       uid: 7855393c-bba7-49fd-9ff6-456a62b2af3f
-    resourceVersion: "2656482"
-    uid: a9b0dfc5-1b39-4346-84ee-2bb4b5e18086
+    resourceVersion: "12363512"
+    uid: 5a669134-2b67-42be-a0c6-c444d53a7ad0
   spec:
-    clusterIP: 10.43.82.211
+    clusterIP: 10.43.85.247
     clusterIPs:
-    - 10.43.82.211
+    - 10.43.85.247
     externalTrafficPolicy: Cluster
     ports:
     - name: tcp-8000
@@ -529,41 +354,6 @@ items:
   kind: Service
   metadata:
     annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30830,"protocol":"TCP","serviceName":"default:source-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/source-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T04:04:15Z"
-    name: source-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: source-server
-      uid: 84c95198-08d8-41bf-bbe2-8ba7ada53d64
-    resourceVersion: "2666462"
-    uid: 0531bfc0-c802-448e-900c-ad79fbe17974
-  spec:
-    clusterIP: 10.43.24.244
-    clusterIPs:
-    - 10.43.24.244
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8030
-      nodePort: 30830
-      port: 8030
-      protocol: TCP
-      targetPort: 8030
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
-    sessionAffinity: None
-    type: NodePort
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
       field.cattle.io/targetWorkloadIds: '["default/user-server"]'
       management.cattle.io/ui-managed: "true"
     creationTimestamp: "2022-12-28T03:59:02Z"
@@ -590,41 +380,6 @@ items:
       workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
-- apiVersion: v1
-  kind: Service
-  metadata:
-    annotations:
-      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30810,"protocol":"TCP","serviceName":"default:user-server-nodeport","allNodes":true}]'
-      field.cattle.io/targetWorkloadIds: '["default/user-server"]'
-      management.cattle.io/ui-managed: "true"
-    creationTimestamp: "2022-12-28T03:59:02Z"
-    name: user-server-nodeport
-    namespace: default
-    ownerReferences:
-    - apiVersion: apps/v1
-      controller: true
-      kind: Deployment
-      name: user-server
-      uid: b5abd455-ecd0-47d2-bc71-e97f88e59c41
-    resourceVersion: "2665391"
-    uid: 62d124d9-1d28-41e6-a50f-ea67cf111e77
-  spec:
-    clusterIP: 10.43.2.13
-    clusterIPs:
-    - 10.43.2.13
-    externalTrafficPolicy: Cluster
-    ports:
-    - name: tcp-8010
-      nodePort: 30810
-      port: 8010
-      protocol: TCP
-      targetPort: 8010
-    selector:
-      workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
-    sessionAffinity: None
-    type: NodePort
   status:
     loadBalancer: {}
 kind: List

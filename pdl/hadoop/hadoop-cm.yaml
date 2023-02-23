@@ -51,11 +51,18 @@ items:
                 <name>dfs.permissions</name>
                 <value>false</value>
               </property>
-          </configuration>
+              <property>
+                 <name>dfs.data.dir</name>
+                 <value>/hdfs/data</value>
+              </property>
+      </configuration>
     rack_topology.data: |-
       datanode-0 /rack00
       datanode-1 /rack01
       datanode-2 /rack02
+    rack_topology.sh: |-
+      #!/bin/bash
+      echo -n "/rack-01"
     yarn-site.xml: "<?xml version=\"1.0\"?>\n<configuration>\n    <property>\n        <name>yarn.nodemanager.aux-services</name>\n
       \       <value>mapreduce_shuffle</value>\n    </property>\n    <property>\n
       \       <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>\n
@@ -68,7 +75,7 @@ items:
     creationTimestamp: "2022-12-16T09:59:44Z"
     name: hadoop-conf
     namespace: hadoop
-    resourceVersion: "8507901"
+    resourceVersion: "13447369"
     uid: 52e4ac23-5579-4b7f-86aa-3669dd4a03b7
 - apiVersion: v1
   data:

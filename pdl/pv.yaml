@@ -64,6 +64,68 @@ items:
   kind: PersistentVolume
   metadata:
     annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2023-02-06T06:19:40Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-flink1
+    resourceVersion: "11637214"
+    uid: 8100b910-6d65-49d1-a100-51b0c5d81fc1
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-flink1
+      namespace: flink1
+      resourceVersion: "11637211"
+      uid: 713aefb3-ffba-4b3c-8814-4292763d7bc9
+    nfs:
+      path: /data/pv/flink1
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolume","metadata":{"annotations":{},"name":"pv-gw"},"spec":{"accessModes":["ReadWriteMany"],"capacity":{"storage":"1Gi"},"nfs":{"path":"/data/pv/gw","server":"192.168.10.101"},"persistentVolumeReclaimPolicy":"Retain"}}
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2023-02-22T08:49:55Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-gw
+    resourceVersion: "15214480"
+    uid: b12e0f7d-1081-4b0d-850e-81b189f5b9da
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-gw
+      namespace: zw-gw
+      resourceVersion: "15214478"
+      uid: 43b5a543-0dc0-43dd-9bfd-50efd6f7f9ea
+    nfs:
+      path: /data/pv/gw
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
       field.cattle.io/description: mysql
       pv.kubernetes.io/bound-by-controller: "yes"
     creationTimestamp: "2022-12-16T06:38:25Z"

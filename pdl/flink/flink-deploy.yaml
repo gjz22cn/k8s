@@ -1,0 +1,296 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-20T06:40:12Z"
+      deployment.kubernetes.io/revision: "243"
+      field.cattle.io/publicEndpoints: '[{"addresses":["192.168.3.204"],"port":30881,"protocol":"TCP","serviceName":"flink:jobmanager-nodeport","allNodes":true}]'
+    creationTimestamp: "2022-12-27T09:11:37Z"
+    generation: 305
+    labels:
+      app: flink
+      component: jobmanager
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    name: jobmanager
+    namespace: flink
+    resourceVersion: "15409774"
+    uid: 6d9e937c-9784-4422-beac-bc8cb43c7ec1
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cattle.io/timestamp: "2023-02-23T05:42:22Z"
+        creationTimestamp: null
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+      spec:
+        affinity:
+          podAffinity: {}
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: component
+                    operator: In
+                    values:
+                    - jobmanager
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+        containers:
+        - args:
+          - jobmanager
+          - $(POD_IP)
+          env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: jobmanager
+          - name: FLINK_PROPERTIES
+            value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          image: 192.168.10.101:5000/flink:1.13.5.0
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8081
+            name: webui
+            protocol: TCP
+          - containerPort: 6123
+            name: rpc
+            protocol: TCP
+          - containerPort: 6124
+            name: blob-server
+            protocol: TCP
+          resources:
+            requests:
+              cpu: "1"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/flink/conf/flink-conf.yaml
+            name: vol-swpyw
+            subPath: flink-conf.yaml
+          - mountPath: /opt/flink/conf/log4j-console.properties
+            name: vol-swpyw
+            subPath: log4j-console.properties
+          - mountPath: /opt/flink/lib
+            name: vol-ighsr
+            subPath: jar
+          - mountPath: /opt/flink/usrlib
+            name: vol-ighsr
+            subPath: usr_jar
+          - mountPath: /opt/flink/joblib
+            name: vol-ighsr
+            subPath: job_jar
+          - mountPath: /opt/flink/log
+            name: vol-ighsr
+            subPath: logs
+          - mountPath: /opt/flink/checkpoints
+            name: vol-ighsr
+            subPath: checkpoints
+        dnsConfig: {}
+        dnsPolicy: ClusterFirst
+        hostAliases:
+        - hostnames:
+          - master
+          ip: 192.168.10.101
+        - hostnames:
+          - slave1
+          ip: 192.168.10.102
+        - hostnames:
+          - slave2
+          ip: 192.168.10.103
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: flink-service-account
+        serviceAccountName: flink-service-account
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: flink-conf
+          name: vol-swpyw
+        - name: vol-ighsr
+          persistentVolumeClaim:
+            claimName: pvc-flink
+  status:
+    availableReplicas: 2
+    conditions:
+    - lastTransitionTime: "2023-02-23T04:57:27Z"
+      lastUpdateTime: "2023-02-23T04:57:27Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-02-03T06:12:21Z"
+      lastUpdateTime: "2023-02-23T05:42:26Z"
+      message: ReplicaSet "jobmanager-766466cff8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 305
+    readyReplicas: 2
+    replicas: 2
+    updatedReplicas: 2
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      cattle.io/timestamp: "2022-12-20T06:40:27Z"
+      deployment.kubernetes.io/revision: "191"
+      field.cattle.io/description: taskmanager
+    creationTimestamp: "2022-12-27T09:18:55Z"
+    generation: 277
+    labels:
+      app: flink-taskmanager
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    name: taskmanager
+    namespace: flink
+    resourceVersion: "15441161"
+    uid: 069d9264-5abb-4019-b434-7075a6061fe2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 3
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          cattle.io/timestamp: "2023-02-23T05:42:22Z"
+        creationTimestamp: null
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+      spec:
+        affinity:
+          podAffinity: {}
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: NotIn
+                    values:
+                    - flink-taskmanager
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+        containers:
+        - args:
+          - taskmanager
+          env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: jobmanager
+          - name: FLINK_PROPERTIES
+            value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+          image: 192.168.10.101:5000/flink:1.13.5.0
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            successThreshold: 1
+            tcpSocket:
+              port: 6122
+            timeoutSeconds: 30
+          name: container-0
+          ports:
+          - containerPort: 6122
+            name: rpc
+            protocol: TCP
+          - containerPort: 6125
+            name: query-state
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "4"
+              memory: 16Gi
+            requests:
+              cpu: "1"
+              memory: 2000Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/flink/conf/flink-conf.yaml
+            name: vol-grczo
+            subPath: flink-conf.yaml
+          - mountPath: /opt/flink/conf/log4j-console.properties
+            name: vol-grczo
+            subPath: log4j-console.properties
+          - mountPath: /opt/flink/lib
+            name: vol-0rxui
+            subPath: jar
+          - mountPath: /opt/flink/checkpoints
+            name: vol-0rxui
+            subPath: checkpoints
+        dnsConfig: {}
+        dnsPolicy: ClusterFirst
+        hostAliases:
+        - hostnames:
+          - master
+          ip: 192.168.10.101
+        - hostnames:
+          - slave1
+          ip: 192.168.10.102
+        - hostnames:
+          - slave2
+          ip: 192.168.10.103
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: flink-service-account
+        serviceAccountName: flink-service-account
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: flink-conf
+          name: vol-grczo
+        - name: vol-0rxui
+          persistentVolumeClaim:
+            claimName: pvc-flink
+  status:
+    availableReplicas: 3
+    conditions:
+    - lastTransitionTime: "2023-02-03T06:12:18Z"
+      lastUpdateTime: "2023-02-23T05:42:28Z"
+      message: ReplicaSet "taskmanager-5567d64f55" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2023-02-23T09:04:37Z"
+      lastUpdateTime: "2023-02-23T09:04:37Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 277
+    readyReplicas: 3
+    replicas: 3
+    updatedReplicas: 3
+kind: List
+metadata:
+  resourceVersion: ""
