@@ -35,8 +35,6 @@ items:
           name: container-0
           ports:
           - containerPort: 10000
-            hostIP: 192.168.3.204
-            hostPort: 10000
             name: hiveserver2
             protocol: TCP
           terminationMessagePath: /dev/termination-log
