@@ -1,0 +1,61 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: jobmanager
+    namespace: flink
+  spec:
+    ports:
+    - name: webui
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    - name: rpc
+      port: 6123
+      protocol: TCP
+      targetPort: 6123
+    - name: blob-server
+      port: 6124
+      protocol: TCP
+      targetPort: 6124
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: jobmanager-nodeport
+    namespace: flink
+  spec:
+    ports:
+    - name: webui
+      nodePort: 30881
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    sessionAffinity: None
+    type: NodePort
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: taskmanager
+    namespace: flink
+  spec:
+    ports:
+    - name: rpc
+      port: 6122
+      protocol: TCP
+      targetPort: 6122
+    - name: query-state
+      port: 6125
+      protocol: TCP
+      targetPort: 6125
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    sessionAffinity: None
+    type: ClusterIP
+kind: List

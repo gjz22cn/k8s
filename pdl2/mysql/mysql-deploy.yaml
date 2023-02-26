@@ -1,0 +1,127 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: mysql
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql
+    name: mysql
+    namespace: mysql
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql
+      spec:
+        affinity: {}
+        containers:
+        - env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "123456"
+          image: mysql:5.7.40
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 3306
+            name: mysql
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 4Gi
+            requests:
+              cpu: 200m
+              memory: 2Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/mysql/my.cnf
+            name: vol-mysql-cnf
+            subPath: my.cnf
+          - mountPath: /var/lib/mysql
+            name: vol-mysql
+            subPath: data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: mysql
+          name: vol-mysql-cnf
+        - name: vol-mysql
+          persistentVolumeClaim:
+            claimName: pvc-mysql
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+    name: mysql8
+    namespace: mysql
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-mysql-mysql8
+      spec:
+        affinity: {}
+        containers:
+        - env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "123456"
+          image: mysql:8.0.22
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 3306
+            name: mysql8
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 4Gi
+            requests:
+              cpu: 200m
+              memory: 2Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: vol-mysql8
+            subPath: data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: vol-mysql8
+          persistentVolumeClaim:
+            claimName: pvc-mysql8
+kind: List

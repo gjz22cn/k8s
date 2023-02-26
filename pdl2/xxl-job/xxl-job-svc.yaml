@@ -1,0 +1,18 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: xxl-job
+    namespace: xxl-job
+  spec:
+    ports:
+    - name: xxl-job
+      port: 30405
+      protocol: TCP
+      targetPort: 30405
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-xxl-job-xxl-job
+    sessionAffinity: None
+    type: ClusterIP
+kind: List

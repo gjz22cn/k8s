@@ -1,0 +1,160 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: data-server
+    namespace: default
+    ownerReferences:
+  spec:
+    ports:
+    - name: tcp-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: frontweb
+    namespace: default
+  spec:
+    ports:
+    - name: web
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: frontweb-nodeport
+    namespace: default
+  spec:
+    ports:
+    - name: web
+      nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+    type: NodePort
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: integration-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8020
+      port: 8020
+      protocol: TCP
+      targetPort: 8020
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: lake-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8050
+      port: 8050
+      protocol: TCP
+      targetPort: 8050
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: metadata-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8070
+      port: 8070
+      protocol: TCP
+      targetPort: 8070
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: modeling-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8040
+      port: 8040
+      protocol: TCP
+      targetPort: 8040
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: rest-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8000
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: rest-server-nodeport
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8000
+      nodePort: 30800
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
+    type: NodePort
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: source-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8030
+      port: 8030
+      protocol: TCP
+      targetPort: 8030
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: user-server
+    namespace: default
+  spec:
+    ports:
+    - name: tcp-8010
+      port: 8010
+      protocol: TCP
+      targetPort: 8010
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
+    type: ClusterIP
+kind: List

@@ -1,0 +1,52 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    my.cnf: |-
+      # Custom config should go here
+      !includedir /etc/mysql/conf.d/
+
+      [mysqld]
+      pid-file        = /var/run/mysqld/mysqld.pid
+      socket          = /var/run/mysqld/mysqld.sock
+      datadir         = /var/lib/mysql
+      secure-file-priv= NULL
+      symbolic-links=0
+      connect_timeout=30
+      character-set-server=utf8
+      ignore-db-dir=lost+found
+      max_connections = 1000
+      explicit_defaults_for_timestamp=true
+      server_id=2
+      log_bin = mysql-bin
+      binlog_format = ROW
+      expire_logs_days = 30
+      max_allowed_packet = 1024M
+      sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+
+      lower_case_table_names = 1
+  kind: ConfigMap
+  metadata:
+    name: mysql
+    namespace: mysql
+- apiVersion: v1
+  data:
+    my.cnf: |-
+      [mysqld]
+      pid-file        = /var/run/mysqld/mysqld.pid
+      socket          = /var/run/mysqld/mysqld.sock
+      datadir         = /var/lib/mysql
+      secure-file-priv= NULL
+      connect_timeout=30
+      max_connections = 1000
+
+      # Custom config should go here
+      !includedir /etc/mysql/conf.d/
+  kind: ConfigMap
+  metadata:
+    name: mysql8
+    namespace: mysql
+kind: List
+metadata:
+  resourceVersion: ""

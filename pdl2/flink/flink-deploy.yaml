@@ -1,0 +1,227 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: flink
+      component: jobmanager
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    name: jobmanager
+    namespace: flink
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-flink-jobmanager
+      spec:
+        affinity:
+          podAffinity: {}
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: component
+                    operator: In
+                    values:
+                    - jobmanager
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+        containers:
+        - env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: jobmanager
+          - name: FLINK_PROPERTIES
+            value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          image: 192.168.10.101:5000/flink:1.13.5.0
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          args: ["jobmanager", $(POD_IP)]
+          ports:
+          - containerPort: 8081
+            name: webui
+            protocol: TCP
+          - containerPort: 6123
+            name: rpc
+            protocol: TCP
+          - containerPort: 6124
+            name: blob-server
+            protocol: TCP
+          resources:
+            requests:
+              cpu: "1"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/flink/conf/flink-conf.yaml
+            name: vol-flink-conf
+            subPath: flink-conf.yaml
+          - mountPath: /opt/flink/conf/log4j-console.properties
+            name: vol-flink-conf
+            subPath: log4j-console.properties
+          - mountPath: /opt/flink/lib
+            name: vol-flink-dir
+            subPath: jar
+          - mountPath: /opt/flink/usrlib
+            name: vol-flink-dir
+            subPath: usr_jar
+          - mountPath: /opt/flink/joblib
+            name: vol-flink-dir
+            subPath: job_jar
+          - mountPath: /opt/flink/log
+            name: vol-flink-dir
+            subPath: logs
+          - mountPath: /opt/flink/checkpoints
+            name: vol-flink-dir
+            subPath: checkpoints
+        dnsConfig: {}
+        dnsPolicy: ClusterFirst
+        hostAliases:
+        - hostnames:
+          - master
+          ip: 192.168.10.101
+        - hostnames:
+          - slave1
+          ip: 192.168.10.102
+        - hostnames:
+          - slave2
+          ip: 192.168.10.103
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: flink-conf
+          name: vol-flink-conf
+        - name: vol-flink-dir
+          persistentVolumeClaim:
+            claimName: pvc-flink
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: flink-taskmanager
+      workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    name: taskmanager
+    namespace: flink
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 3
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-flink-taskmanager
+      spec:
+        affinity:
+          podAffinity: {}
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: NotIn
+                    values:
+                    - flink-taskmanager
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+        containers:
+        - env:
+          - name: JOB_MANAGER_RPC_ADDRESS
+            value: jobmanager
+          - name: FLINK_PROPERTIES
+            value: 'env.java.opts: -Duser.timezone=Asia/Shanghai'
+          image: 192.168.10.101:5000/flink:1.13.5.0
+          args: ["taskmanager"]
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            successThreshold: 1
+            tcpSocket:
+              port: 6122
+            timeoutSeconds: 30
+          name: container-0
+          ports:
+          - containerPort: 6122
+            name: rpc
+            protocol: TCP
+          - containerPort: 6125
+            name: query-state
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "4"
+              memory: 16Gi
+            requests:
+              cpu: "1"
+              memory: 2000Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/flink/conf/flink-conf.yaml
+            name: vol-flink-conf
+            subPath: flink-conf.yaml
+          - mountPath: /opt/flink/conf/log4j-console.properties
+            name: vol-flink-conf
+            subPath: log4j-console.properties
+          - mountPath: /opt/flink/lib
+            name: vol-flink-dir
+            subPath: jar
+          - mountPath: /opt/flink/checkpoints
+            name: vol-flink-dir
+            subPath: checkpoints
+        dnsConfig: {}
+        dnsPolicy: ClusterFirst
+        hostAliases:
+        - hostnames:
+          - master
+          ip: 192.168.10.101
+        - hostnames:
+          - slave1
+          ip: 192.168.10.102
+        - hostnames:
+          - slave2
+          ip: 192.168.10.103
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: flink-conf
+          name: vol-flink-conf
+        - name: vol-flink-dir
+          persistentVolumeClaim:
+            claimName: pvc-flink
+kind: List

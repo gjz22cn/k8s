@@ -1,0 +1,575 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
+    name: data-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-data-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/data-server:20230208174633
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8080
+            name: tcp-8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-data-server-conf
+            subPath: application.yml
+          - mountPath: /etc/localtime
+            name: vol-timezone
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: data-server-application
+          name: vol-data-server-conf
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+    name: frontweb
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-frontweb
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/frontweb:20230217171018
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 80
+            name: web
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /usr/share/nginx/html/static/config.js
+            name: vol-web-conf
+            subPath: config.js
+          - mountPath: /etc/localtime
+            name: vol-timezone
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: web-conf
+          name: vol-web-conf
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-integration-server
+    name: integration-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-integration-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/integration-server:20230221153158
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8020
+            name: tcp-8020
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/localtime
+            name: vol-timezone
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-integration-server-conf
+            subPath: application.yml
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: integration-server-application
+          name: vol-integration-server-conf
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-lake-server
+    name: lake-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-lake-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/lake-server:20230120142316
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8050
+            name: tcp-8050
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /etc/localtime
+            name: vol-timezone
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-lake-server-conf
+            subPath: application.yml
+          - mountPath: /mnt/upload
+            name: vol-app
+            subPath: upload
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+        - configMap:
+            defaultMode: 420
+            name: lake-server-application
+          name: vol-lake-server-conf
+        - name: vol-app
+          persistentVolumeClaim:
+            claimName: pvc-app
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-metadata-server
+    name: metadata-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-metadata-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/metadata-server:20230120142316
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8070
+            name: tcp-8070
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/localtime
+            name: vol-timezone
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-metadata-server-conf
+            subPath: application.yml
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: metadata-server-application
+          name: vol-metadata-server-conf
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-modeling-server
+    name: modeling-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-modeling-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/modeling-server:20230131103125
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8040
+            name: tcp-8040
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/localtime
+            name: vol-timezone
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-modeling-server-conf
+            subPath: application.yml
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: modeling-server-application
+          name: vol-modeling-server-conf
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-rest-server
+    name: rest-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-rest-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/rest-server:20230120142316
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8000
+            name: tcp-8000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-rest-server-conf
+            subPath: application.yml
+          - mountPath: /mnt/upload
+            name: vol-app
+            subPath: upload
+          - mountPath: /etc/localtime
+            name: vol-timezone
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: rest-server-application
+          name: vol-rest-server-conf
+        - name: vol-app
+          persistentVolumeClaim:
+            claimName: pvc-app
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
+    name: source-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-source-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/source-server:20230120142316
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8030
+            name: tcp-8030
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-source-server-conf
+            subPath: application.yml
+          - mountPath: /etc/localtime
+            name: vol-timezone
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-conf
+        - configMap:
+            defaultMode: 420
+            name: source-server-application
+          name: vol-source-server-conf
+        - hostPath:
+            path: /etc/localtime
+            type: ""
+          name: vol-timezone
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      workload.user.cattle.io/workloadselector: deployment-default-user-server
+    name: user-server
+    namespace: default
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-default-user-server
+      spec:
+        affinity: {}
+        containers:
+        - image: 10.168.2.90/sjzt/user-server:20230120142316
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8010
+            name: tcp-8010
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: "/etc/localtime\t"
+            name: vol-timezone
+          - mountPath: /data/java/config/application-baseTest.yml
+            name: vol-app-base-test-conf
+            subPath: application-base.yml
+          - mountPath: /data/java/config/application-test.yml
+            name: vol-user-server-conf
+            subPath: application.yml
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: "/etc/localtime\t"
+            type: ""
+          name: vol-timezone
+        - configMap:
+            defaultMode: 420
+            name: application-base
+          name: vol-app-base-test-conf
+        - configMap:
+            defaultMode: 420
+            name: user-server-application
+          name: vol-user-server-conf
+kind: List

@@ -1,0 +1,23 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: pv-flink
+    resourceVersion: "2487997"
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-flink
+      namespace: flink
+    nfs:
+      path: /data/pv/flink
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+kind: List

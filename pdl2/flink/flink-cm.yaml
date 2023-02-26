@@ -1,0 +1,104 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    flink-conf.yaml: |-
+      jobmanager.rpc.address: jobmanager
+      jobmanager.rpc.port: 6123
+      # jobmanager.memory.process.size: 3500m
+      jobmanager.memory.jvm-metaspace.size: 2048m
+      jobmanager.execution.failover-strategy: region
+      jobmanager.memory.heap.size: 2048m
+
+      taskmanager.rpc.port: 6122
+      taskmanager.memory.process.size: 16384m
+      #taskmanager.memory.jvm-metaspace.size: 2048m
+      taskmanager.numberOfTaskSlots: 40
+
+      parallelism.default: 1
+      blob.server.port: 6124
+      query.server.port: 6125
+      env.java.opts.taskmanager: "-Duser.timezone=Asia/Shanghai"
+      akka.ask.timeout: 60s
+      akka.framesize: "104857600b"
+      web.timeout: 1000000
+      rest.bind-address: 0.0.0.0
+      heartbeat.timeout: 180000
+      classloader.resolve-order: parent-first
+      classloader.check-leaked-classloader: false
+
+      # HA
+      high-availability: zookeeper
+      high-availability.zookeeper.quorum: 192.168.3.204:2181
+      high-availability.cluster-id: /pdl2
+      high-availability.zookeeper.path.root: /flink
+
+
+      # hdfs
+      high-availability.storageDir: hdfs://hdfs-master.hadoop:9000/flink/recovery
+      #high-availability.storageDir: /opt/flink/recovery
+      restart-strategy: fixed-delay
+      restart-strategy.fixed-delay.attempts: 10
+
+      # checkpoint
+      state.backend: filesystem
+      # state.backend.incremental: true
+      state.checkpoint-storage: filesystem
+      state.checkpoints.dir: hdfs://hdfs-master.hadoop:9000/flink/checkpoints
+      state.savepoints.dir: hdfs://hdfs-master.hadoop:9000/flink/savepoints
+
+
+      # state.backend.rocksdb.localdir: /opt/flink/checkpoints
+      # state.backend.rocksdb.timer-service.factory: HEAP
+
+      web.upload.dir: /opt/flink/joblib
+    log4j-console.properties: |-
+      # This affects logging for both user code and Flink
+      rootLogger.level = INFO
+      rootLogger.appenderRef.console.ref = ConsoleAppender
+      rootLogger.appenderRef.rolling.ref = RollingFileAppender
+
+      # Uncomment this if you want to _only_ change Flink's logging
+      #logger.flink.name = org.apache.flink
+      #logger.flink.level = INFO
+
+      # The following lines keep the log level of common libraries/connectors on
+      # log level INFO. The root logger does not override this. You have to manually
+      # change the log levels here.
+      logger.akka.name = akka
+      logger.akka.level = INFO
+      logger.kafka.name= org.apache.kafka
+      logger.kafka.level = INFO
+      logger.hadoop.name = org.apache.hadoop
+      logger.hadoop.level = INFO
+      logger.zookeeper.name = org.apache.zookeeper
+      logger.zookeeper.level = INFO
+
+      # Log all infos to the console
+      appender.console.name = ConsoleAppender
+      appender.console.type = CONSOLE
+      appender.console.layout.type = PatternLayout
+      appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
+
+      # Log all infos in the given rolling file
+      appender.rolling.name = RollingFileAppender
+      appender.rolling.type = RollingFile
+      appender.rolling.append = false
+      appender.rolling.fileName = ${sys:log.file}
+      appender.rolling.filePattern = ${sys:log.file}.%i
+      appender.rolling.layout.type = PatternLayout
+      appender.rolling.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
+      appender.rolling.policies.type = Policies
+      appender.rolling.policies.size.type = SizeBasedTriggeringPolicy
+      appender.rolling.policies.size.size=100MB
+      appender.rolling.strategy.type = DefaultRolloverStrategy
+      appender.rolling.strategy.max = 10
+
+      # Suppress the irrelevant (wrong) warnings from the Netty channel handler
+      logger.netty.name = org.apache.flink.shaded.akka.org.jboss.netty.channel.DefaultChannelPipeline
+      logger.netty.level = OFF
+  kind: ConfigMap
+  metadata:
+    name: flink-conf
+    namespace: flink
+kind: List

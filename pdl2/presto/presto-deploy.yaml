@@ -1,0 +1,99 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      app: presto
+      workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
+    name: presto
+    namespace: presto
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          workload.user.cattle.io/workloadselector: apps.deployment-presto-presto
+      spec:
+        affinity:
+          podAffinity: {}
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - hiveserver2
+                namespaces:
+                - presto
+                - hive
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        containers:
+        - image: ahanaio/prestodb-sandbox:0.278.1
+          imagePullPolicy: IfNotPresent
+          name: container-0
+          ports:
+          - containerPort: 8091
+            name: presto
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8091
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/presto-server/etc/catalog/hive.properties
+            name: vol-presto-catalog-conf
+            subPath: hive.properties
+          - mountPath: /opt/presto-server/etc/catalog/iceberg.properties
+            name: vol-presto-catalog-conf
+            subPath: iceberg.properties
+          - mountPath: /opt/presto-server/etc/catalog/mysql.properties
+            name: vol-presto-catalog-conf
+            subPath: mysql.properties
+          - mountPath: /opt/presto-server/etc/config.properties
+            name: vol-presto-conf
+            subPath: config.properties
+          - mountPath: /opt/presto-server/etc/jvm.config
+            name: vol-presto-conf
+            subPath: jvm.config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: presto-hadoop-conf
+          name: vol-presto-hadoop-conf
+        - configMap:
+            defaultMode: 420
+            name: presto-catalog-conf
+          name: vol-presto-catalog-conf
+        - configMap:
+            defaultMode: 420
+            name: presto-conf
+          name: vol-presto-conf
+kind: List

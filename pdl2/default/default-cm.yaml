@@ -1,0 +1,707 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    application-base.yml: |-
+      spring:
+        mail:
+          host: smtp.mxhichina.com
+          username: yiming.liu@zhan-wan.com
+          password: ENC(ae2YHQxFLnC+96nzRGsqHoQYGXFdHf5Y)
+          properties:
+            mail:
+              smtp:
+                auth: true
+                ssl.enable: true
+                socketFactory.class: javax.net.ssl.SSLSocketFactory
+                socketFactory.port: 465
+                port: 465
+                starttls:
+                  enable: true
+                  required: true
+
+      http:
+        maxTotal: 200
+        defaultMaxPerRoute: 20
+        connectTimeout: 3000
+        connectionRequestTimeout: 3000
+        socketTimeout: 10000
+        staleConnectionCheckEnabled: true
+
+      nifi:
+        server-url: http://192.168.3.164:31262/nifi-api/
+
+      seata:
+        enabled: true
+        enable-auto-data-source-proxy: true
+        registry:
+          type: zk
+          zk:
+            server-addr: zookeeper.zookeeper:2181
+            connect-timeout: 10000
+        config:
+          type: zk
+          zk:
+            server-addr: zookeeper.zookeeper:2181
+            connect-timeout: 10000
+
+      xxljob:
+        server-url: http://xxl-job-admin.xxl-job:30405/xxl-job-admin/
+        username: admin
+        password: 123456
+        influxdb:
+          interval: 60
+          failRetryCount: 2
+  kind: ConfigMap
+  metadata:
+    name: application-base
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8080
+
+      spring:
+        application:
+          name: data_server
+        datasource:
+          hive:
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: org.apache.hive.jdbc.HiveDriver
+            jdbc-url: jdbc:hive2://hiveserver2.hive:10000/default
+            username: root
+            password:
+          presto:
+            name: presto
+            type: com.alibaba.druid.pool.DruidDataSource
+            driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+            jdbc-url: jdbc:presto://presto.presto:8091
+            username: root
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/data_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+        redis:
+          database: 11
+          host: redis.redis
+          port: 6379
+          password: 123456
+          timeout: 60000
+          pool:
+            max-wait: 3000
+            max-idle: 30
+          redisson-address: redis://${spring.redis.host}:${spring.redis.port}
+        dubbo:
+          application:
+            name: data-server-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20890
+          base-package: com.zhanwan.centre.etl.data.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+          jdbc-type-for-null: null
+        type-aliases-package: com.zhanwan.centre.etl.source.dao
+
+      seata:
+        enabled: false
+
+      hive:
+        url: jdbc:hive2://hiveserver2.hive:10000/
+        username: root
+        password:
+
+      yarn:
+        url: http://yarn-master.hadoop:8088/
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: data-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8020
+
+      spring:
+        application:
+          name: integration_server
+        datasource:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/integration_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+        redis:
+          database: 14
+          host: redis.redis
+          port: 6379
+          password: 123456
+          timeout: 60000
+          pool:
+            max-wait: 3000
+            max-idle: 30
+          redisson-address: redis://${spring.redis.host}:${spring.redis.port}
+        dubbo:
+          application:
+            name: data-integration-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20820
+          base-package: com.zhanwan.centre.etl.integration.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+        type-aliases-package: com.zhanwan.centre.etl.integration.dao
+
+      seata:
+          enabled: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+
+      kafka:
+        server-url: kafka.kafka:9092
+
+      hadoop:
+        hdfs: hdfs://hdfs-master.hadoop:9000/user/hive/warehouse/
+        hdfsPure: hdfs-master.hadoop:9000
+
+      flink:
+        server-url: http://jobmanager.flink:8081
+        jar-location: /opt/jars/
+        mysql-jar-name: MySQL2Kafka-0.1-SNAPSHOT-jar-with-dependencies.jar
+        iceberg-jar-name: kafka-iceberg-1.0-SNAPSHOT.jar
+        sql-jar-name: task-exec-1.0-SNAPSHOT.jar
+
+
+      hive:
+        hiveServer2: jdbc:hive2://hiveserver2.hive:10000/default
+        hiveServer2Pure: jdbc:hive2://hiveserver2.hive:10000/
+        hiveMetastore: metastore.hive:9083
+        user: root
+        password: ""
+
+      #
+      lakeInto:
+        interval: 1
+  kind: ConfigMap
+  metadata:
+    name: integration-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8050
+
+      spring:
+        application:
+          name: lake_server
+        datasource:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: org.apache.hive.jdbc.HiveDriver
+          jdbc-url: jdbc:hive2://hiveserver2.hive:10000/default
+          username: root
+          password:
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+        dubbo:
+          application:
+            name: data-lake-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20870
+          base-package: com.zhanwan.centre.lakehouse.lake.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+        hadoop:
+          fs-uri: hdfs://hdfs-master.hadoop:9000
+          user: root
+          replication: 1
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+        type-aliases-package: com.zhanwan.centre.lakehouse.lake.dao
+
+      seata:
+        enabled: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: lake-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8070
+
+      spring:
+        application:
+          name: metadata_server
+
+        datasource:
+          hive:
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: org.apache.hive.jdbc.HiveDriver
+            jdbc-url: jdbc:hive2://hiveserver2.hive:10000/default
+            username: root
+            password:
+          presto:
+            name: presto
+            type: com.alibaba.druid.pool.DruidDataSource
+            driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+            jdbc-url: jdbc:presto://presto.presto:8091
+            username: root
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/metadata_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+
+        dubbo:
+          application:
+            name: data-metadata-server
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20880
+          base-package: com.zhanwan.centre.lakehouse.metadata.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+        hadoop:
+          fs-uri: hdfs://hdfs-master.hadoop:9000
+          user: root
+          replication: 1
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+        type-aliases-package: com.zhanwan.centre.lakehouse.metadata.dao
+
+      seata:
+        enabled: false
+  kind: ConfigMap
+  metadata:
+    name: metadata-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8040
+
+      spring:
+        application:
+          name: modeling_server
+        datasource:
+          hive:
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: org.apache.hive.jdbc.HiveDriver
+            jdbc-url: jdbc:hive2://hiveserver2.hive:10000/default
+            username: root
+            password:
+          presto:
+            name: presto
+            type: com.alibaba.druid.pool.DruidDataSource
+            driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+            jdbc-url: jdbc:presto://presto.presto:8091
+            username: root
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/modeling_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+        redis:
+          database: 12
+          host: redis.redis
+          port: 6379
+          password: 123456
+          timeout: 60000
+          pool:
+            max-wait: 3000
+            max-idle: 30
+          redisson-address: redis://${spring.redis.host}:${spring.redis.port}
+        dubbo:
+          application:
+            name: data-modeling-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20850
+          base-package: com.zhanwan.centre.etl.modeling.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 30000
+            check: false
+            retries: 0
+            version: 1.0
+            group: test
+        servlet:
+          multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            location: D:\upload\
+        hadoop:
+          fs-uri: hdfs://hdfs-master.hadoop:9000
+          user: root
+          replication: 1
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+          jdbc-type-for-null: null
+        type-aliases-package: com.zhanwan.centre.etl.modeling.dao
+
+      seata:
+        enabled: false
+        enableAutoDataSourceProxy: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: modeling-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    nginx.conf: |
+      worker_processes  1;
+      events {
+          worker_connections  1024;
+      }
+      http {
+          include       mime.types;
+          default_type  application/octet-stream;
+          sendfile        on;
+          keepalive_timeout  65;
+
+          server {
+              listen       80;
+              server_name  localhost;
+              autoindex on;
+
+              location / {
+                  root   html;
+                  index  index.html index.htm;
+              }
+              error_page   500 502 503 504  /50x.html;
+              location = /50x.html {
+                  root   html;
+              }
+          }
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"nginx.conf":"worker_processes  1;\nevents {\n    worker_connections  1024;\n}\nhttp {\n    include       mime.types;\n    default_type  application/octet-stream;\n    sendfile        on;\n    keepalive_timeout  65;\n\n    server {\n        listen       80;\n        server_name  localhost;\n        autoindex on;\n\n        location / {\n            root   html;\n            index  index.html index.htm;\n        }\n        error_page   500 502 503 504  /50x.html;\n        location = /50x.html {\n            root   html;\n        }\n    }\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"nginx-conf","namespace":"default"}}
+    name: nginx-conf
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8000
+        http:
+          encoding:
+            charset: utf8
+            force: true
+            enabled: true
+        thymeleaf:
+          cache: false
+          enabled: false
+
+      spring:
+        application:
+          name: rest_server
+        redis:
+          database: 13
+          host: redis.redis
+          port: 6379
+          password: 123456
+          timeout: 60000
+          pool:
+            max-wait: 3000
+            max-idle: 30
+          redisson-address: redis://${spring.redis.host}:${spring.redis.port}
+        jackson:
+          date-format: yyyy-MM-dd HH:mm:ss
+          time-zone: GMT+8
+        dubbo:
+          application:
+            name: data-lake-rest
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+          base-package: com.zhanwan.centre
+          consumer:
+            timeout: 300000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+        servlet:
+          multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            location: /mnt/upload/
+
+      seata:
+        service:
+          vgroup-mapping:
+            ${spring:application:name}_group: default
+        tx-service-group: ${spring.application.name}_group
+        enabled: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: rest-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8030
+
+      spring:
+        application:
+          name: source_server
+        datasource:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/source_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+        dubbo:
+          application:
+            name: data-source-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20840
+          base-package: com.zhanwan.centre.etl.source.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: false
+            retries: 2
+            version: 1.0
+            group: test
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+          jdbc-type-for-null: null
+        type-aliases-package: com.zhanwan.centre.etl.source.dao
+
+      seata:
+        enabled: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: source-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    application.yml: |-
+      server:
+        port: 8010
+
+      spring:
+        application:
+          name: user_server
+        datasource:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://mysql.mysql:3306/user_center?useSSL=false&useAffectedRows=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 2
+            maximum-pool-size: 10
+            connection-test-query: select 1
+        redis:
+          database: 15
+          host: redis.redis
+          port: 6379
+          password: 123456
+          timeout: 60000
+          pool:
+            max-wait: 3000
+            max-idle: 30
+          redisson-address: redis://${spring.redis.host}:${spring.redis.port}
+        dubbo:
+          application:
+            name: data-user-service
+            logger: slf4j
+          registry:
+            address: zookeeper://zookeeper.zookeeper:2181
+            check: false
+          server: true
+          protocol:
+            name: dubbo
+            port: 20800
+          base-package: com.zhanwan.centre.gateway.user.service
+          provider:
+            retries: 0
+            version: 1.0
+            group: test
+          consumer:
+            timeout: 3000
+            check: true
+            retries: 2
+            version: 1.0
+            group: test
+
+      mybatis:
+        mapper-locations: classpath*:mapper/*/*.xml
+        configuration:
+          map-underscore-to-camel-case: true
+        type-aliases-package: com.zhanwan.centre.gateway.user.dao
+
+      token:
+        jwtSecret: ENC(KVp+G1Ifbo/Yb7ZLVkPDGnvCGU1wo0iBaBfwQpLBWdhAMvupfpithQ==)
+        expire:
+          second: 18000
+
+      seata:
+        service:
+          vgroup-mapping:
+            ${spring:application:name}_group: default
+        tx-service-group: ${spring.application.name}_group
+        enabled: false
+
+      logging:
+        config: classpath:logback-boot-server.xml
+  kind: ConfigMap
+  metadata:
+    name: user-server-application
+    namespace: default
+- apiVersion: v1
+  data:
+    config.js: |-
+      window.globalConfig = {
+      baseUrl: `http://192.168.3.204:30800` // server-addr
+      }
+  kind: ConfigMap
+  metadata:
+    name: web-conf
+    namespace: default
+kind: List

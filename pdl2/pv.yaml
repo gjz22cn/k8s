@@ -1,0 +1,219 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2022-12-28T03:14:02Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-app
+    resourceVersion: "2657400"
+    uid: 1ea801a8-2c2c-41ca-87b7-433cb87bedd1
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-app
+      namespace: default
+      resourceVersion: "2657398"
+      uid: e9aa6744-314b-470b-94b5-53de6fca0a6a
+    nfs:
+      path: /data/pv/app
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2022-12-27T09:00:29Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-flink
+    resourceVersion: "2487997"
+    uid: 9d2b54d4-c1e8-4b39-8485-8275949f9e26
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-flink
+      namespace: flink
+      resourceVersion: "2487995"
+      uid: 209643d7-9120-43a1-9e03-20cc2a764a5d
+    nfs:
+      path: /data/pv/flink
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2023-02-06T06:19:40Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-flink1
+    resourceVersion: "11637214"
+    uid: 8100b910-6d65-49d1-a100-51b0c5d81fc1
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-flink1
+      namespace: flink1
+      resourceVersion: "11637211"
+      uid: 713aefb3-ffba-4b3c-8814-4292763d7bc9
+    nfs:
+      path: /data/pv/flink1
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolume","metadata":{"annotations":{},"name":"pv-gw"},"spec":{"accessModes":["ReadWriteMany"],"capacity":{"storage":"1Gi"},"nfs":{"path":"/data/pv/gw","server":"192.168.10.101"},"persistentVolumeReclaimPolicy":"Retain"}}
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2023-02-22T08:49:55Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-gw
+    resourceVersion: "15214480"
+    uid: b12e0f7d-1081-4b0d-850e-81b189f5b9da
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-gw
+      namespace: zw-gw
+      resourceVersion: "15214478"
+      uid: 43b5a543-0dc0-43dd-9bfd-50efd6f7f9ea
+    nfs:
+      path: /data/pv/gw
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      field.cattle.io/description: mysql
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2022-12-16T06:38:25Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-mysql
+    resourceVersion: "50477"
+    uid: fd39a63c-0256-4744-ae0d-2999f3847035
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 50Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-mysql
+      namespace: mysql
+      resourceVersion: "50475"
+      uid: 0ed572fd-61cf-403e-94b0-a57d02c9b2f8
+    nfs:
+      path: /data/pv/mysql
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2022-12-28T06:55:02Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-mysql8
+    resourceVersion: "2695243"
+    uid: 74e57290-95ca-48d3-b085-6f0b50aca26d
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-mysql8
+      namespace: mysql
+      resourceVersion: "2695241"
+      uid: aede842f-ba06-4720-9bc4-f4a49e4129e6
+    nfs:
+      path: /data/pv/mysql8
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      field.cattle.io/description: redis
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2022-12-16T04:45:36Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pv-redis
+    resourceVersion: "32762"
+    uid: 1e26a75c-cd63-40f6-95aa-d6629245fe2f
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pvc-redis
+      namespace: redis
+      resourceVersion: "32760"
+      uid: 798c7f2c-2bb9-49e5-96a6-312a7f455dab
+    nfs:
+      path: /data/pv/redis
+      server: 192.168.10.101
+    persistentVolumeReclaimPolicy: Retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""

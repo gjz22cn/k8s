@@ -1,0 +1,198 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2022-12-28T03:14:21Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-app
+    namespace: default
+    resourceVersion: "2657402"
+    uid: e9aa6744-314b-470b-94b5-53de6fca0a6a
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-app
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2022-12-27T09:00:51Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-flink
+    namespace: flink
+    resourceVersion: "2487999"
+    uid: 209643d7-9120-43a1-9e03-20cc2a764a5d
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-flink
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2023-02-06T06:19:59Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-flink1
+    namespace: flink1
+    resourceVersion: "11637222"
+    uid: 713aefb3-ffba-4b3c-8814-4292763d7bc9
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-flink1
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      field.cattle.io/description: mysql
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2022-12-16T06:41:54Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-mysql
+    namespace: mysql
+    resourceVersion: "50505"
+    uid: 0ed572fd-61cf-403e-94b0-a57d02c9b2f8
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 50Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-mysql
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 50Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2022-12-28T06:55:25Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-mysql8
+    namespace: mysql
+    resourceVersion: "2695255"
+    uid: aede842f-ba06-4720-9bc4-f4a49e4129e6
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-mysql8
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      field.cattle.io/description: redis
+      pv.kubernetes.io/bind-completed: "yes"
+    creationTimestamp: "2022-12-16T04:47:36Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-redis
+    namespace: redis
+    resourceVersion: "32795"
+    uid: 798c7f2c-2bb9-49e5-96a6-312a7f455dab
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ""
+    volumeMode: Filesystem
+    volumeName: pv-redis
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 10Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"pvc-gw","namespace":"zw-gw"},"spec":{"accessModes":["ReadWriteMany"],"resources":{"requests":{"storage":"1Gi"}}}}
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+    creationTimestamp: "2023-02-22T08:49:56Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pvc-gw
+    namespace: zw-gw
+    resourceVersion: "15214482"
+    uid: 43b5a543-0dc0-43dd-9bfd-50efd6f7f9ea
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 1Gi
+    volumeMode: Filesystem
+    volumeName: pv-gw
+  status:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 1Gi
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""
