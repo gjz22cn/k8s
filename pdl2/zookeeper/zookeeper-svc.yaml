@@ -15,4 +15,21 @@ items:
       workload.user.cattle.io/workloadselector: apps.deployment-zookeeper-zookeeper
     sessionAffinity: None
     type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: zookeeper-nodeport
+    namespace: zookeeper
+  spec:
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: zookeeper
+      nodePort: 32181
+      port: 2181
+      protocol: TCP
+      targetPort: 2181
+    selector:
+      workload.user.cattle.io/workloadselector: apps.deployment-zookeeper-zookeeper
+    sessionAffinity: None
+    type: NodePort
 kind: List
