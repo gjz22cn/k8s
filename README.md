@@ -1,2 +1,1 @@
 # k8s
-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
