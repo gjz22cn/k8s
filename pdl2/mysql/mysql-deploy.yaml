@@ -115,12 +115,26 @@ items:
           - mountPath: /var/lib/mysql
             name: vol-mysql8
             subPath: data
+        - image: 192.168.10.101:5000/hive_lk_clean:1.0.0
+          imagePullPolicy: Always
+          name: container-1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: configuration.yaml
+            name: vol-hive-helper
+            subPath: configuration.yaml
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 30
         volumes:
+        - configMap:
+            defaultMode: 420
+            name: hive-helper
+          name: vol-hive-helper
         - name: vol-mysql8
           persistentVolumeClaim:
             claimName: pvc-mysql8

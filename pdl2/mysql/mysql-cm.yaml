@@ -2,6 +2,28 @@ apiVersion: v1
 items:
 - apiVersion: v1
   data:
+    configuration.yaml: |-
+      linux:
+        host: 192.168.3.204
+        port: 22
+        username: root
+        password: '123456'
+
+      mysql:
+        host: 127.0.0.1
+        port: 3306
+        database: 'hive'
+        username: root
+        password: '123456'
+
+      k8s:
+        command: https://192.168.3.204:6443/api/v1/namespaces/flink/pods
+  kind: ConfigMap
+  metadata:
+    name: hive-helper
+    namespace: mysql
+- apiVersion: v1
+  data:
     my.cnf: |-
       # Custom config should go here
       !includedir /etc/mysql/conf.d/

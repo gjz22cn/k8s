@@ -46,7 +46,7 @@ items:
             connect-timeout: 10000
 
       xxljob:
-        server-url: http://xxl-job-admin.xxl-job:30405/xxl-job-admin/
+        server-url: http://xxl-job.xxl-job:30405/xxl-job-admin/
         username: admin
         password: 123456
         influxdb:
